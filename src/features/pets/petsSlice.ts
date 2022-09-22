@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
 
 interface Pet {
 	id: string;
@@ -30,7 +31,7 @@ const pet: Pet = {
 
 export const initialState = [
 		pet,
-		{ ...pet, id: '2', name: 'Pet 2' },
+		{ ...pet, id: '2', name: 'Pet 2', type: 'Cat', breed: 'Persian' },
 		{ ...pet, id: '3', name: 'Pet 3' },  
 ];
 
@@ -43,5 +44,7 @@ const petSlice = createSlice({
 		deletePet: (state, action) => {},
 	},
 });
+
+export const selectPets = (state: RootState) => state.pets;
 
 export default petSlice.reducer;
