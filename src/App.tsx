@@ -20,8 +20,7 @@ function App() {
 				}}
 			>
 				<Header />
-				<Layout>
-					<h1>Welcome to React Router!</h1>
+				<Layout>					
 					<Routes>
 						<Route path="/" element={<ListPets />} />
 						<Route path="/pets" element={<ListPets />} />
