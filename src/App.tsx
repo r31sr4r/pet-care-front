@@ -8,44 +8,62 @@ import { Routes, Route } from 'react-router-dom';
 import { ListPets } from './features/pets/ListPets';
 import { CreatePet } from './features/pets/CreatePet';
 import { EditPet } from './features/pets/EditPet';
+import { SnackbarProvider } from 'notistack';
 
 function App() {
 	return (
 		<ThemeProvider theme={appTheme}>
-			<Box
-				component="main"
-				sx={{
-					height: '100vh',
-					backgroundColor: (theme) => theme.palette.grey[900],
+			<SnackbarProvider
+				autoHideDuration={3000}
+				maxSnack={3}
+				anchorOrigin={{
+					vertical: 'top',
+					horizontal: 'right',
 				}}
 			>
-				<Header />
-				<Layout>					
-					<Routes>
-						<Route path="/" element={<ListPets />} />
-						<Route path="/pets" element={<ListPets />} />
-						<Route path="/pets/create" element={<CreatePet />} />
-						<Route path="/pets/edit/:id" element={<EditPet />} />
+				<Box
+					component="main"
+					sx={{
+						height: '100vh',
+						backgroundColor: (theme) => theme.palette.grey[900],
+					}}
+				>
+					<Header />
+					<Layout>
+						<Routes>
+							<Route path="/" element={<ListPets />} />
+							<Route path="/pets" element={<ListPets />} />
+							<Route
+								path="/pets/create"
+								element={<CreatePet />}
+							/>
+							<Route
+								path="/pets/edit/:id"
+								element={<EditPet />}
+							/>
 
-						<Route
-							path="*"
-							element={
-								<Box
-									sx={{
-										color: (theme) =>
-											theme.palette.grey[500],
-									}}
-								>
-									<Typography variant="h1">404</Typography>
-									<Typography variant="h2">
-										Page not found
-									</Typography>
-								</Box>
-							}
-						/>
-					</Routes>
-				</Layout>
-			</Box>
+							<Route
+								path="*"
+								element={
+									<Box
+										sx={{
+											color: (theme) =>
+												theme.palette.grey[500],
+										}}
+									>
+										<Typography variant="h1">
+											404
+										</Typography>
+										<Typography variant="h2">
+											Page not found
+										</Typography>
+									</Box>
+								}
+							/>
+						</Routes>
+					</Layout>
+				</Box>
+			</SnackbarProvider>
 		</ThemeProvider>
 	);
 }

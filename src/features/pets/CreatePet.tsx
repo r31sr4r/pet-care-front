@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { Pet, createPet } from './petsSlice';
 import { PetForm } from './components/PetForm';
+import { useSnackbar } from 'notistack'
 
 export const CreatePet = () => {
 	const [isdisabled, setIsDisabled] = useState(false);
@@ -25,10 +26,12 @@ export const CreatePet = () => {
 		deleted_at: ''
 	});
 	const dispatch = useAppDispatch();
+	const { enqueueSnackbar } = useSnackbar();
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();	
 		dispatch(createPet(petState));
+		enqueueSnackbar('Pet created successfully', { variant: 'success' });
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
