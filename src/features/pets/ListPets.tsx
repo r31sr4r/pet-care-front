@@ -17,7 +17,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export const ListPets = () => {
 	const pets = useAppSelector(selectPets);
-	const navigate = useNavigate();
+	const navigate = useNavigate();	
 
 	const Demo = styled('div')(({ theme }) => ({
 		backgroundColor: theme.palette.background.paper,
