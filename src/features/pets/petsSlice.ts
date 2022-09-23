@@ -7,7 +7,8 @@ export interface Pet {
     type: string;
     other_type: string;
     breed: string;
-    birthday: string;
+	gender: string;
+    birth_date: string;
     customer_id: string;
     image_url: string;
 	is_active: boolean;
@@ -22,7 +23,8 @@ const pet: Pet = {
     type: 'Dog',
     other_type: '',
     breed: 'Belgian Shepherd',
-    birthday: '2020-01-01',
+	gender: 'Male',
+    birth_date: '2020-01-01',
     customer_id: '1',
     image_url: '',
 	is_active: true,
@@ -64,7 +66,7 @@ const petSlice = createSlice({
 
 export const selectPets = (state: RootState) => state.pets;
 
-export const selectCatoryById = (state: RootState, id: string) => {
+export const selectPetById = (state: RootState, id: string) => {
 	const pet = state.pets.find((pet) => pet.id === id);
 
 	return (
@@ -74,7 +76,8 @@ export const selectCatoryById = (state: RootState, id: string) => {
 			type: '',
 			other_type: '',
 			breed: '',
-			birthday: '',
+			gender: '',
+			birth_date: '',
 			customer_id: '',	
 			image_url: '',			
 			is_active: false,
