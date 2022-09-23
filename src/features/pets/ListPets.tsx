@@ -8,6 +8,7 @@ import {
 	ListItemAvatar,
 	ListItemText,
 	styled,	
+	Tooltip
 } from '@mui/material';
 import { useAppSelector } from '../../app/hooks';
 import { selectPets } from './petsSlice';
@@ -46,15 +47,18 @@ export const ListPets = () => {
 					{pets.map((pet) => (
 						<ListItem
 							key={pet.id}
+							divider
 							secondaryAction={
-								<IconButton 
-									edge="end" 
-									aria-label="delete"
-									onClick={() => handleClick(pet)}
-								>
-									<OpenInNewIcon 
-									/>
-								</IconButton>
+								<Tooltip title="Detalhar" placement="left-start">
+									<IconButton 
+										edge="end" 
+										aria-label="delete"
+										onClick={() => handleClick(pet)}
+									>
+										<OpenInNewIcon 
+										/>
+									</IconButton>
+								</Tooltip>
 							}
 
 						>
