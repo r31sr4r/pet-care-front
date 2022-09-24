@@ -5,10 +5,10 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Pet, selectPetById, updatePet } from './petsSlice';
 import { PetForm } from './components/PetForm';
 import { useSnackbar } from 'notistack'
+import { Dayjs } from 'dayjs';
 
 export const EditPet = () => {
 	const id = useParams<{ id: string }>().id || '';
-	const [type, setType] = React.useState('');
 	const [isdisabled, setIsDisabled] = React.useState(false);
 	const pet = useAppSelector((state) => selectPetById(state, id));
 	const [petState, setPetState] = React.useState<Pet>(pet);
@@ -32,11 +32,18 @@ export const EditPet = () => {
 	};
 
 	const handlePetTypeChange = (event: SelectChangeEvent) => {
-        setType(event.target.value);
+		const { name, value } = event.target;
+		setPetState({ ...petState, [name]: value });
+
     };
 
 	const handlePetGenderChange = (event: SelectChangeEvent) => {
-		setPetState({ ...petState, gender: event.target.value });
+		const { name, value } = event.target;
+		setPetState({ ...petState, [name]: value });
+	};
+
+	const handlePetBirthDateChange = (newValue: Dayjs | null) => {
+		setPetState({ ...petState, birth_date: newValue?.format('YYYY-MM-DD') });
 	};
 
 	return (
@@ -50,7 +57,7 @@ export const EditPet = () => {
 
 				<PetForm
 					pet={petState}
-					petType={type}
+					petType={petState.type}
 					isdisabled={isdisabled}
 					isLoading={false}
 					handleSubmit={handleSubmit}
@@ -58,6 +65,7 @@ export const EditPet = () => {
 					handleToogle={handleToogle}
 					handlePetTypeChange={handlePetTypeChange}
 					handlePetGenderChange={handlePetGenderChange}
+					handlePetBirthDateChange={handlePetBirthDateChange}
 				/>
 			</Paper>
 		</Box>

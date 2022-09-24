@@ -2,18 +2,16 @@ import { FormControl, InputLabel, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 type Props = {
-    petType: string;
-    handlePetTypeChange: (e: SelectChangeEvent) => void;    
+	petType: string;
+	handlePetTypeChange: (e: SelectChangeEvent) => void;
 };
 
-export function PetTypeSelector(
-    { petType, handlePetTypeChange }: Props
-) {
-
+export function PetTypeSelector({ petType, handlePetTypeChange }: Props) {
 	return (
 		<FormControl fullWidth>
 			<InputLabel id="demo-simple-select-label">Tipo</InputLabel>
 			<Select
+				name="type"
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
 				value={petType}

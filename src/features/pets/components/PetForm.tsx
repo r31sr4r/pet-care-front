@@ -19,8 +19,8 @@ import { Link } from 'react-router-dom';
 import { PetTypeSelector } from './PetTypeSelector';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Dayjs } from 'dayjs';
 
 type Props = {
 	pet: Pet;
@@ -32,6 +32,7 @@ type Props = {
 	handleToogle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handlePetTypeChange: (e: SelectChangeEvent) => void;
 	handlePetGenderChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handlePetBirthDateChange: (newValue: Dayjs | null) => void;
 };
 
 export function PetForm({
@@ -44,15 +45,8 @@ export function PetForm({
 	handleToogle,
 	handlePetTypeChange,
 	handlePetGenderChange,
+	handlePetBirthDateChange,
 }: Props) {
-	const [value, setValue] = React.useState<Dayjs | null>(
-		dayjs('2014-08-18T21:11:54'),
-	  );
-	
-	  const handleChangeData = (newValue: Dayjs | null) => {
-		setValue(newValue);
-	  };
-
 	return (
 		<Box p={2}>
 			<form onSubmit={onSubmit}>
@@ -83,23 +77,20 @@ export function PetForm({
 							<RadioGroup
 								row
 								aria-labelledby="demo-row-radio-buttons-group-label"
-								name="row-radio-buttons-group"
+								name="gender"
 								onChange={handlePetGenderChange}
 							>
 								<FormControlLabel
 									value="female"
 									control={<Radio />}
 									label="Fêmea"
+									checked={(pet.gender && pet.gender === 'female') || undefined}
 								/>
 								<FormControlLabel
 									value="male"
 									control={<Radio />}
 									label="Macho"
-								/>
-								<FormControlLabel
-									value="other"
-									control={<Radio />}
-									label="Other"
+									checked={(pet.gender && pet.gender === 'male') || undefined}
 								/>
 							</RadioGroup>
 						</FormControl>
@@ -108,9 +99,9 @@ export function PetForm({
 						<FormControl fullWidth>
 							<TextField
 								required
-								name="type"
-								label="Type"
-								value={pet.type}
+								name="breed"
+								label="Breed"
+								value={pet.breed}
 								disabled={isdisabled}
 								onChange={handleChange}
 							/>
@@ -120,11 +111,11 @@ export function PetForm({
 						<FormControl fullWidth>
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 								<Stack spacing={3}>
-									<MobileDatePicker
+									<MobileDatePicker										
 										label="Data de Nascimento"
 										inputFormat="DD/MM/YYYY"
-										value={value}
-										onChange={handleChangeData}
+										value={pet.birth_date}
+										onChange={handlePetBirthDateChange}
 										renderInput={(params) => (
 											<TextField {...params} />
 										)}

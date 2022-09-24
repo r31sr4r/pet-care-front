@@ -1,17 +1,12 @@
-import {
-	Box,
-	Paper,
-	SelectChangeEvent,
-	Typography,
-} from '@mui/material';
+import { Box, Paper, SelectChangeEvent, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { Pet, createPet } from './petsSlice';
 import { PetForm } from './components/PetForm';
-import { useSnackbar } from 'notistack'
+import { useSnackbar } from 'notistack';
+import { Dayjs } from 'dayjs';
 
 export const CreatePet = () => {
-	const [type, setType] = useState('');
 	const [isdisabled, setIsDisabled] = useState(false);
 	const [petState, setPetState] = useState<Pet>({
 		id: '',
@@ -20,19 +15,19 @@ export const CreatePet = () => {
 		other_type: '',
 		breed: '',
 		gender: '',
-		birth_date: '',
+		birth_date: null,
 		customer_id: '',
 		image_url: '',
 		is_active: true,
 		created_at: '',
 		updated_at: '',
-		deleted_at: ''
+		deleted_at: '',
 	});
 	const dispatch = useAppDispatch();
 	const { enqueueSnackbar } = useSnackbar();
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();	
+		e.preventDefault();
 		dispatch(createPet(petState));
 		enqueueSnackbar('Pet created successfully', { variant: 'success' });
 	}
@@ -48,13 +43,20 @@ export const CreatePet = () => {
 	};
 
 	const handlePetTypeChange = (event: SelectChangeEvent) => {
-        setType(event.target.value);
-		setPetState({ ...petState, type: event.target.value });
-    };
+		const { name, value } = event.target;
+		setPetState({ ...petState, [name]: value });
+	};
 
 	const handlePetGenderChange = (event: SelectChangeEvent) => {
-		console.log(event.target.value);
-		setPetState({ ...petState, gender: event.target.value });
+		const { name, value } = event.target;
+		setPetState({ ...petState, [name]: value });
+	};
+
+	const handlePetBirthDateChange = (newValue: Dayjs | null) => {
+		setPetState({
+			...petState,
+			birth_date: newValue?.format('YYYY-MM-DD'),
+		});
 	};
 
 	return (
@@ -65,17 +67,18 @@ export const CreatePet = () => {
 						<Typography variant="h4">Create Pet</Typography>
 					</Box>
 				</Box>
-			<PetForm
-				pet={petState}
-				petType={type}
-				isdisabled={isdisabled}
-				isLoading={false}
-				handleSubmit={handleSubmit}
-				handleChange={handleChange}
-				handleToogle={handleToogle}
-				handlePetTypeChange={handlePetTypeChange}
-				handlePetGenderChange={handlePetGenderChange}
-			/>
+				<PetForm
+					pet={petState}
+					petType={petState.type}
+					isdisabled={isdisabled}
+					isLoading={false}
+					handleSubmit={handleSubmit}
+					handleChange={handleChange}
+					handleToogle={handleToogle}
+					handlePetTypeChange={handlePetTypeChange}
+					handlePetGenderChange={handlePetGenderChange}
+					handlePetBirthDateChange={handlePetBirthDateChange}
+				/>
 			</Paper>
 		</Box>
 	);
