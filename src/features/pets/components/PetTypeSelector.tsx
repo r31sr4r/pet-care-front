@@ -9,13 +9,13 @@ type Props = {
 export function PetTypeSelector({ petType, handlePetTypeChange }: Props) {
 	return (
 		<FormControl fullWidth>
-			<InputLabel id="demo-simple-select-label">Tipo</InputLabel>
+			<InputLabel id="demo-simple-select-label">Tipo *</InputLabel>
 			<Select
 				name="type"
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
 				value={petType}
-				label="Tipo"
+				label="Tipo *"
 				onChange={handlePetTypeChange}
 			>
 				<MenuItem value={'DOG'}>Cachorro</MenuItem>
@@ -25,7 +25,7 @@ export function PetTypeSelector({ petType, handlePetTypeChange }: Props) {
 				<MenuItem value={'RABBIT'}>Coelho</MenuItem>
 				<MenuItem value={'REPTILE'}>Réptil</MenuItem>
 				<MenuItem value={'OTHER'}>Outro</MenuItem>
-			</Select>
+			</Select>			
 		</FormControl>
 	);
 }

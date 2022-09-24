@@ -9,6 +9,8 @@ export interface Pet {
     breed: string;
 	gender: string;
     birth_date: string | null | undefined;
+	microchip: string | null;
+	neutered: boolean;
     customer_id: string;
     image_url: string;
 	is_active: boolean;
@@ -25,6 +27,8 @@ const pet: Pet = {
     breed: 'Belgian Shepherd',
 	gender: 'Male',
     birth_date: '2020-01-01',
+	microchip: null,
+	neutered: false,
     customer_id: '1',
     image_url: '',
 	is_active: true,
@@ -78,6 +82,8 @@ export const selectPetById = (state: RootState, id: string) => {
 			breed: '',
 			gender: '',
 			birth_date: null,
+			microchip: null,
+			neutered: false,
 			customer_id: '',	
 			image_url: '',			
 			is_active: false,

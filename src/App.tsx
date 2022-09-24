@@ -9,6 +9,7 @@ import { ListPets } from './features/pets/ListPets';
 import { CreatePet } from './features/pets/CreatePet';
 import { EditPet } from './features/pets/EditPet';
 import { SnackbarProvider } from 'notistack';
+import { ListBreeds } from './features/breeds/ListBreeds'
 
 function App() {
 	return (
@@ -41,6 +42,7 @@ function App() {
 								path="/pets/edit/:id"
 								element={<EditPet />}
 							/>
+							<Route path='/breeds' element={< ListBreeds />} />
 
 							<Route
 								path="*"

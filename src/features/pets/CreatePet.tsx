@@ -16,6 +16,8 @@ export const CreatePet = () => {
 		breed: '',
 		gender: '',
 		birth_date: null,
+		microchip: '',
+		neutered: false,
 		customer_id: '',
 		image_url: '',
 		is_active: true,
@@ -59,17 +61,28 @@ export const CreatePet = () => {
 		});
 	};
 
+	const handleBreedChange = (event: SelectChangeEvent) => {
+		const { name, value } = event.target;
+		setPetState({ ...petState, [name]: value });				
+	};
+
+	const handleNeuteredChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, checked } = e.target;
+		setPetState({ ...petState, [name]: checked });
+	};
+
 	return (
 		<Box>
 			<Paper>
 				<Box p={2}>
 					<Box mb={2}>
-						<Typography variant="h4">Create Pet</Typography>
+						<Typography variant="h4">Cadastrar pet</Typography>
 					</Box>
 				</Box>
 				<PetForm
 					pet={petState}
 					petType={petState.type}
+					breedName={petState.breed}
 					isdisabled={isdisabled}
 					isLoading={false}
 					handleSubmit={handleSubmit}
@@ -78,6 +91,8 @@ export const CreatePet = () => {
 					handlePetTypeChange={handlePetTypeChange}
 					handlePetGenderChange={handlePetGenderChange}
 					handlePetBirthDateChange={handlePetBirthDateChange}
+					handleBreedChange={handleBreedChange}
+					handleNeuteredChange={handleNeuteredChange}
 				/>
 			</Paper>
 		</Box>

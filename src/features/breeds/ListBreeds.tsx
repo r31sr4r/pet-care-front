@@ -7,28 +7,36 @@ import {
 	ListItem,
 	ListItemAvatar,
 	ListItemText,
-	styled,	
-	Tooltip
+	styled,
+	Tooltip,
 } from '@mui/material';
 import { useAppSelector } from '../../app/hooks';
-import { selectPets } from './petsSlice';
+import { selectBreeds } from './breedsSlice';
 import PetsIcon from '@mui/icons-material/Pets';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Link, useNavigate } from 'react-router-dom';
+import { BreedSelector } from './components/BreedSelector';
+import React from 'react';
 
-export const ListPets = () => {
-	const pets = useAppSelector(selectPets);
-	const navigate = useNavigate();	
+export const ListBreeds = () => {
+	const breeds = useAppSelector(selectBreeds);
+	const [breedName, setBreedName] = React.useState('');
+	const navigate = useNavigate();
 
 	const Demo = styled('div')(({ theme }) => ({
 		backgroundColor: theme.palette.background.paper,
 	}));
 
-	const handleClick = (pet: any) => {		
-		navigate(`/pets/edit/${pet.id}`);
-	  };
+	const handleClick = (breed: any) => {
+		navigate(`/breeds/edit/${breed.id}`);
+	};
 
-	const selectPetType = (type: string) => {
+	const handleBreedChange = (e: any) => {
+		setBreedName(e.target.value);
+	};
+
+
+	const selectBreedType = (type: string) => {
 		switch (type) {
 			case 'DOG':
 				return 'Cão';
@@ -56,31 +64,35 @@ export const ListPets = () => {
 					variant="contained"
 					color="secondary"
 					component={Link}
-					to="/pets/create"
+					to="/breeds/create"
 					style={{ marginBottom: '1rem' }}
 				>
-					New Pet
+					New Breed
 				</Button>
+			</Box>
+			<Box>
+				<BreedSelector breedName={breedName} petType='DOG' handleBreedChange={handleBreedChange} />
 			</Box>
 			<Demo>
 				<List>
-					{pets.map((pet) => (
+					{breeds.map((breed) => (
 						<ListItem
-							key={pet.id}
+							key={breed.id}
 							divider
 							secondaryAction={
-								<Tooltip title="Detalhar" placement="left-start">
-									<IconButton 
-										edge="end" 
+								<Tooltip
+									title="Detalhar"
+									placement="left-start"
+								>
+									<IconButton
+										edge="end"
 										aria-label="delete"
-										onClick={() => handleClick(pet)}
+										onClick={() => handleClick(breed)}
 									>
-										<OpenInNewIcon 
-										/>
+										<OpenInNewIcon />
 									</IconButton>
 								</Tooltip>
 							}
-
 						>
 							<ListItemAvatar>
 								<Avatar>
@@ -88,10 +100,8 @@ export const ListPets = () => {
 								</Avatar>
 							</ListItemAvatar>
 							<ListItemText
-								primary={pet.name}
-								secondary={`${
-									selectPetType(pet.type)
-								} ${pet.breed ? pet.breed : ''}`}
+								primary={breed.name}
+								secondary={`${selectBreedType(breed.type)} `}
 							/>
 						</ListItem>
 					))}

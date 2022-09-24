@@ -13,6 +13,7 @@ import {
 	RadioGroup,
 	Radio,
 	Stack,
+	Typography
 } from '@mui/material';
 import { Pet } from '../petsSlice';
 import { Link } from 'react-router-dom';
@@ -21,10 +22,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Dayjs } from 'dayjs';
+import { BreedSelector } from '../../breeds/components/BreedSelector';
 
 type Props = {
 	pet: Pet;
 	petType: string;
+	breedName: string;
 	isdisabled?: boolean;
 	isLoading?: boolean;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -33,11 +36,14 @@ type Props = {
 	handlePetTypeChange: (e: SelectChangeEvent) => void;
 	handlePetGenderChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handlePetBirthDateChange: (newValue: Dayjs | null) => void;
+	handleBreedChange: (e: SelectChangeEvent) => void;
+	handleNeuteredChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export function PetForm({
 	pet,
 	petType,
+	breedName: breedId,
 	isdisabled,
 	isLoading,
 	handleSubmit: onSubmit,
@@ -46,6 +52,8 @@ export function PetForm({
 	handlePetTypeChange,
 	handlePetGenderChange,
 	handlePetBirthDateChange,
+	handleBreedChange,
+	handleNeuteredChange,
 }: Props) {
 	return (
 		<Box p={2}>
@@ -63,55 +71,24 @@ export function PetForm({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item xs={12}>
+					<Grid item xs={12} sm={6}>
 						<PetTypeSelector
 							petType={petType}
 							handlePetTypeChange={handlePetTypeChange}
 						/>
 					</Grid>
-					<Grid item xs={12}>
-						<FormControl>
-							<FormLabel id="demo-row-radio-buttons-group-label">
-								Gender
-							</FormLabel>
-							<RadioGroup
-								row
-								aria-labelledby="demo-row-radio-buttons-group-label"
-								name="gender"
-								onChange={handlePetGenderChange}
-							>
-								<FormControlLabel
-									value="female"
-									control={<Radio />}
-									label="Fêmea"
-									checked={(pet.gender && pet.gender === 'female') || undefined}
-								/>
-								<FormControlLabel
-									value="male"
-									control={<Radio />}
-									label="Macho"
-									checked={(pet.gender && pet.gender === 'male') || undefined}
-								/>
-							</RadioGroup>
-						</FormControl>
+					<Grid item xs={12} sm={6}>
+						<BreedSelector
+							breedName={breedId}
+							petType={petType}
+							handleBreedChange={handleBreedChange}
+						/>
 					</Grid>
-					<Grid item xs={12}>
-						<FormControl fullWidth>
-							<TextField
-								required
-								name="breed"
-								label="Breed"
-								value={pet.breed}
-								disabled={isdisabled}
-								onChange={handleChange}
-							/>
-						</FormControl>
-					</Grid>
-					<Grid item xs={12}>
+					<Grid item xs={12} sm={6}>
 						<FormControl fullWidth>
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 								<Stack spacing={3}>
-									<MobileDatePicker										
+									<MobileDatePicker
 										label="Data de Nascimento"
 										inputFormat="DD/MM/YYYY"
 										value={pet.birth_date}
@@ -123,6 +100,71 @@ export function PetForm({
 								</Stack>
 							</LocalizationProvider>
 						</FormControl>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<FormControl>
+							<FormLabel id="demo-row-radio-buttons-group-label">
+								Gênero
+							</FormLabel>
+							<RadioGroup
+								row
+								aria-labelledby="demo-row-radio-buttons-group-label"
+								name="gender"
+								onChange={handlePetGenderChange}
+							>
+								<FormControlLabel
+									value="female"
+									control={<Radio />}
+									label="Fêmea"
+									checked={
+										(pet.gender &&
+											pet.gender === 'female') ||
+										undefined
+									}
+								/>
+								<FormControlLabel
+									value="male"
+									control={<Radio />}
+									label="Macho"
+									checked={
+										(pet.gender && pet.gender === 'male') ||
+										undefined
+									}
+								/>
+							</RadioGroup>
+						</FormControl>
+					</Grid>
+
+					<Grid item xs={12} sm={6}>
+						<FormControl fullWidth>
+							<TextField								
+								name="microchip"
+								label="Microchip"
+								value={pet.microchip}
+								disabled={isdisabled}
+								onChange={handleChange}
+							/>
+						</FormControl>
+					</Grid>
+
+					<Grid item xs={12} sm={6}>
+						<FormGroup>						
+							<FormControlLabel
+								control={
+									<Switch
+										name="neutered"
+										color="secondary"
+										onChange={handleNeuteredChange}
+										checked={pet.neutered}
+										inputProps={{
+											'aria-label': 'controlled',
+										}}
+									/>
+								}
+								
+								label="Castrado(a)"
+							/>
+						</FormGroup>						
 					</Grid>
 
 					<Grid item xs={12}>
