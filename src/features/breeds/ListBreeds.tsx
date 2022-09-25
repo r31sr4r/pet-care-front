@@ -11,7 +11,7 @@ import {
 	Tooltip,
 } from '@mui/material';
 import { useAppSelector } from '../../app/hooks';
-import { selectBreeds } from './breedsSlice';
+import { selectBreeds, useGetBreedsQuery } from './breedsSlice';
 import PetsIcon from '@mui/icons-material/Pets';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Link, useNavigate } from 'react-router-dom';
@@ -19,9 +19,12 @@ import { BreedSelector } from './components/BreedSelector';
 import React from 'react';
 
 export const ListBreeds = () => {
+	const { data, isFetching, error } = useGetBreedsQuery();
 	const breeds = useAppSelector(selectBreeds);
 	const [breedName, setBreedName] = React.useState('');
 	const navigate = useNavigate();
+
+	console.log(data?.items);
 
 	const Demo = styled('div')(({ theme }) => ({
 		backgroundColor: theme.palette.background.paper,
@@ -75,7 +78,7 @@ export const ListBreeds = () => {
 			</Box>
 			<Demo>
 				<List>
-					{breeds.map((breed) => (
+					{data?.items.map((breed) => (
 						<ListItem
 							key={breed.id}
 							divider

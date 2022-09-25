@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { Result, Results } from '../../types/Breed';
+import { apiSlice } from '../api/apiSlice';
 
 export interface Breed {
 	id: string;
@@ -8,6 +10,21 @@ export interface Breed {
 	is_active: boolean;
 	created_at: string;	
 }
+
+const endpointUrl = '/breeds';
+
+export const breedApiSlice = apiSlice.injectEndpoints({
+	endpoints: ({ query, mutation }) => ({
+		getBreeds: query<Results, void>({
+			query: () => `${endpointUrl}`,
+			providesTags: ['Breeds'],
+		}),
+	}),
+});
+
+export const { useGetBreedsQuery } =
+	breedApiSlice;
+
 
 const breed: Breed = {
 	id: 'ea68b7d8-0727-4960-87c3-0e98ed297a93',
@@ -25,7 +42,7 @@ export const initialState = [
         { ...breed, id: 'e10813a2-1793-4f1f-8b5e-7a0f0472e367', name: 'Breed 5'},
         { ...breed, id: 'e10813a2-1793-4f1f-8b5e-7a0f0472e368', name: 'Breed 6', type: 'CAT'},
         { ...breed, id: 'e10813a2-1793-4f1f-8b5e-7a0f0472e369', name: 'Breed 7', type: 'CAT'},
-        { ...breed, id: 'e10813a2-1793-4f1f-8b5e-7a0f0472e370', name: 'Breed 8'},
+        { ...breed, id: 'e10813a2-1793-4f1f-8b5e-7a0f0472e373', name: 'Breed 8'},
         { ...breed, id: 'e10813a2-1793-4f1f-8b5e-7a0f0472e370', name: 'Breed 9'},
         { ...breed, id: 'e10813a2-1793-4f1f-8b5e-7a0f0472e371', name: 'Breed 10', type: 'CAT'},
 ];
