@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { Result, Results } from '../../types/Breed';
+import { Item, Result, Results } from '../../types/Breed';
 import { apiSlice } from '../api/apiSlice';
 
 export interface Breed {
@@ -13,16 +13,28 @@ export interface Breed {
 
 const endpointUrl = '/breeds';
 
+const getBreedsByType = (petType: string) => {
+	return {
+		url: `${endpointUrl}/type/${petType}`,
+		method: 'GET',
+	};
+};
+
+
 export const breedApiSlice = apiSlice.injectEndpoints({
 	endpoints: ({ query, mutation }) => ({
 		getBreeds: query<Results, void>({
 			query: () => `${endpointUrl}`,
 			providesTags: ['Breeds'],
 		}),
+		getBreedsByType: query<Item[], {petType: string}>({
+			query: ({petType}) => getBreedsByType(petType),
+			providesTags: ['Breeds'],
+		}),
 	}),
 });
 
-export const { useGetBreedsQuery } =
+export const { useGetBreedsQuery, useGetBreedsByTypeQuery } =
 	breedApiSlice;
 
 
