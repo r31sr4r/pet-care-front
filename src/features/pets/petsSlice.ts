@@ -37,7 +37,7 @@ export const petApiSlice = apiSlice.injectEndpoints({
 			query: () => `${endpointUrl}`,
 			providesTags: ['Pets'],
 		}),
-		getPetsByCustomerID: query<Item[], {customer_id: string}>({
+		getPetsByCustomerID: query<Results, {customer_id: string}>({
 			query: ({customer_id}) => getPetsByCustomerID(customer_id),
 			providesTags: ['Pets'],
 		}),

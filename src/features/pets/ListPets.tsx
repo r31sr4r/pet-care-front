@@ -1,20 +1,23 @@
-import {
-	Box,
-	Button
-} from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { Petlist } from './components/PetList';
-import { selectPets, useGetPetsQuery } from './petsSlice';
+import {
+	selectPets,
+	useGetPetsByCustomerIDQuery,
+	useGetPetsQuery,
+} from './petsSlice';
 
 export const ListPets = () => {
-	const { data, isFetching, error } = useGetPetsQuery();
+	const { data, isFetching, error } = useGetPetsByCustomerIDQuery(
+		{ customer_id: 'eb115738-7d68-4916-976e-6df6bec808a8' },
+	);
 	const pets = useAppSelector(selectPets);
-	const navigate = useNavigate();	
+	const navigate = useNavigate();
 
-	const handleClick = (pet: any) => {		
+	const handleClick = (pet: any) => {
 		navigate(`/pets/edit/${pet.id}`);
-	  };
+	};
 
 	return (
 		<Box maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
