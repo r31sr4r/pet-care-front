@@ -21,8 +21,7 @@ export const CreatePet = () => {
 		customer_id: '',
 		image_url: '',
 		is_active: true,
-		created_at: '',
-		updated_at: '',
+		created_at: '',		
 		deleted_at: '',
 	});
 	const dispatch = useAppDispatch();

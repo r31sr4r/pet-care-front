@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import petsReducer from '../features/pets/petsSlice';
+import petsReducer, { petApiSlice } from '../features/pets/petsSlice';
 import breedsReducer, { breedApiSlice } from '../features/breeds/breedsSlice';
 import { apiSlice } from '../features/api/apiSlice';
 
@@ -9,6 +9,7 @@ export const store = configureStore({
 		breeds: breedsReducer,
 		[apiSlice.reducerPath]: apiSlice.reducer,
 		[breedApiSlice.reducerPath]: apiSlice.reducer,
+		[petApiSlice.reducerPath]: apiSlice.reducer,
 	},
 });
 

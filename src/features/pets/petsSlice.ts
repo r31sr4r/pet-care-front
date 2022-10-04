@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { Item, Results } from '../../types/Pet';
+import { apiSlice } from '../api/apiSlice';
+
 
 export interface Pet {
 	id: string;
@@ -16,8 +19,33 @@ export interface Pet {
 	is_active: boolean;
 	deleted_at: string | null;
 	created_at: string;
-	updated_at: string;
 }
+
+const endpointUrl = '/pets';
+
+const getPetsByCustomerID = (customer_id: string) => {
+	return {
+		url: `${endpointUrl}/customer/${customer_id}`,
+		method: 'GET',
+	};
+};
+
+
+export const petApiSlice = apiSlice.injectEndpoints({
+	endpoints: ({ query, mutation }) => ({
+		getPets: query<Results, void>({
+			query: () => `${endpointUrl}`,
+			providesTags: ['Pets'],
+		}),
+		getPetsByCustomerID: query<Item[], {customer_id: string}>({
+			query: ({customer_id}) => getPetsByCustomerID(customer_id),
+			providesTags: ['Pets'],
+		}),
+	}),
+});
+
+export const { useGetPetsQuery, useGetPetsByCustomerIDQuery } =
+	petApiSlice;
 
 const pet: Pet = {
 	id: '1',
@@ -33,8 +61,7 @@ const pet: Pet = {
     image_url: '',
 	is_active: true,
 	deleted_at: null,
-	created_at: '2021-01-01 00:00:00',
-	updated_at: '2021-01-01 00:00:00',
+	created_at: '2021-01-01 00:00:00',	
 };
 
 export const initialState = [
@@ -88,8 +115,7 @@ export const selectPetById = (state: RootState, id: string) => {
 			image_url: '',			
 			is_active: false,
 			deleted_at: null,
-			created_at: '',
-			updated_at: '',
+			created_at: '',			
 		}
 	);
 };

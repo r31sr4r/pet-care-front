@@ -1,6 +1,5 @@
 import { SortDirection } from './SortDirection';
 
-
 export interface Results {
     items:       Item[];
     total:       number;
@@ -18,12 +17,19 @@ export interface Result {
 }
 
 export interface Item {
-    id:          string;
-    name:        string;
-    type:        string;
-    description: null;
-    is_active:    boolean;
-    created_at:   Date;
+    id:         string;
+    name:       string;
+    type:       string;
+    other_type:  null;
+    breed:      string;
+    gender:     null;
+    birth_date:  null;
+    microchip:  null;
+    neutered:   boolean;
+    image_url:   null;
+    is_active:   boolean;
+    created_at:  Date;
+    customer_id: string;
 }
 
 export interface SearchParams {
@@ -33,4 +39,3 @@ export interface SearchParams {
 	sort_dir?: SortDirection;
 	filter?: string;
 }
-

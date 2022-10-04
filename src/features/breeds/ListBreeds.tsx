@@ -24,7 +24,6 @@ export const ListBreeds = () => {
 	const [breedName, setBreedName] = React.useState('');
 	const navigate = useNavigate();
 
-	console.log(data?.items);
 
 	const Demo = styled('div')(({ theme }) => ({
 		backgroundColor: theme.palette.background.paper,
