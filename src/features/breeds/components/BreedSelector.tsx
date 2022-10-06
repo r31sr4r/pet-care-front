@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useAppSelector } from '../../../app/hooks';
-import { selectBreedByType, selectBreeds, useGetBreedsByTypeQuery } from '../breedsSlice';
+import { useEffect } from 'react';
+import { useGetBreedsByTypeQuery } from '../breedsSlice';
 
 type Props = {
 	breedName: string;
@@ -15,10 +15,6 @@ export function BreedSelector({
 	handleBreedChange,
 }: Props) {
 	const { data, isFetching, error } = useGetBreedsByTypeQuery({ petType: petType });
-	const breeds = useAppSelector(selectBreeds);
-	const breedsByType = useAppSelector((state) =>
-		selectBreedByType(state, petType)
-	);
 
 	return (
 		<FormControl fullWidth>
@@ -30,7 +26,7 @@ export function BreedSelector({
 				value={breedName}
 				label="Raça"
 				onChange={handleBreedChange}
-				key={breedName}
+				key={breedName}				
 			>
 				{data ? data.map((breed) => (
 					<MenuItem value={breed.name} key={breed.id}>{breed.name}</MenuItem>

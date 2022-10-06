@@ -140,7 +140,7 @@ export function PetForm({
 							<TextField								
 								name="microchip"
 								label="Microchip"
-								value={pet.microchip}
+								value={pet.microchip?.toString()}
 								disabled={isdisabled}
 								onChange={handleChange}
 							/>
@@ -193,7 +193,7 @@ export function PetForm({
 								component={Link}
 								to="/pets"
 							>
-								Back
+								Voltar
 							</Button>
 
 							<Button
@@ -202,7 +202,7 @@ export function PetForm({
 								color="secondary"
 								disabled={isdisabled}
 							>
-								Save
+								Salvar
 							</Button>
 						</Box>
 					</Grid>

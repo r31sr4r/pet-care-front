@@ -11,6 +11,8 @@ export const store = configureStore({
 		[breedApiSlice.reducerPath]: apiSlice.reducer,
 		[petApiSlice.reducerPath]: apiSlice.reducer,
 	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
@@ -18,6 +20,6 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
 	ReturnType,
 	RootState,
-	unknown,
+	unknown,	
 	Action<string>
 >;

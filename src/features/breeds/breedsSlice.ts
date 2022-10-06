@@ -28,7 +28,7 @@ export const breedApiSlice = apiSlice.injectEndpoints({
 			providesTags: ['Breeds'],
 		}),
 		getBreedsByType: query<Item[], {petType: string}>({
-			query: ({petType}) => getBreedsByType(petType),
+			query: ({petType}) => petType ? getBreedsByType(petType) : '',
 			providesTags: ['Breeds'],
 		}),
 	}),

@@ -1,12 +1,12 @@
 import { Box, Paper, SelectChangeEvent, Typography } from '@mui/material';
-import { useState } from 'react';
-import { useAppDispatch } from '../../app/hooks';
-import { Pet, createPet } from './petsSlice';
-import { PetForm } from './components/PetForm';
-import { useSnackbar } from 'notistack';
 import { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
+import { useEffect, useState } from 'react';
+import { PetForm } from './components/PetForm';
+import { Pet, useCreatePetMutation } from './petsSlice';
 
 export const CreatePet = () => {
+	const [createPet, status] = useCreatePetMutation();
 	const [isdisabled, setIsDisabled] = useState(false);
 	const [petState, setPetState] = useState<Pet>({
 		id: '',
@@ -21,16 +21,27 @@ export const CreatePet = () => {
 		customer_id: '',
 		image_url: '',
 		is_active: true,
-		created_at: '',		
-		deleted_at: '',
+		created_at: null,
 	});
-	const dispatch = useAppDispatch();
 	const { enqueueSnackbar } = useSnackbar();
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		dispatch(createPet(petState));
-		enqueueSnackbar('Pet created successfully', { variant: 'success' });
+		const payload = {
+			name: petState.name,
+			type: petState.type,
+			other_type: petState.other_type,
+			breed: petState.breed,
+			gender: petState.gender,
+			birth_date: petState.birth_date,
+			microchip: petState.microchip,
+			neutered: petState.neutered,
+			customer_id: 'eb115738-7d68-4916-976e-6df6bec808a8',
+			image_url: petState.image_url,
+			is_active: petState.is_active,
+		};
+
+		await createPet(payload);
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +56,7 @@ export const CreatePet = () => {
 
 	const handlePetTypeChange = (event: SelectChangeEvent) => {
 		const { name, value } = event.target;
-		setPetState({ ...petState, [name]: value });
+		setPetState({ ...petState, [name]: value, breed: '' });
 	};
 
 	const handlePetGenderChange = (event: SelectChangeEvent) => {
@@ -62,13 +73,24 @@ export const CreatePet = () => {
 
 	const handleBreedChange = (event: SelectChangeEvent) => {
 		const { name, value } = event.target;
-		setPetState({ ...petState, [name]: value });				
+		setPetState({ ...petState, [name]: value });
 	};
 
 	const handleNeuteredChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = e.target;
 		setPetState({ ...petState, [name]: checked });
 	};
+
+	useEffect(() => {
+		if (status.isSuccess) {
+			enqueueSnackbar('Pet cadastrado com sucesso', { variant: 'success' })
+			setIsDisabled(true);
+		}
+		if (status.error) {
+			enqueueSnackbar('Ocorreu um erro ao cadastrar o Pet', { variant: 'error' })
+		}
+
+	}, [enqueueSnackbar, status.error, status.isSuccess])
 
 	return (
 		<Box>
