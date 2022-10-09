@@ -1,22 +1,23 @@
 import { SortDirection } from './SortDirection';
 
 export interface Results {
-    items:       Item[];
-    total:       number;
-    current_page: number;
-    last_page:    number;
-    per_page:     number;
+    paginationPresenter: Meta
+    data: Pet[];
 }
 
 export interface Result {
-    items:       Item;
+    paginationPresenter: Meta
+    data: Pet;
+}
+
+export interface Meta {    
     total:       number;
     current_page: number;
     last_page:    number;
     per_page:     number;
 }
 
-export interface Item {
+export interface Pet {
     id:         string;
     name:       string;
     type:       string;

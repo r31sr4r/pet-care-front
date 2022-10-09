@@ -37,7 +37,7 @@ export const ListPets = () => {
 					Cadastrar Pet
 				</Button>
 			</Box>
-			<Petlist data={data} handleClick={handleClick} />
+			<Petlist results={data} handleClick={handleClick} />
 		</Box>
 	);
 };

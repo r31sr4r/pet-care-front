@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { Item, Result, Results } from '../../types/Pet';
+import { Result, Results } from '../../types/Pet';
 import { apiSlice } from '../api/apiSlice';
 
 export interface Pet {

@@ -13,11 +13,11 @@ import { Results } from '../../../types/Pet';
 import { SelectPetType } from '../../../utils/SelectPetType';
 
 type Props = {
-	data: Results | undefined;
+	results: Results | undefined;
 	handleClick: (pet: any) => void;
 };
 
-export const Petlist = ({ data, handleClick }: Props) => {
+export const Petlist = ({ results, handleClick }: Props) => {
 	const ListStyle = styled('div')(({ theme }) => ({
 		backgroundColor: theme.palette.background.paper,
 	}));
@@ -25,7 +25,7 @@ export const Petlist = ({ data, handleClick }: Props) => {
 	return (
 		<ListStyle>
 			<List>
-				{data?.items.map((pet) => (
+				{results?.data.map((pet) => (
 					<ListItem
 						key={pet.id}
 						divider
