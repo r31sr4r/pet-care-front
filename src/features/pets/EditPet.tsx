@@ -73,7 +73,7 @@ export const EditPet = () => {
 
 	useEffect(() => {
 		if (pet) {
-			setPetState(pet);
+			setPetState(pet.data);
 		}
 	}, [pet]);
 

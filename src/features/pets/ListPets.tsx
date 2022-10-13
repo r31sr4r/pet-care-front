@@ -11,7 +11,7 @@ import {
 
 export const ListPets = () => {
 	const { data, isFetching, error } = useGetPetsByCustomerIDQuery(
-		{ customer_id: 'eb115738-7d68-4916-976e-6df6bec808a8' },
+		{ customer_id: '2965100a-e5d4-4e44-9f60-73a6a62f2723' },
 	);
 	const pets = useAppSelector(selectPets);
 	const navigate = useNavigate();

@@ -77,7 +77,7 @@ export const ListBreeds = () => {
 			</Box>
 			<Demo>
 				<List>
-					{data?.items.map((breed) => (
+					{data?.data.map((breed: any) => (
 						<ListItem
 							key={breed.id}
 							divider

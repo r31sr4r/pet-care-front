@@ -1,20 +1,16 @@
 import { SortDirection } from './SortDirection';
 
-
 export interface Results {
-    items:       Item[];
-    total:       number;
-    current_page: number;
-    last_page:    number;
-    per_page:     number;
+    meta: Meta
+    data: Item[];
+}
+
+export interface ResultsByType {    
+    data: Item[];
 }
 
 export interface Result {
-    items:       Item;
-    total:       number;
-    current_page: number;
-    last_page:    number;
-    per_page:     number;
+    data:       Item;
 }
 
 export interface Item {
@@ -24,6 +20,13 @@ export interface Item {
     description: null;
     is_active:    boolean;
     created_at:   Date;
+}
+
+export interface Meta {    
+    total:       number;
+    current_page: number;
+    last_page:    number;
+    per_page:     number;
 }
 
 export interface SearchParams {

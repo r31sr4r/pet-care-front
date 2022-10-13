@@ -16,6 +16,7 @@ export function BreedSelector({
 }: Props) {
 	const { data, isFetching, error } = useGetBreedsByTypeQuery({ petType: petType });
 
+	console.log('data', data?.data);
 	return (
 		<FormControl fullWidth>
 			<InputLabel id="demo-simple-select-label">Raça</InputLabel>
@@ -28,7 +29,7 @@ export function BreedSelector({
 				onChange={handleBreedChange}
 				key={breedName}				
 			>
-				{data ? data.map((breed) => (
+				{data?.data ? data.data.map((breed) => (
 					<MenuItem value={breed.name} key={breed.id}>{breed.name}</MenuItem>
 				)) : 
 				[]

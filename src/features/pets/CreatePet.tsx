@@ -36,7 +36,7 @@ export const CreatePet = () => {
 			birth_date: petState.birth_date,
 			microchip: petState.microchip,
 			neutered: petState.neutered,
-			customer_id: 'eb115738-7d68-4916-976e-6df6bec808a8',
+			customer_id: '2965100a-e5d4-4e44-9f60-73a6a62f2723',
 			image_url: petState.image_url,
 			is_active: petState.is_active,
 		};
