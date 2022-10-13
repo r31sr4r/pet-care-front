@@ -10,6 +10,7 @@ import { CreatePet } from './features/pets/CreatePet';
 import { EditPet } from './features/pets/EditPet';
 import { SnackbarProvider } from 'notistack';
 import { ListBreeds } from './features/breeds/ListBreeds'
+import SignUp from './features/signup/SignUp';
 
 function App() {
 	return (
@@ -33,6 +34,7 @@ function App() {
 					<Layout>
 						<Routes>
 							<Route path="/" element={<ListPets />} />
+							<Route path="/signup" element={<SignUp />} />
 							<Route path="/pets" element={<ListPets />} />
 							<Route
 								path="/pets/create"
