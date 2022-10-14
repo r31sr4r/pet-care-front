@@ -10,7 +10,7 @@ import { CreatePet } from './features/pets/CreatePet';
 import { EditPet } from './features/pets/EditPet';
 import { SnackbarProvider } from 'notistack';
 import { ListBreeds } from './features/breeds/ListBreeds'
-import SignUp from './features/signup/SignUp';
+import SignUp from './features/users/SignUp';
 
 function App() {
 	return (
