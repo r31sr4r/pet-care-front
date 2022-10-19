@@ -1,33 +1,10 @@
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import { SignUpForm } from './components/SignUpForm';
 import { useCreateUserMutation, User } from './usersSlice';
 import { useSnackbar } from 'notistack';
-
-function Copyright(props: any) {
-	return (
-		<Typography
-			variant="body2"
-			color="text.secondary"
-			align="center"
-			{...props}
-		>
-			{'Copyright © '}
-			<Link
-				color="inherit"
-				href="https://www.onewayinnovation.com.br/"
-				target={'_blank'}
-			>
-				One Way Innovation
-			</Link>{' '}
-			{new Date().getFullYear()}
-			{'.'}
-		</Typography>
-	);
-}
+import { Copyright } from '../../utils/components/copyright/Copyright';
 
 export default function SignUp() {
 	const { enqueueSnackbar } = useSnackbar();

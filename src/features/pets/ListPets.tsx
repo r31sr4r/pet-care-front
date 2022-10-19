@@ -1,12 +1,10 @@
 import { Box, Button, Typography } from '@mui/material';
-import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { Petlist } from './components/PetList';
 import {
 	selectPets,
-	useGetPetsByCustomerIDQuery,
-	useGetPetsQuery,
+	useGetPetsByCustomerIDQuery
 } from './petsSlice';
 
 export const ListPets = () => {

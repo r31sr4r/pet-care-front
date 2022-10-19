@@ -36,3 +36,18 @@ export interface SearchParams {
 	filter?: string;
 }
 
+export interface AccessResult {
+    data: AccessData;
+}
+
+export interface AccessData {
+    access_token: string;
+    token_type?: string;
+    expires_in?: number;
+}
+
+export interface UserSignIn {
+    email: string;
+    password: string;
+}
+
