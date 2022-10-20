@@ -24,10 +24,6 @@ export default function SignIn() {
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-		});
 
 		const payload = {
 			email: data.get('email'),
@@ -35,15 +31,12 @@ export default function SignIn() {
 		};
 
 		await signInUser(payload);
-        navigate('/');
 
 	};
 
 	useEffect(() => {
 		if (status.isSuccess) {
-			enqueueSnackbar('Login realizado com sucesso', {
-				variant: 'success',
-			});
+			navigate('/');
 		} else if (status?.error?.status === 401) {
 			enqueueSnackbar('Usuário ou senha inválidos', {
 				variant: 'error',
