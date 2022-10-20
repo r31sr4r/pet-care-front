@@ -123,7 +123,7 @@ export default function SignIn() {
 							</Link>
 						</Grid>
 						<Grid item>
-							<Link href="#" variant="body2">
+							<Link href="/type" variant="body2">
 								{'Não possui uma conta? Criar'}
 							</Link>
 						</Grid>

@@ -12,6 +12,7 @@ import { SnackbarProvider } from 'notistack';
 import { ListBreeds } from './features/breeds/ListBreeds'
 import SignUp from './features/users/SignUp';
 import SignIn from './features/users/SignIn';
+import ActionAreaCard from './features/users/components/SelectUserType';
 
 function App() {
 	return (
@@ -38,6 +39,7 @@ function App() {
 							<Route path="/signup" element={<SignUp />} />
 							<Route path="/signin" element={<SignIn />} />
 							<Route path="/pets" element={<ListPets />} />
+							<Route path="/type" element={<ActionAreaCard />} />
 							<Route
 								path="/pets/create"
 								element={<CreatePet />}

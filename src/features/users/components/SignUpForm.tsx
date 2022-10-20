@@ -13,6 +13,7 @@ import { User } from '../usersSlice';
 type Props = {
 	user: User;
 	isDisabled?: boolean;
+	userType: string;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -20,6 +21,7 @@ type Props = {
 export function SignUpForm({
 	user,
 	isDisabled,
+	userType,
 	handleSubmit,
 	handleChange,
 }: Props) {
@@ -104,6 +106,9 @@ export function SignUpForm({
 			<Typography component="h1" variant="h5">
 				Criar Conta
 			</Typography>
+			<Typography component="h1" variant="h6">
+				{userType}
+			</Typography>			
 			<Box
 				component="form"
 				// noValidate
@@ -181,11 +186,16 @@ export function SignUpForm({
 					disabled={isDisabled}
 					sx={{ mt: 3, mb: 2 }}
 				>
-					Sign Up
+					Cadastrar
 				</Button>
 				<Grid container justifyContent="flex-end">
-					<Grid item>
-						<Link href="#" variant="body2">
+					<Grid item xs>
+						<Link href="/type" variant="body2">
+							Voltar
+						</Link>
+					</Grid>
+					<Grid item >
+						<Link href="/signin" variant="body2">
 							Já possui um conta? Faça o login
 						</Link>
 					</Grid>

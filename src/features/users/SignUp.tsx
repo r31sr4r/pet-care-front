@@ -5,8 +5,13 @@ import { SignUpForm } from './components/SignUpForm';
 import { useCreateUserMutation, User } from './usersSlice';
 import { useSnackbar } from 'notistack';
 import { Copyright } from '../../utils/components/copyright/Copyright';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
+	const location = useLocation();
+	let navigate = useNavigate();	
+	const userType = location.state?.group === 'customer' ? 'Dono de Pets' : 'Veterinário';
+
 	const { enqueueSnackbar } = useSnackbar();
 	const [createUser, status] = useCreateUserMutation();
 	const [isDisabled, setIsDisabled] = useState(false);
@@ -24,25 +29,24 @@ export default function SignUp() {
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
-		console.log(name, value);
 		setUserState({ ...userState, [name]: value });
 	};
 
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
+		let group = 'customer';
 
-		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-			name: data.get('name'),
-		});
+		if (location.state) {
+			group = location.state.group;
+		}
+
+		// const data = new FormData(event.currentTarget);
 
 		const payload = {
 			name: userState.name,
 			email: userState.email,
 			password: userState.password,
-			group: 'customer',
+			group: group,
 			role: 'user',
 		};
 
@@ -55,6 +59,7 @@ export default function SignUp() {
 				variant: 'success',
 			});
 			setIsDisabled(true);
+			navigate('/signin');
 		}
 		if (status.error) {
 			enqueueSnackbar('Ocorreu um erro ao realizar seu cadastro', {
@@ -69,6 +74,7 @@ export default function SignUp() {
 			<SignUpForm
 				user={userState}
 				isDisabled={isDisabled}
+				userType={userType}
 				handleSubmit={handleSubmit}
 				handleChange={handleChange}
 			/>
