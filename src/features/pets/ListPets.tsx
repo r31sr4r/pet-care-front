@@ -6,10 +6,12 @@ import {
 	selectPets,
 	useGetPetsByCustomerIDQuery
 } from './petsSlice';
+import { UserData } from '../../utils/security/UserData';
 
 export const ListPets = () => {
+
 	const { data, isFetching, error } = useGetPetsByCustomerIDQuery(
-		{ customer_id: '2965100a-e5d4-4e44-9f60-73a6a62f2723' },
+		{ customer_id: UserData()?.user.id },
 	);
 	const pets = useAppSelector(selectPets);
 	const navigate = useNavigate();

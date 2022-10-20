@@ -2,6 +2,7 @@ import { Box, Paper, SelectChangeEvent, Typography } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
+import { UserData } from '../../utils/security/UserData';
 import { PetForm } from './components/PetForm';
 import { Pet, useCreatePetMutation } from './petsSlice';
 
@@ -36,7 +37,7 @@ export const CreatePet = () => {
 			birth_date: petState.birth_date,
 			microchip: petState.microchip,
 			neutered: petState.neutered,
-			customer_id: '2965100a-e5d4-4e44-9f60-73a6a62f2723',
+			customer_id: UserData()?.user.id ,
 			image_url: petState.image_url,
 			is_active: petState.is_active,
 		};

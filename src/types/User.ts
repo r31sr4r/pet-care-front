@@ -51,3 +51,22 @@ export interface UserSignIn {
     password: string;
 }
 
+export interface TokenPayload {
+    exp: number;
+    iat: number;
+    user: UserTokenPayload;
+}
+
+export interface UserTokenPayload {
+    id: string;
+    email: string;
+    name: string;
+    profile: Profile[]
+}
+
+export interface Profile {
+    group: string;
+    role: string;
+}
+
+
