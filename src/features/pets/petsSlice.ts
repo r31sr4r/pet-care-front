@@ -25,10 +25,6 @@ const getPetsByCustomerID = (customer_id: string) => {
 	return {
 		url: `${endpointUrl}/customer/${customer_id}`,
 		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			'Autorization': `Bearer ${localStorage.getItem('token')}`,
-		},
 	};
 };
 
