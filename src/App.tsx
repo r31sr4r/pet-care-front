@@ -13,6 +13,7 @@ import { ListBreeds } from './features/breeds/ListBreeds'
 import SignUp from './features/users/SignUp';
 import SignIn from './features/users/SignIn';
 import ActionAreaCard from './features/users/components/SelectUserType';
+import { ChangePassword } from './features/users/ChangePassword';
 
 function App() {
 	return (
@@ -38,6 +39,7 @@ function App() {
 							<Route path="/" element={<ListPets />} />
 							<Route path="/signup" element={<SignUp />} />
 							<Route path="/signin" element={<SignIn />} />
+							<Route path="/user/change-password" element={<ChangePassword />} />
 							<Route path="/pets" element={<ListPets />} />
 							<Route path="/type" element={<ActionAreaCard />} />
 							<Route

@@ -1,80 +1,108 @@
-import { useState } from 'react';
-import { PasswordInputField } from './PasswordInputField';
-import { ConfirmPasswordInputField } from './ConfirmPasswordInputField';
+import { useState, useEffect } from 'react';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import { User } from '../../../features/users/usersSlice';
 
-export function PasswordAndConfirmPasswordValidation() {
+type Props = {
+	user: User;
+	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export function PasswordAndConfirmPasswordValidation({
+	user,
+	handleChange,
+}: Props) {
 	const [passwordError, setPasswordError] = useState(false);
 	const [confirmPasswordError, setConfirmPasswordError] = useState(false);
-	const [passwordInput, setPasswordInput] = useState({
-		password: '',
-		confirmPassword: '',
-	});
+	const [passwordErrorMessages, setPasswordErrorMessages] = useState('');
 
-	const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setPasswordInput({ ...passwordInput, [name]: value });
+	const handleValidation = () => {
+		const upperCaseRegex = /(?=.*?[A-Z])/;
+		const lowerCaseRegex = /(?=.*?[a-z])/;
+		const numberRegex = /(?=.*?\d)/;
+		const specialCharacterRegex = /(?=.*?[#?!@$%^&*-])/;
+		const minLengthRegex = /(?=.{6,})/;
+
+		const upperCaseValidation = upperCaseRegex.test(user.password);
+		const lowerCaseValidation = lowerCaseRegex.test(user.password);
+		const numberValidation = numberRegex.test(user.password);
+		const specialCharacterValidation = specialCharacterRegex.test(
+			user.password
+		);
+		const minLengthValidation = minLengthRegex.test(user.password);
+
+		const passwordValidation: boolean =
+			upperCaseValidation &&
+			lowerCaseValidation &&
+			(numberValidation || specialCharacterValidation) &&
+			minLengthValidation;
+
+		const numberAndSpecialCharacterValidation: boolean =
+			numberValidation || specialCharacterValidation;
+
+		const passwordErrorMessages = `Sua senha precisar ter pelo menos:
+            ${upperCaseValidation ? '✔️' : '❌'} uma letra maíuscula
+            ${lowerCaseValidation ? '✔️' : '❌'} uma letra minúscula
+            ${
+				numberAndSpecialCharacterValidation ? '✔️' : '❌'
+			} um número ou caracter especial            
+            ${minLengthValidation ? '✔️' : '❌'} no mínimo 6 caracteres`;
+
+		if (!passwordValidation) {
+			setPasswordError(true);
+			setPasswordErrorMessages(passwordErrorMessages);
+		} else {
+			setPasswordError(false);
+			setPasswordErrorMessages('');
+		}
+
+		if (user.password !== user.confirm_password) {
+			setPasswordError(true);
+			setConfirmPasswordError(true);
+		} else {
+			setPasswordError(false);
+			setConfirmPasswordError(false);
+		}
 	};
 
-	const handleValidation = (e: React.KeyboardEvent<HTMLDivElement>) => {
-		const { name, value } = e.target as HTMLInputElement;
-		if (name === 'password') {
-			const upperCaseRegex = /(?=.*?[A-Z])/;
-			const lowerCaseRegex = /(?=.*?[a-z])/;
-			const numberRegex = /(?=.*?[0-9])/;
-			const specialCharacterRegex = /(?=.*?[#?!@$%^&*-])/;
-			const minLengthRegex = /(?=.{8,})/;
-
-			const passwordValidation: boolean =
-				upperCaseRegex.test(value) &&
-				lowerCaseRegex.test(value) &&
-				numberRegex.test(value) &&
-				specialCharacterRegex.test(value) &&
-				minLengthRegex.test(value);
-
-			if (value !== passwordInput.confirmPassword) {
-				setPasswordError(true);
-			} else {
-				setPasswordError(false);
-			}
-		}
-		if (name === 'confirmPassword') {
-			if (value !== passwordInput.password) {
-				setConfirmPasswordError(true);
-			} else {
-				setConfirmPasswordError(false);
-			}
-		}
-	};
+	useEffect(() => {
+		handleValidation();
+	}, [user.password, user.confirm_password]);
 
 	return (
 		<>
-			<PasswordInputField
-				handleValidation={handleValidation}
-				handlePasswordChange={handlePasswordChange}
-				passwordValue={passwordInput.password}
-				passwordError={passwordError}
-			/>
-			<ConfirmPasswordInputField
-				handleValidation={handleValidation}
-				handlePasswordChange={handlePasswordChange}
-				passwordValue={passwordInput.confirmPassword}
-				passwordError={confirmPasswordError}
-			/>
+			<Grid item xs={12}>
+				<TextField
+					required
+					fullWidth
+					name="password"
+					label="Senha"
+					type="password"
+					id="password"
+					autoComplete="new-password"
+					value={user.password}
+					onChange={handleChange}
+					error={passwordError}
+					helperText={passwordError ? passwordErrorMessages : ''}
+				/>
+			</Grid>
+			<Grid item xs={12}>
+				<TextField
+					required
+					fullWidth
+					name="confirm_password"
+					label="Confirmar senha"
+					type="password"
+					id="confirm_password"
+					autoComplete="new-password"
+					value={user.confirm_password}
+					onChange={handleChange}
+					error={confirmPasswordError}
+					helperText={
+						confirmPasswordError ? 'As senhas não conferem' : ''
+					}
+				/>
+			</Grid>
 		</>
 	);
-
-	// useEffect(() => {
-	// 	if (password !== confirmPassword) {
-	// 		setPasswordError(true);
-	// 		setConfirmPasswordError(true);
-	// 	} else {
-	// 		setPasswordError(false);
-	// 		setConfirmPasswordError(false);
-	// 	}
-	// }, [password, confirmPassword]);
-
-	// return {
-	// 	passwordError,
-	// 	confirmPasswordError,
-	// };
 }

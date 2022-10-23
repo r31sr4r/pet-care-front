@@ -7,6 +7,7 @@ export interface User {
 	email: string;
 	password: string;
 	confirm_password: string | null;
+	old_password: string | null;
 	group: string;
 	role: string;
 	is_active: boolean | null;
@@ -14,6 +15,14 @@ export interface User {
 }
 
 const endpointUrl = '/users';
+
+function updatePasswordMutation(user: User) {
+	return {
+		url: `${endpointUrl}/${user.id}`,
+		method: 'PATCH',
+		body: user,
+	};
+}
 
 function createUserMutation(user: User) {
 	return {
@@ -47,7 +56,15 @@ export const userApiSlice: any = apiSlice.injectEndpoints({
 			},
 			invalidatesTags: ['Users'],
 		}),
+		updatePassword: mutation<Result, User>({
+			query: updatePasswordMutation,
+			invalidatesTags: ['Users'],
+		}),
 	}),
 });
 
-export const { useCreateUserMutation, useSignInUserMutation } = userApiSlice;
+export const {
+	useCreateUserMutation,
+	useSignInUserMutation,
+	useUpdatePasswordMutation,
+} = userApiSlice;

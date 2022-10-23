@@ -21,6 +21,7 @@ export default function SignUp() {
 		email: '',
 		password: '',
 		confirm_password: '',
+		old_password: '',
 		group: '',
 		role: '',
 		is_active: true,
@@ -39,8 +40,6 @@ export default function SignUp() {
 		if (location.state) {
 			group = location.state.group;
 		}
-
-		// const data = new FormData(event.currentTarget);
 
 		const payload = {
 			name: userState.name,

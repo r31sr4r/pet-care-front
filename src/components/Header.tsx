@@ -1,19 +1,19 @@
+import { AccountCircle } from '@mui/icons-material';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
 	AppBar,
 	Box,
 	Button,
-	IconButton,
-	Link,
-	Menu,
+	IconButton, Menu,
 	MenuItem,
 	Toolbar,
-	Typography,
+	Typography
 } from '@mui/material';
 import React, { useEffect } from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
-import logo_white from '../assets/images/logo-white.png';
-import { AccountCircle, Logout } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import logo_white from '../assets/images/logo-white.png';
+import { UserData } from '../utils/security/UserData';
+
 
 export function Header() {
 	let navigate = useNavigate();
@@ -43,6 +43,10 @@ export function Header() {
 		setAnchorEl(null);
 		if (ev.nativeEvent.target.outerText === 'Sair') {
 			handleLogout();
+		}
+		else if (ev.nativeEvent.target.outerText === 'Alterar Senha') {
+			const id  = UserData()?.user.id
+			navigate(`/user/change-password`);
 		}
 	};
 
