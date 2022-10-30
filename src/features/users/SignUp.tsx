@@ -2,10 +2,11 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useEffect, useState } from 'react';
 import { SignUpForm } from './components/SignUpForm';
-import { useCreateUserMutation, User } from './usersSlice';
+import { useCreateUserMutation } from './usersSlice';
 import { useSnackbar } from 'notistack';
 import { Copyright } from '../../utils/components/copyright/Copyright';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { User } from '../../types/User';
 
 export default function SignUp() {
 	const location = useLocation();

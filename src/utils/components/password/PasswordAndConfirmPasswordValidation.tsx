@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import { User } from '../../../features/users/usersSlice';
+import { User } from '../../../types/User';
 
 type Props = {
 	user: User;

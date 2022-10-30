@@ -1,18 +1,5 @@
-import { AccessResult, Result, UserSignIn } from '../../types/User';
+import { AccessResult, Result, User, UserSignIn } from '../../types/User';
 import { apiSlice } from '../api/apiSlice';
-
-export interface User {
-	id: string | null;
-	name: string;
-	email: string;
-	password: string;
-	confirm_password: string | null;
-	old_password: string | null;
-	group: string;
-	role: string;
-	is_active: boolean | null;
-	created_at: string | null;
-}
 
 const endpointUrl = '/users';
 

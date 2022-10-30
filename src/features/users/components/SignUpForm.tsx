@@ -7,9 +7,9 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
+import { User } from '../../../types/User';
 import { EmailInputField } from '../../../utils/components/email/EmailInputField';
 import { PasswordAndConfirmPasswordValidation } from '../../../utils/components/password/PasswordAndConfirmPasswordValidation';
-import { User } from '../usersSlice';
 
 type Props = {
 	user: User;

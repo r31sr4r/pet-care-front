@@ -2,17 +2,17 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import React, { useEffect, useState } from 'react';
-import { PasswordAndConfirmPasswordValidation } from '../../utils/components/password/PasswordAndConfirmPasswordValidation';
-import { User, useUpdatePasswordMutation } from './usersSlice';
-import { useSnackbar } from 'notistack';
-import { UserData } from '../../utils/security/UserData';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useSnackbar } from 'notistack';
+import React, { useEffect, useState } from 'react';
+import { User } from '../../types/User';
+import { PasswordAndConfirmPasswordValidation } from '../../utils/components/password/PasswordAndConfirmPasswordValidation';
+import { UserData } from '../../utils/security/UserData';
+import { useUpdatePasswordMutation } from './usersSlice';
 
 export function ChangePassword() {
 	const { id, name, email } = UserData()?.user;
