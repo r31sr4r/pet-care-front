@@ -18,19 +18,19 @@ export interface Meta {
 }
 
 export interface Pet {
-    id:         string;
-    name:       string;
-    type:       string;
-    other_type:  null;
-    breed:      string;
-    gender:     null;
-    birth_date:  null;
-    microchip:  null;
-    neutered:   boolean;
-    image_url:   null;
-    is_active:   boolean;
-    created_at:  Date;
-    customer_id: string;
+	id: string;
+	name: string;
+	type: string;
+	other_type: string;
+	breed: string;
+	gender: string;
+	birth_date: string | null | undefined;
+	microchip: string | null;
+	neutered: boolean;
+	customer_id: string;
+	image_url: string;
+	is_active: boolean;
+	created_at: string | null;
 }
 
 export interface SearchParams {

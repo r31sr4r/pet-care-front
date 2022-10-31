@@ -3,8 +3,9 @@ import { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Pet } from '../../types/Pet';
 import { PetForm } from './components/PetForm';
-import { Pet, useGetPetQuery, useUpdatePetMutation } from './petsSlice';
+import { useGetPetQuery, useUpdatePetMutation } from './petsSlice';
 
 export const EditPet = () => {
 	const id = useParams<{ id: string }>().id || '';
@@ -39,7 +40,7 @@ export const EditPet = () => {
 		setPetState({ ...petState, [name]: value });
 	};
 
-	const handleToogle = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = e.target;
 		setPetState({ ...petState, [name]: checked });
 	};
@@ -98,11 +99,11 @@ export const EditPet = () => {
 					pet={petState}
 					petType={petState.type}
 					breedName={petState.breed}
-					isdisabled={status.isLoading}
-					isLoading={false}
+					isDisabled={status.isLoading}
+					isLoading={isFetching}
 					handleSubmit={handleSubmit}
 					handleChange={handleChange}
-					handleToogle={handleToogle}
+					handleToggle={handleToggle}
 					handlePetTypeChange={handlePetTypeChange}
 					handlePetGenderChange={handlePetGenderChange}
 					handlePetBirthDateChange={handlePetBirthDateChange}

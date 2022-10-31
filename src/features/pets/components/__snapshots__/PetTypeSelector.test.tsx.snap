@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PetTypeSelector should render successfully 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiFormControl-root MuiFormControl-fullWidth css-q8hpuo-MuiFormControl-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      id="demo-simple-select-label"
+    >
+      Tipo *
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+    >
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-labelledby="demo-simple-select-label demo-simple-select"
+        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        id="demo-simple-select"
+        role="button"
+        tabindex="0"
+      >
+        Cachorro
+      </div>
+      <input
+        aria-hidden="true"
+        class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        name="type"
+        tabindex="-1"
+        value="DOG"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden="true"
+        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="css-14lo706"
+        >
+          <span>
+            Tipo *
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+</DocumentFragment>
+`;

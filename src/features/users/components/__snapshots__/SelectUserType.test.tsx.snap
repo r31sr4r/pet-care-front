@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectUserType should render successfully 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root css-19midj6"
+  >
+    <div
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation2 css-1mbunh-MuiPaper-root"
+    >
+      <div
+        class="MuiTypography-root MuiTypography-h6 css-1mjmjqw-MuiTypography-root"
+      >
+        Como você deseja se cadastrar?
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-x0dsna-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1ri6ub7-MuiPaper-root-MuiCard-root"
+          >
+            <button
+              class="MuiButtonBase-root MuiCardActionArea-root css-b6lsxj-MuiButtonBase-root-MuiCardActionArea-root"
+              tabindex="0"
+              type="button"
+            >
+              <img
+                alt="dono de pets"
+                class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-o69gx8-MuiCardMedia-root"
+                height="140"
+                src="pet_owner.png"
+              />
+              <div
+                class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+              >
+                <div
+                  class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-h93ljk-MuiTypography-root"
+                >
+                  Dono de Pets
+                </div>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+                >
+                  Cadastre seus pets e tenha todo o controle de vacinas, exames, consultas, entre outros, inclusive dados lançados por veterinários que também fazem parte do Pet Care Club.
+                </p>
+              </div>
+              <span
+                class="MuiCardActionArea-focusHighlight css-1v2exvi-MuiCardActionArea-focusHighlight"
+              />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1ri6ub7-MuiPaper-root-MuiCard-root"
+          >
+            <button
+              class="MuiButtonBase-root MuiCardActionArea-root css-b6lsxj-MuiButtonBase-root-MuiCardActionArea-root"
+              tabindex="0"
+              type="button"
+            >
+              <img
+                alt="veterinário"
+                class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-o69gx8-MuiCardMedia-root"
+                height="140"
+                src="vet.png"
+              />
+              <div
+                class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+              >
+                <div
+                  class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-h93ljk-MuiTypography-root"
+                >
+                  Veterinário
+                </div>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+                >
+                  Tenha acesso a um software completo para gerenciar sua clínica. Disponibilizamos prontuários digitais, controle de vacinas, exames, consultas, entre outros.
+                </p>
+              </div>
+              <span
+                class="MuiCardActionArea-focusHighlight css-1v2exvi-MuiCardActionArea-focusHighlight"
+              />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -14,9 +14,10 @@ export function BreedSelector({
 	petType,
 	handleBreedChange,
 }: Props) {
-	const { data, isFetching, error } = useGetBreedsByTypeQuery({ petType: petType });
+	const { data, isFetching, error } = useGetBreedsByTypeQuery({
+		petType: petType,
+	});
 
-	console.log('data', data?.data);
 	return (
 		<FormControl fullWidth>
 			<InputLabel id="demo-simple-select-label">Raça</InputLabel>
@@ -24,16 +25,18 @@ export function BreedSelector({
 				name="breed"
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
-				value={breedName}
+				value={ isFetching ? 'Carregando...' : breedName }
 				label="Raça"
 				onChange={handleBreedChange}
-				key={breedName}				
+				key={breedName}
 			>
-				{data?.data ? data.data.map((breed) => (
-					<MenuItem value={breed.name} key={breed.id}>{breed.name}</MenuItem>
-				)) : 
-				[]
-				}
+				{data?.data
+					? data.data.map((breed) => (
+							<MenuItem value={breed.name} key={breed.id}>
+								{breed.name}
+							</MenuItem>
+					  ))
+					: []}
 			</Select>
 		</FormControl>
 	);

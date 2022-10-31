@@ -3,8 +3,9 @@ import { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { UserData } from '../../utils/security/UserData';
+import { Pet } from '../../types/Pet';
 import { PetForm } from './components/PetForm';
-import { Pet, useCreatePetMutation } from './petsSlice';
+import { useCreatePetMutation } from './petsSlice';
 
 export const CreatePet = () => {
 	const [createPet, status] = useCreatePetMutation();
@@ -50,7 +51,7 @@ export const CreatePet = () => {
 		setPetState({ ...petState, [name]: value });
 	};
 
-	const handleToogle = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = e.target;
 		setPetState({ ...petState, [name]: checked });
 	};
@@ -105,11 +106,11 @@ export const CreatePet = () => {
 					pet={petState}
 					petType={petState.type}
 					breedName={petState.breed}
-					isdisabled={isdisabled}
-					isLoading={false}
+					isDisabled={status.isLoading || isdisabled}
+					isLoading={status.isLoading}
 					handleSubmit={handleSubmit}
 					handleChange={handleChange}
-					handleToogle={handleToogle}
+					handleToggle={handleToggle}
 					handlePetTypeChange={handlePetTypeChange}
 					handlePetGenderChange={handlePetGenderChange}
 					handlePetBirthDateChange={handlePetBirthDateChange}

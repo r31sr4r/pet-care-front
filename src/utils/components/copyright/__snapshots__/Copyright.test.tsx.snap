@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Copyright should render successfully 1`] = `
+<DocumentFragment>
+  <p
+    class="MuiTypography-root MuiTypography-body2 MuiTypography-alignCenter css-1vl95ex-MuiTypography-root"
+  >
+    Copyright © 
+    <a
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1cghntr-MuiTypography-root-MuiLink-root"
+      href="https://www.onewayinnovation.com.br/"
+      target="_blank"
+    >
+      One Way Innovation
+    </a>
+     2022.
+  </p>
+</DocumentFragment>
+`;

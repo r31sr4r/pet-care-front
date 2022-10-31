@@ -15,7 +15,6 @@ import {
 	Stack,
 	Typography
 } from '@mui/material';
-import { Pet } from '../petsSlice';
 import { Link } from 'react-router-dom';
 import { PetTypeSelector } from './PetTypeSelector';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -23,16 +22,18 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Dayjs } from 'dayjs';
 import { BreedSelector } from '../../breeds/components/BreedSelector';
+import { Pet } from '../../../types/Pet';
+import { Provider } from 'react-redux';
 
 type Props = {
 	pet: Pet;
 	petType: string;
 	breedName: string;
-	isdisabled?: boolean;
+	isDisabled?: boolean;
 	isLoading?: boolean;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	handleToogle: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleToggle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handlePetTypeChange: (e: SelectChangeEvent) => void;
 	handlePetGenderChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handlePetBirthDateChange: (newValue: Dayjs | null) => void;
@@ -44,11 +45,11 @@ export function PetForm({
 	pet,
 	petType,
 	breedName: breedId,
-	isdisabled,
+	isDisabled,
 	isLoading,
 	handleSubmit: onSubmit,
 	handleChange,
-	handleToogle,
+	handleToggle,
 	handlePetTypeChange,
 	handlePetGenderChange,
 	handlePetBirthDateChange,
@@ -66,7 +67,7 @@ export function PetForm({
 								name="name"
 								label="Name"
 								value={pet.name}
-								disabled={isdisabled}
+								disabled={isDisabled}
 								onChange={handleChange}
 							/>
 						</FormControl>
@@ -141,7 +142,7 @@ export function PetForm({
 								name="microchip"
 								label="Microchip"
 								value={pet.microchip?.toString()}
-								disabled={isdisabled}
+								disabled={isDisabled}
 								onChange={handleChange}
 							/>
 						</FormControl>
@@ -174,7 +175,7 @@ export function PetForm({
 									<Switch
 										name="is_active"
 										color="secondary"
-										onChange={handleToogle}
+										onChange={handleToggle}
 										checked={pet.is_active}
 										inputProps={{
 											'aria-label': 'controlled',
@@ -200,9 +201,9 @@ export function PetForm({
 								type="submit"
 								variant="contained"
 								color="secondary"
-								disabled={isdisabled}
+								disabled={ isDisabled || isLoading }
 							>
-								Salvar
+								{isLoading ? 'Salvando...' : 'Salvar'}								
 							</Button>
 						</Box>
 					</Grid>

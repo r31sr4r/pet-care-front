@@ -1,23 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { Result, Results } from '../../types/Pet';
+import { Pet, Result, Results } from '../../types/Pet';
 import { apiSlice } from '../api/apiSlice';
-
-export interface Pet {
-	id: string;
-	name: string;
-	type: string;
-	other_type: string;
-	breed: string;
-	gender: string;
-	birth_date: string | null | undefined;
-	microchip: string | null;
-	neutered: boolean;
-	customer_id: string;
-	image_url: string;
-	is_active: boolean;
-	created_at: string | null;
-}
 
 const endpointUrl = '/pets';
 
