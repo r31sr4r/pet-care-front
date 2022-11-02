@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { PetTypeSelector } from './PetTypeSelector';
+import { PetTypeSelector } from '../PetTypeSelector';
 
 const Props = {
     petType: 'DOG',

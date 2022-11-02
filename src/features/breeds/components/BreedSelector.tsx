@@ -25,7 +25,7 @@ export function BreedSelector({
 				name="breed"
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
-				value={ isFetching ? 'Carregando...' : breedName }
+				value={ isFetching ? '' : breedName }
 				label="Raça"
 				onChange={handleBreedChange}
 				key={breedName}

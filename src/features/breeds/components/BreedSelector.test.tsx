@@ -1,5 +1,4 @@
-import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { renderWithProviders } from '../../../utils/test/test-utils';
 import { BreedSelector } from './BreedSelector';
 
 const Props = {
@@ -10,10 +9,7 @@ const Props = {
 
 describe('BreedSelector', () => {
     it('should render successfully', () => {
-        // const { asFragment } = render(<BreedSelector {...Props} />, {
-        //     wrapper: BrowserRouter,
-        // });
-        // expect(asFragment()).toMatchSnapshot();
-        expect(true).toBeTruthy();
+        const { asFragment } = renderWithProviders(<BreedSelector {...Props} />);
+        expect(asFragment()).toMatchSnapshot();        
     });
 });
