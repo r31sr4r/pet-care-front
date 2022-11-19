@@ -18,9 +18,10 @@ import { SelectPetType } from '../../../utils/SelectPetType';
 type Props = {
 	results: Results | undefined;
 	handleClick: (pet: any) => void;
+	handleVaccine: (pet: any) => void;
 };
 
-export const Petlist = ({ results, handleClick }: Props) => {
+export const Petlist = ({ results, handleClick, handleVaccine }: Props) => {
 	const ListStyle = styled('div')(({ theme }) => ({
 		backgroundColor: theme.palette.background.paper,
 	}));
@@ -54,12 +55,16 @@ export const Petlist = ({ results, handleClick }: Props) => {
 							secondary={`${SelectPetType(pet.type)} ${
 								pet.breed ? pet.breed : ''
 							}`}
-						/>						
-						<Tooltip title="Vacinas" placement="left-start" sx={{ mr: 0.3 }}>
+						/>
+						<Tooltip
+							title="Vacinas"
+							placement="left-start"
+							sx={{ mr: 0.3 }}
+						>
 							<IconButton
 								edge="end"
 								aria-label="vacinas"
-								onClick={() => handleClick(pet)}								
+								onClick={() => handleVaccine(pet)}
 							>
 								<VaccinesIcon />
 							</IconButton>

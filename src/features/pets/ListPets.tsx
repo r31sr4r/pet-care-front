@@ -3,7 +3,7 @@ import {
 	Box,
 	Button,
 	CircularProgress,
-	Typography
+	Typography,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserData } from '../../utils/security/UserData';
@@ -18,6 +18,10 @@ export const ListPets = () => {
 
 	const handleClick = (pet: any) => {
 		navigate(`/pets/edit/${pet.id}`);
+	};
+
+	const handleVaccine = (pet: any) => {
+		navigate(`/pets/${pet.id}/vaccines`);
 	};
 
 	if (error) {
@@ -50,7 +54,11 @@ export const ListPets = () => {
 					Cadastrar Pet
 				</Button>
 			</Box>
-			<Petlist results={data} handleClick={handleClick} />
+			<Petlist
+				results={data}
+				handleClick={handleClick}
+				handleVaccine={handleVaccine}
+			/>
 		</Box>
 	);
 };

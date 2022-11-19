@@ -14,6 +14,7 @@ import SignUp from './features/users/SignUp';
 import SignIn from './features/users/SignIn';
 import ActionAreaCard from './features/users/components/SelectUserType';
 import { ChangePassword } from './features/users/ChangePassword';
+import { VaccinationRecord } from './features/pets/VaccinationRecord';
 
 function App() {
 	return (
@@ -50,7 +51,9 @@ function App() {
 								path="/pets/edit/:id"
 								element={<EditPet />}
 							/>
+							<Route path='/pets/:id/vaccines' element={<VaccinationRecord />} />
 							<Route path='/breeds' element={< ListBreeds />} />
+
 
 							<Route
 								path="*"

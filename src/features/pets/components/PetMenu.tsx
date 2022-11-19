@@ -10,10 +10,10 @@ import VaccinesIcon from '@mui/icons-material/Vaccines';
 
 type Props = {
 	petId: string;
-	handleClick: (petID: any) => void;
+	handleVaccine: (petId: any) => void;
 };
 
-export const PetMenu = ({ petId, handleClick }: Props) => {
+export const PetMenu = ({ petId, handleVaccine }: Props) => {
 	return (
 		<Box mb={2}>
 			<Grid container spacing={2} direction="column">
@@ -26,7 +26,7 @@ export const PetMenu = ({ petId, handleClick }: Props) => {
 						<IconButton
 							edge="end"
 							aria-label="vacinas"
-							onClick={() => handleClick(petId)}
+							onClick={() => handleVaccine(petId)}
 						>
 							<VaccinesIcon fontSize="large" />
 						</IconButton>

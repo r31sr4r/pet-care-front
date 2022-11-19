@@ -7,9 +7,10 @@ import { Pet } from '../../types/Pet';
 import { PetForm } from './components/PetForm';
 import { useCreatePetMutation } from './petsSlice';
 import { PetMenu } from './components/PetMenu';
+import { useNavigate } from 'react-router-dom';
 
 export const CreatePet = () => {
-	const [createPet, status] = useCreatePetMutation();
+	const [createPet, status ] = useCreatePetMutation();
 	const [isdisabled, setIsDisabled] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
 	const [petState, setPetState] = useState<Pet>({
@@ -45,12 +46,19 @@ export const CreatePet = () => {
 			is_active: petState.is_active,
 		};
 
-		await createPet(payload);
+		const result = await createPet(payload);
+		setPetState({ ...petState, id: result.data?.data.id });
 	}
+
+	const navigate = useNavigate();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setPetState({ ...petState, [name]: value });
+	};
+
+	const handleVaccine = (petId: any) => {
+		navigate(`/pets/${petId}/vaccines`);
 	};
 
 	const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +98,7 @@ export const CreatePet = () => {
 			enqueueSnackbar('Pet cadastrado com sucesso', {
 				variant: 'success',
 			});
+			console.log(petState);
 			setIsDisabled(true);
 			setShowMenu(true);
 		}
@@ -113,7 +122,7 @@ export const CreatePet = () => {
 						{showMenu ? (
 							<PetMenu
 								petId={petState.id}
-								handleClick={() => {}}
+								handleVaccine={handleVaccine}
 							/>
 						) : (
 							<div />

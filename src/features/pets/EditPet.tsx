@@ -1,22 +1,15 @@
 import {
-	Box,
-	Divider,
-	IconButton,
-	Paper,
-	SelectChangeEvent,
-	Tooltip,
-	Typography,
-	Grid,
+	Box, Paper,
+	SelectChangeEvent, Typography
 } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Pet } from '../../types/Pet';
 import { PetForm } from './components/PetForm';
-import { useGetPetQuery, useUpdatePetMutation } from './petsSlice';
-import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { PetMenu } from './components/PetMenu';
+import { useGetPetQuery, useUpdatePetMutation } from './petsSlice';
 
 export const EditPet = () => {
 	const id = useParams<{ id: string }>().id || '';
@@ -40,11 +33,16 @@ export const EditPet = () => {
 	});
 
 	const { enqueueSnackbar } = useSnackbar();
-
+	const navigate = useNavigate();
+	
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		await updatePet(petState);
 	}
+
+	const handleVaccine = (petId: any) => {
+		navigate(`/pets/${petId}/vaccines`);
+	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -112,37 +110,8 @@ export const EditPet = () => {
 				<Box ml={2} mr={2} >
 					<PetMenu 
 						petId={petState.id}
-						handleClick={() => {}}
+						handleVaccine={handleVaccine}
 					/>
-					{/* <Box mb={2}>
-						<Grid container spacing={2} direction="column">
-							<Grid item xs={3}>
-								<Tooltip
-									title="Vacinas"
-									placement="left-start"
-									sx={{ mr: 0.3, ml: 2 }}
-								>
-									<IconButton
-										edge="end"
-										aria-label="vacinas"
-										// onClick={() => handleClick(pet)}
-									>
-										<VaccinesIcon fontSize="large" />
-									</IconButton>
-								</Tooltip>
-								<Grid item xs={3}>
-									<Typography
-										variant="caption"
-										gutterBottom
-										sx={{ ml: 2.3 }}
-									>
-										Vacinas
-									</Typography>
-								</Grid>
-							</Grid>
-						</Grid>
-						<Divider />
-					</Box> */}
 				</Box>
 
 				<PetForm
