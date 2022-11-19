@@ -1,13 +1,16 @@
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import VaccinesIcon from '@mui/icons-material/Vaccines';
 import PetsIcon from '@mui/icons-material/Pets';
 import {
-    Avatar, IconButton,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    styled,
-    Tooltip
+	Avatar,
+	IconButton,
+	List,
+	ListItem,
+	ListItemAvatar,
+	ListItemText,
+	styled,
+	Tooltip,
+	Divider,
 } from '@mui/material';
 import { Results } from '../../../types/Pet';
 import { SelectPetType } from '../../../utils/SelectPetType';
@@ -51,7 +54,17 @@ export const Petlist = ({ results, handleClick }: Props) => {
 							secondary={`${SelectPetType(pet.type)} ${
 								pet.breed ? pet.breed : ''
 							}`}
-						/>
+						/>						
+						<Tooltip title="Vacinas" placement="left-start" sx={{ mr: 0.3 }}>
+							<IconButton
+								edge="end"
+								aria-label="vacinas"
+								onClick={() => handleClick(pet)}								
+							>
+								<VaccinesIcon />
+							</IconButton>
+						</Tooltip>
+						<Divider />
 					</ListItem>
 				))}
 			</List>

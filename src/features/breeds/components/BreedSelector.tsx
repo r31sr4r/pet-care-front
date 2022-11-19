@@ -1,6 +1,5 @@
 import { FormControl, InputLabel, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useEffect } from 'react';
 import { useGetBreedsByTypeQuery } from '../breedsSlice';
 
 type Props = {
@@ -17,7 +16,6 @@ export function BreedSelector({
 	const { data, isFetching, error } = useGetBreedsByTypeQuery({
 		petType: petType,
 	});
-
 	return (
 		<FormControl fullWidth>
 			<InputLabel id="demo-simple-select-label">Raça</InputLabel>

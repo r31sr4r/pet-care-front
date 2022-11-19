@@ -3,19 +3,17 @@ import {
 	Box,
 	Button,
 	CircularProgress,
-	Typography,
+	Typography
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
-import { Petlist } from './components/PetList';
-import { selectPets, useGetPetsByCustomerIDQuery } from './petsSlice';
 import { UserData } from '../../utils/security/UserData';
+import { Petlist } from './components/PetList';
+import { useGetPetsByCustomerIDQuery } from './petsSlice';
 
 export const ListPets = () => {
 	const { data, isFetching, error } = useGetPetsByCustomerIDQuery({
 		customer_id: UserData()?.user.id,
 	});
-	const pets = useAppSelector(selectPets);
 	const navigate = useNavigate();
 
 	const handleClick = (pet: any) => {

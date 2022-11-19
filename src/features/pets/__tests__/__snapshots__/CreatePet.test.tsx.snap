@@ -22,6 +22,11 @@ exports[`CreatePet should render successfully 1`] = `
         </div>
       </div>
       <div
+        class="MuiBox-root css-1at62qq"
+      >
+        <div />
+      </div>
+      <div
         class="MuiBox-root css-19midj6"
       >
         <form>

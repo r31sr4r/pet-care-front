@@ -6,10 +6,12 @@ import { UserData } from '../../utils/security/UserData';
 import { Pet } from '../../types/Pet';
 import { PetForm } from './components/PetForm';
 import { useCreatePetMutation } from './petsSlice';
+import { PetMenu } from './components/PetMenu';
 
 export const CreatePet = () => {
 	const [createPet, status] = useCreatePetMutation();
 	const [isdisabled, setIsDisabled] = useState(false);
+	const [showMenu, setShowMenu] = useState(false);
 	const [petState, setPetState] = useState<Pet>({
 		id: '',
 		name: '',
@@ -38,7 +40,7 @@ export const CreatePet = () => {
 			birth_date: petState.birth_date,
 			microchip: petState.microchip,
 			neutered: petState.neutered,
-			customer_id: UserData()?.user.id ,
+			customer_id: UserData()?.user.id,
 			image_url: petState.image_url,
 			is_active: petState.is_active,
 		};
@@ -85,14 +87,18 @@ export const CreatePet = () => {
 
 	useEffect(() => {
 		if (status.isSuccess) {
-			enqueueSnackbar('Pet cadastrado com sucesso', { variant: 'success' })
+			enqueueSnackbar('Pet cadastrado com sucesso', {
+				variant: 'success',
+			});
 			setIsDisabled(true);
+			setShowMenu(true);
 		}
 		if (status.error) {
-			enqueueSnackbar('Ocorreu um erro ao cadastrar o Pet', { variant: 'error' })
+			enqueueSnackbar('Ocorreu um erro ao cadastrar o Pet', {
+				variant: 'error',
+			});
 		}
-
-	}, [enqueueSnackbar, status.error, status.isSuccess])
+	}, [enqueueSnackbar, status.error, status.isSuccess]);
 
 	return (
 		<Box>
@@ -101,6 +107,18 @@ export const CreatePet = () => {
 					<Box mb={2}>
 						<Typography variant="h4">Cadastrar pet</Typography>
 					</Box>
+				</Box>
+				<Box ml={2} mr={2}>
+					<>
+						{showMenu ? (
+							<PetMenu
+								petId={petState.id}
+								handleClick={() => {}}
+							/>
+						) : (
+							<div />
+						)}
+					</>
 				</Box>
 				<PetForm
 					pet={petState}

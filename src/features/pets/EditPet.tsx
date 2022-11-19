@@ -1,4 +1,13 @@
-import { Box, Paper, SelectChangeEvent, Typography } from '@mui/material';
+import {
+	Box,
+	Divider,
+	IconButton,
+	Paper,
+	SelectChangeEvent,
+	Tooltip,
+	Typography,
+	Grid,
+} from '@mui/material';
 import { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
@@ -6,6 +15,8 @@ import { useParams } from 'react-router-dom';
 import { Pet } from '../../types/Pet';
 import { PetForm } from './components/PetForm';
 import { useGetPetQuery, useUpdatePetMutation } from './petsSlice';
+import VaccinesIcon from '@mui/icons-material/Vaccines';
+import { PetMenu } from './components/PetMenu';
 
 export const EditPet = () => {
 	const id = useParams<{ id: string }>().id || '';
@@ -80,9 +91,13 @@ export const EditPet = () => {
 
 	useEffect(() => {
 		if (status.error) {
-			enqueueSnackbar('Ocorreum erro ao atualizar o pet', { variant: 'error' });
+			enqueueSnackbar('Ocorreum erro ao atualizar o pet', {
+				variant: 'error',
+			});
 		} else if (status.isSuccess) {
-			enqueueSnackbar('Pet atualizado com sucesso', { variant: 'success' });
+			enqueueSnackbar('Pet atualizado com sucesso', {
+				variant: 'success',
+			});
 		}
 	}, [enqueueSnackbar, status.error, status.isSuccess]);
 
@@ -90,9 +105,44 @@ export const EditPet = () => {
 		<Box>
 			<Paper>
 				<Box p={2}>
-					<Box mb={2}>
+					<Box mb={1}>
 						<Typography variant="h4">Editar Pet</Typography>
 					</Box>
+				</Box>
+				<Box ml={2} mr={2} >
+					<PetMenu 
+						petId={petState.id}
+						handleClick={() => {}}
+					/>
+					{/* <Box mb={2}>
+						<Grid container spacing={2} direction="column">
+							<Grid item xs={3}>
+								<Tooltip
+									title="Vacinas"
+									placement="left-start"
+									sx={{ mr: 0.3, ml: 2 }}
+								>
+									<IconButton
+										edge="end"
+										aria-label="vacinas"
+										// onClick={() => handleClick(pet)}
+									>
+										<VaccinesIcon fontSize="large" />
+									</IconButton>
+								</Tooltip>
+								<Grid item xs={3}>
+									<Typography
+										variant="caption"
+										gutterBottom
+										sx={{ ml: 2.3 }}
+									>
+										Vacinas
+									</Typography>
+								</Grid>
+							</Grid>
+						</Grid>
+						<Divider />
+					</Box> */}
 				</Box>
 
 				<PetForm
