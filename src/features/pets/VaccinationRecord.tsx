@@ -7,9 +7,11 @@ import {
 	Typography,
 	Grid,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export const VaccinationRecord = () => {
+    const id = useParams<{ id: string }>().id || '';
+
 	return (
 		<Box maxWidth="lg" mr={2} >
 			<Backdrop
@@ -35,7 +37,7 @@ export const VaccinationRecord = () => {
 						variant="contained"
 						color="secondary"
 						component={Link}
-						to="/pets/create"
+						to={`/pets/${id}/vaccines/create`}
 						style={{ marginBottom: '1rem' }}
 					>
 						Registrar Vacina

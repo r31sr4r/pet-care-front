@@ -4,7 +4,7 @@ export const baseUrl = 'http://localhost:3001';
 
 export const apiSlice = createApi({
 	reducerPath: 'api',
-	tagTypes: ['Breeds', 'Pets', 'Users'],
+	tagTypes: ['Breeds', 'Pets', 'Users', 'Vaccines'],
 	endpoints: (builder) => ({}),
 	baseQuery: fetchBaseQuery({
 		baseUrl,

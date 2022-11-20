@@ -9,14 +9,16 @@ import petsReducer, { petApiSlice } from '../features/pets/petsSlice';
 import breedsReducer, { breedApiSlice } from '../features/breeds/breedsSlice';
 import { apiSlice } from '../features/api/apiSlice';
 import { userApiSlice } from '../features/users/usersSlice';
+import { vaccineApiSlice } from '../features/vaccines/vaccinesSlice';
 
 const rootReducer = combineReducers({
 	pets: petsReducer,
-	breeds: breedsReducer,
+	breeds: breedsReducer,		
 	[apiSlice.reducerPath]: apiSlice.reducer,
 	[breedApiSlice.reducerPath]: apiSlice.reducer,
 	[petApiSlice.reducerPath]: apiSlice.reducer,
 	[userApiSlice.reducerPath]: apiSlice.reducer,
+	[vaccineApiSlice.reducerPath]: apiSlice.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
