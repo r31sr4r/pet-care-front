@@ -4,7 +4,6 @@ import { apiSlice } from '../api/apiSlice';
 const endpointUrl = '/vaccines';
 
 const getVaccinesByBreedType = (breed_type: string) => {
-	console.log('getVaccinesByBreedType', breed_type);
 	return {
 		url: `${endpointUrl}/breed-type/${breed_type}`,
 		method: 'GET',

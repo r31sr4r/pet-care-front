@@ -13,7 +13,6 @@ export function VaccineSelector({
 	breedType,
 	handleVaccineChange,
 }: Props) {
-	console.log('breedType', breedType);
 	const { data, isFetching, error } = useGetVaccinesByBreedTypeQuery({
 		breed_type: breedType,
 	});
