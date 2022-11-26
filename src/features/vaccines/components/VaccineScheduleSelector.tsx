@@ -25,6 +25,7 @@ export function VaccineScheduleSelector({
 				id="demo-simple-select"
 				value={ isFetching ? '' : vaccineScheduleId }
 				label="Dose"
+				required
 				onChange={handleVaccineScheduleChange}
 				key={vaccineScheduleId}
 			>

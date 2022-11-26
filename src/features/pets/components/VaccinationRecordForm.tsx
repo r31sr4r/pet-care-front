@@ -29,11 +29,12 @@ import { VaccineScheduleSelector } from '../../vaccines/components/VaccineSchedu
 type Props = {
 	// pet: Pet;
 	// petType: string;
-	// breedName: string;
+	vaccineName: string;
+	vaccineId: string;
 	isDisabled?: boolean;
 	isLoading?: boolean;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-	// handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	// handleToggle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	// handlePetGenderChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleAppliedDateChange: (newValue: Dayjs | null) => void;
@@ -47,39 +48,28 @@ type Props = {
 export function VaccinationRecordForm({
 	// pet,
 	// petType,
-	// breedName: breedId,
+	vaccineName: vaccineName,
+	vaccineId: vaccineId,
 	isDisabled,
 	isLoading,
 	handleSubmit: onSubmit,
-	// handleChange,
+	handleChange,
 	// handleToggle,
 	// handlePetGenderChange,
 	handleAppliedDateChange,
 	handleAppliedChange,
 	handleVaccineChange,
 	handleBrandChange,
-	handleVaccineScheduleChange
-
+	handleVaccineScheduleChange,
 }: Props) {
 	return (
 		<Box p={2}>
 			<form onSubmit={onSubmit}>
 				<Grid container spacing={3}>
-					{/* <Grid item xs={12}>
-						<FormControl fullWidth>
-							<TextField
-								required
-								name="name"
-								label="Name"
-								value={pet.name}
-								disabled={isDisabled}
-								onChange={handleChange}
-							/>
-						</FormControl>
-					</Grid> */}
 					<Grid item xs={12} sm={6}>
 						<VaccineSelector
-							vaccineName="teste"
+							vaccineName={vaccineName}
+							vaccineId={vaccineId}
 							breedType="DOG"
 							handleVaccineChange={handleVaccineChange}
 						/>
@@ -150,6 +140,41 @@ export function VaccinationRecordForm({
 									/>
 								</Stack>
 							</LocalizationProvider>
+						</FormControl>
+					</Grid>
+					<Grid item xs={12}>
+						<FormControl fullWidth>
+							<TextField								
+								name="notes"
+								label="Observações"
+								multiline								
+								maxRows={4}
+								// value={pet.name}
+								disabled={isDisabled}
+								onChange={handleChange}
+							/>
+						</FormControl>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<FormControl fullWidth>
+							<TextField
+								name="clinic"
+								label="Clínica/estabelecimento"
+								//value={pet.microchip?.toString()}
+								disabled={isDisabled}
+								onChange={handleChange}
+							/>
+						</FormControl>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<FormControl fullWidth>
+							<TextField
+								name="vet"
+								label="Veterinário"
+								//value={pet.microchip?.toString()}
+								disabled={isDisabled}
+								onChange={handleChange}
+							/>
 						</FormControl>
 					</Grid>
 

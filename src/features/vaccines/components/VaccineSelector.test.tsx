@@ -6,6 +6,7 @@ const breedType = 'DOG';
 const Props = {
     breedType: breedType,
     vaccineName: '',
+    vaccineId: '',
     handleVaccineChange: () => {},
 };
 

@@ -4,12 +4,14 @@ import { useGetVaccinesByBreedTypeQuery } from '../vaccinesSlice';
 
 type Props = {
 	vaccineName: string;
+	vaccineId: string;
 	breedType: string;
 	handleVaccineChange: (e: SelectChangeEvent) => void;
 };
 
 export function VaccineSelector({
 	vaccineName,
+	vaccineId,
 	breedType,
 	handleVaccineChange,
 }: Props) {
@@ -20,13 +22,14 @@ export function VaccineSelector({
 		<FormControl fullWidth>
 			<InputLabel id="demo-simple-select-label">Vacina</InputLabel>
 			<Select
-				name="vaccine"
+				name="name"
+				required
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
 				value={ isFetching ? '' : vaccineName }
 				label="Vacina"
 				onChange={handleVaccineChange}
-				key={vaccineName}
+				key={vaccineId}
 			>
 				{data?.data
 					? data.data.map((vaccine: any) => (
