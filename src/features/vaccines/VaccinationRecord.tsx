@@ -8,9 +8,11 @@ import {
 	Grid,
 } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
+import { useGetPetQuery } from '../pets/petsSlice';
 
 export const VaccinationRecord = () => {
     const id = useParams<{ id: string }>().id || '';
+	const { data: pet } = useGetPetQuery({ id });
 
 	return (
 		<Box maxWidth="lg" mr={2} >
@@ -30,7 +32,7 @@ export const VaccinationRecord = () => {
 			</Box>
 			<Grid container spacing={1} ml={1} >
 				<Grid item xs={12} md={9}>
-					<Typography variant="h6">Ravena</Typography>
+					<Typography variant="h6">{pet?.data?.name}</Typography>
 				</Grid>
 				<Grid item xs={12} md={3}>
 					<Button

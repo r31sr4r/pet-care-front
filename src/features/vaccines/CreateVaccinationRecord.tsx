@@ -1,7 +1,4 @@
-import {
-	Box, Paper,
-	SelectChangeEvent, Typography
-} from '@mui/material';
+import { Box, Paper, SelectChangeEvent, Typography } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
 import { VaccinationRecordForm } from './components/VaccinationRecordForm';
@@ -9,31 +6,37 @@ import { VaccinationRecordForm } from './components/VaccinationRecordForm';
 import { useSnackbar } from 'notistack';
 import { VaccinationRecord } from '../../types/VaccinationRecord';
 import { useCreateVaccinationRecordMutation } from './vaccinationRecordsSlice';
+import { useGetPetQuery } from '../pets/petsSlice';
+import { useParams } from 'react-router-dom';
 
 export const CreateVaccinationRecord = () => {
-	const [createVaccinationRecord, status ] = useCreateVaccinationRecordMutation();
+	const id = useParams<{ id: string }>().id || '';
+	const { data: pet } = useGetPetQuery({ id });
+	const [createVaccinationRecord, status] =
+		useCreateVaccinationRecordMutation();
 	const [isdisabled, setIsDisabled] = useState(false);
-	const [vaccinationRecordState, setVaccinationRecordState] = useState<VaccinationRecord>({
-		id: '',
-		pet_id: '',
-		vaccine_id: '',
-		vaccine_schedule_id: '',
-		brand_id: '',
-		was_applied: true,
-		application_date: null,
-		booster_date: null,
-		notes: '',
-		clinic: '',
-		vet: '',
-		update_reason: '',
-		created_at: null,
-	});
+	const [vaccinationRecordState, setVaccinationRecordState] =
+		useState<VaccinationRecord>({
+			id: '',
+			pet_id: '',
+			vaccine_id: '',
+			vaccine_schedule_id: '',
+			brand_id: '',
+			was_applied: true,
+			application_date: null,
+			booster_date: null,
+			notes: '',
+			clinic: '',
+			vet: '',
+			update_reason: '',
+			created_at: null,
+		});
 	const { enqueueSnackbar } = useSnackbar();
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		const payload = {
-			pet_id: vaccinationRecordState.pet_id,
+			pet_id: pet?.data?.id,
 			vaccine_id: vaccinationRecordState.vaccine_id,
 			vaccine_schedule_id: vaccinationRecordState.vaccine_schedule_id,
 			brand_id: vaccinationRecordState.brand_id,
@@ -43,11 +46,14 @@ export const CreateVaccinationRecord = () => {
 			notes: vaccinationRecordState.notes,
 			clinic: vaccinationRecordState.clinic,
 			vet: vaccinationRecordState.vet,
-			update_reason: vaccinationRecordState.update_reason,			
+			update_reason: vaccinationRecordState.update_reason,
 		};
 
 		const result = await createVaccinationRecord(payload);
-		setVaccinationRecordState({ ...vaccinationRecordState, id: result.data?.data.id });
+		setVaccinationRecordState({
+			...vaccinationRecordState,
+			id: result.data?.data.id,
+		});
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,13 +72,17 @@ export const CreateVaccinationRecord = () => {
 	};
 
 	const handleVaccineScheduleChange = (event: SelectChangeEvent) => {
+		console.log(event.target);
 		const { name, value } = event.target;
 		setVaccinationRecordState({ ...vaccinationRecordState, [name]: value });
 	};
 
 	const handleAppliedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = e.target;
-		setVaccinationRecordState({ ...vaccinationRecordState, [name]: checked });
+		setVaccinationRecordState({
+			...vaccinationRecordState,
+			[name]: checked,
+		});
 	};
 
 	const handleAppliedDateChange = (newValue: Dayjs | null) => {
@@ -83,7 +93,7 @@ export const CreateVaccinationRecord = () => {
 		});
 	};
 
-	const handleBoosterDateChange = (newValue: Dayjs | null) => {		
+	const handleBoosterDateChange = (newValue: Dayjs | null) => {
 		setVaccinationRecordState({
 			...vaccinationRecordState,
 			booster_date: newValue?.format('YYYY-MM-DD'),
@@ -108,15 +118,20 @@ export const CreateVaccinationRecord = () => {
 		<Box>
 			<Paper>
 				<Box p={2}>
-					<Box mb={2}>
+					<Box>
 						<Typography variant="h4">Registrar Vacina</Typography>
 					</Box>
 				</Box>
-				<VaccinationRecordForm		
-					vaccinationRecord={vaccinationRecordState}			
+				<Box p={2}>
+					<Box>
+						<Typography variant="h6">{pet?.data?.name}</Typography>
+					</Box>
+				</Box>
+				<VaccinationRecordForm
+					vaccinationRecord={vaccinationRecordState}
 					isDisabled={false}
 					isLoading={false}
-					vaccineId={vaccinationRecordState.vaccine_id}
+					pet={pet?.data}					
 					handleSubmit={handleSubmit}
 					handleChange={handleChange}
 					handleBrandChange={handleBrandChange}

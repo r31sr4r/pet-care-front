@@ -14,7 +14,7 @@ export function VaccineScheduleSelector({
 	handleVaccineScheduleChange,
 }: Props) {
 	const { data, isFetching, error } = useGetVaccineSchedulesByVaccineQuery({
-		vaccine_id: vaccineId,
+		vaccine_id: vaccineId === '' ? '0' : vaccineId,
 	});
 	return (
 		<FormControl fullWidth>
@@ -31,7 +31,7 @@ export function VaccineScheduleSelector({
 			>
 				{data?.data
 					? data.data.map((vaccine: any) => (
-							<MenuItem value={vaccine.id} key={vaccine.id}>
+							<MenuItem value={vaccine.id} key={vaccine.id} >
 								{vaccine.description}
 							</MenuItem>
 					  ))
