@@ -3,13 +3,13 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useGetBrandsByTypeQuery } from '../brandsSlice';
 
 type Props = {
-	brandName: string;
+	brandId: string | null | undefined;
 	brandType: string;
 	handleBrandChange: (e: SelectChangeEvent) => void;
 };
 
 export function BrandSelector({
-	brandName,
+	brandId,
 	brandType,
 	handleBrandChange,
 }: Props) {
@@ -20,17 +20,17 @@ export function BrandSelector({
 		<FormControl fullWidth>
 			<InputLabel id="demo-simple-select-label">Marca</InputLabel>
 			<Select
-				name="brand"
+				name="brand_id"
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
-				value={ isFetching ? '' : brandName }
+				value={ brandId || '' }
 				label="Marca"
 				onChange={handleBrandChange}
-				key={brandName}
+				key={brandId}
 			>
 				{data?.data
 					? data.data.map((brand: any) => (
-							<MenuItem value={brand.name} key={brand.id}>
+							<MenuItem value={brand.id} key={brand.id}>
 								{brand.name}
 							</MenuItem>
 					  ))

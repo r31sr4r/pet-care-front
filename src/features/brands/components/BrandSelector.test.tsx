@@ -18,7 +18,7 @@ const server = setupServer(...handlers);
 
 const Props = {
     brandType: brandType,
-    brandName: '',
+    brandId: '',
     handleBrandChange: () => {},
 };
 

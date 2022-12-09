@@ -22,14 +22,14 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Dayjs } from 'dayjs';
 import { Pet } from '../../../types/Pet';
 import { Provider } from 'react-redux';
-import { VaccineSelector } from '../../vaccines/components/VaccineSelector';
+import { VaccineSelector } from './VaccineSelector';
 import { BrandSelector } from '../../brands/components/BrandSelector';
-import { VaccineScheduleSelector } from '../../vaccines/components/VaccineScheduleSelector';
+import { VaccineScheduleSelector } from './VaccineScheduleSelector';
+import { VaccinationRecord } from '../../../types/VaccinationRecord';
 
 type Props = {
-	// pet: Pet;
-	// petType: string;
-	vaccineName: string;
+	vaccinationRecord: VaccinationRecord;
+	// vaccinationRecordType: string;
 	vaccineId: string;
 	isDisabled?: boolean;
 	isLoading?: boolean;
@@ -38,6 +38,7 @@ type Props = {
 	// handleToggle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	// handlePetGenderChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleAppliedDateChange: (newValue: Dayjs | null) => void;
+	handleBoosterDateChange: (newValue: Dayjs | null) => void;
 	// handleBrandChange: (e: SelectChangeEvent) => void;
 	handleAppliedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleBrandChange: (e: SelectChangeEvent) => void;
@@ -46,17 +47,16 @@ type Props = {
 };
 
 export function VaccinationRecordForm({
-	// pet,
-	// petType,
-	vaccineName: vaccineName,
+	vaccinationRecord,
+	// vaccinationRecordType,	
 	vaccineId: vaccineId,
 	isDisabled,
 	isLoading,
 	handleSubmit: onSubmit,
 	handleChange,
-	// handleToggle,
 	// handlePetGenderChange,
 	handleAppliedDateChange,
+	handleBoosterDateChange,
 	handleAppliedChange,
 	handleVaccineChange,
 	handleBrandChange,
@@ -67,8 +67,7 @@ export function VaccinationRecordForm({
 			<form onSubmit={onSubmit}>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={6}>
-						<VaccineSelector
-							vaccineName={vaccineName}
+						<VaccineSelector							
 							vaccineId={vaccineId}
 							breedType="DOG"
 							handleVaccineChange={handleVaccineChange}
@@ -76,8 +75,8 @@ export function VaccinationRecordForm({
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<VaccineScheduleSelector
-							vaccineScheduleId="1019e908-4a6f-4b1e-b32c-549ae33c79f1"
-							vaccineId="547f9bd3-cddb-4cee-9a97-6b0eaef7f58a"
+							vaccineScheduleId={vaccinationRecord.vaccine_schedule_id}
+							vaccineId={vaccinationRecord.vaccine_id}
 							handleVaccineScheduleChange={
 								handleVaccineScheduleChange
 							}
@@ -85,7 +84,7 @@ export function VaccinationRecordForm({
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<BrandSelector
-							brandName="{brandId}"
+							brandId={vaccinationRecord.brand_id}
 							brandType="VACCINE"
 							handleBrandChange={handleBrandChange}
 						/>
@@ -95,10 +94,10 @@ export function VaccinationRecordForm({
 							<FormControlLabel
 								control={
 									<Switch
-										name="applied"
+										name="was_applied"
 										color="secondary"
 										onChange={handleAppliedChange}
-										checked={true}
+										checked={vaccinationRecord.was_applied}
 										inputProps={{
 											'aria-label': 'controlled',
 										}}
@@ -115,7 +114,7 @@ export function VaccinationRecordForm({
 									<MobileDatePicker
 										label="Data da Apliciação"
 										inputFormat="DD/MM/YYYY"
-										value={new Date()}
+										value={vaccinationRecord.application_date}
 										onChange={handleAppliedDateChange}
 										renderInput={(params) => (
 											<TextField {...params} />
@@ -132,8 +131,8 @@ export function VaccinationRecordForm({
 									<MobileDatePicker
 										label="Data da Próxima Dose"
 										inputFormat="DD/MM/YYYY"
-										value={new Date()}
-										onChange={handleAppliedDateChange}
+										value={vaccinationRecord.booster_date}
+										onChange={handleBoosterDateChange}
 										renderInput={(params) => (
 											<TextField {...params} />
 										)}
@@ -149,7 +148,7 @@ export function VaccinationRecordForm({
 								label="Observações"
 								multiline								
 								maxRows={4}
-								// value={pet.name}
+								// value={vaccinationRecord.name}
 								disabled={isDisabled}
 								onChange={handleChange}
 							/>
@@ -160,7 +159,7 @@ export function VaccinationRecordForm({
 							<TextField
 								name="clinic"
 								label="Clínica/estabelecimento"
-								//value={pet.microchip?.toString()}
+								//value={vaccinationRecord.microchip?.toString()}
 								disabled={isDisabled}
 								onChange={handleChange}
 							/>
@@ -171,7 +170,7 @@ export function VaccinationRecordForm({
 							<TextField
 								name="vet"
 								label="Veterinário"
-								//value={pet.microchip?.toString()}
+								//value={vaccinationRecord.microchip?.toString()}
 								disabled={isDisabled}
 								onChange={handleChange}
 							/>
@@ -185,7 +184,7 @@ export function VaccinationRecordForm({
 									<MobileDatePicker
 										label="Data de Nascimento"
 										inputFormat="DD/MM/YYYY"
-										value={pet.birth_date}
+										value={vaccinationRecord.birth_date}
 										onChange={handlePetBirthDateChange}
 										renderInput={(params) => (
 											<TextField {...params} />
@@ -211,8 +210,8 @@ export function VaccinationRecordForm({
 									control={<Radio />}
 									label="Fêmea"
 									checked={
-										(pet.gender &&
-											pet.gender === 'female') ||
+										(vaccinationRecord.gender &&
+											vaccinationRecord.gender === 'female') ||
 										undefined
 									}
 								/>
@@ -221,7 +220,7 @@ export function VaccinationRecordForm({
 									control={<Radio />}
 									label="Macho"
 									checked={
-										(pet.gender && pet.gender === 'male') ||
+										(vaccinationRecord.gender && vaccinationRecord.gender === 'male') ||
 										undefined
 									}
 								/>
@@ -234,7 +233,7 @@ export function VaccinationRecordForm({
 							<TextField
 								name="microchip"
 								label="Microchip"
-								value={pet.microchip?.toString()}
+								value={vaccinationRecord.microchip?.toString()}
 								disabled={isDisabled}
 								onChange={handleChange}
 							/>
@@ -249,7 +248,7 @@ export function VaccinationRecordForm({
 										name="neutered"
 										color="secondary"
 										onChange={handleNeuteredChange}
-										checked={pet.neutered}
+										checked={vaccinationRecord.neutered}
 										inputProps={{
 											'aria-label': 'controlled',
 										}}
@@ -268,7 +267,7 @@ export function VaccinationRecordForm({
 										name="is_active"
 										color="secondary"
 										onChange={handleToggle}
-										checked={pet.is_active}
+										checked={vaccinationRecord.is_active}
 										inputProps={{
 											'aria-label': 'controlled',
 										}}
@@ -284,7 +283,7 @@ export function VaccinationRecordForm({
 							<Button
 								variant="contained"
 								component={Link}
-								to="/pets"
+								to="/vaccinationRecords"
 							>
 								Voltar
 							</Button>

@@ -11,6 +11,7 @@ export const apiSlice = createApi({
 		'Vaccines',
 		'Brands',
 		'VaccineSchedules',
+		'VaccinationRecords',
 	],
 	endpoints: (builder) => ({}),
 	baseQuery: fetchBaseQuery({

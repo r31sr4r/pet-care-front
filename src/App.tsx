@@ -14,8 +14,8 @@ import SignUp from './features/users/SignUp';
 import SignIn from './features/users/SignIn';
 import ActionAreaCard from './features/users/components/SelectUserType';
 import { ChangePassword } from './features/users/ChangePassword';
-import { VaccinationRecord } from './features/pets/VaccinationRecord';
-import { CreateVaccinationRecord } from './features/pets/CreateVaccinationRecord';
+import { VaccinationRecord } from './features/vaccines/VaccinationRecord';
+import { CreateVaccinationRecord } from './features/vaccines/CreateVaccinationRecord';
 
 function App() {
 	return (

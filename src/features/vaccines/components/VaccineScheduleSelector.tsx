@@ -20,7 +20,7 @@ export function VaccineScheduleSelector({
 		<FormControl fullWidth>
 			<InputLabel id="demo-simple-select-label">Dose</InputLabel>
 			<Select
-				name="vaccine"
+				name="vaccine_schedule_id"
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
 				value={ isFetching ? '' : vaccineScheduleId }
@@ -32,7 +32,7 @@ export function VaccineScheduleSelector({
 				{data?.data
 					? data.data.map((vaccine: any) => (
 							<MenuItem value={vaccine.id} key={vaccine.id}>
-								{vaccine.dose}
+								{vaccine.description}
 							</MenuItem>
 					  ))
 					: []}
