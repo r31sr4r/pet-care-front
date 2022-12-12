@@ -1,4 +1,8 @@
+import { Pet } from './Pet';
 import { SortDirection } from './SortDirection';
+import { Vaccine } from './Vaccine';
+import { VaccineSchedule } from './VaccineSchedule';
+import { Brand } from './Brand';
 
 export interface Results {
     meta: Meta
@@ -31,6 +35,10 @@ export interface VaccinationRecord {
 	vet: string | null;
 	update_reason: string | null;	
 	created_at: string | null;
+	pet: Pet | null;
+	vaccine: Vaccine | null;
+	vaccine_schedule: VaccineSchedule | null;
+	brand: Brand | null;
 }
 
 export interface SearchParams {

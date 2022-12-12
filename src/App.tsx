@@ -14,8 +14,9 @@ import SignUp from './features/users/SignUp';
 import SignIn from './features/users/SignIn';
 import ActionAreaCard from './features/users/components/SelectUserType';
 import { ChangePassword } from './features/users/ChangePassword';
-import { VaccinationRecord } from './features/vaccines/VaccinationRecord';
+import { VaccinationRecordList } from './features/vaccines/VaccinationRecordList';
 import { CreateVaccinationRecord } from './features/vaccines/CreateVaccinationRecord';
+import { DetailVaccinationRecord } from './features/vaccines/DetailVaccinationRecord';
 
 function App() {
 	return (
@@ -52,8 +53,9 @@ function App() {
 								path="/pets/edit/:id"
 								element={<EditPet />}
 							/>
-							<Route path='/pets/:id/vaccines' element={<VaccinationRecord />} />
+							<Route path='/pets/:id/vaccines' element={<VaccinationRecordList />} />
 							<Route path='/pets/:id/vaccines/create' element={<CreateVaccinationRecord />} />
+							<Route path='/pets/vaccines/:id' element={<DetailVaccinationRecord />} />
 							<Route path='/breeds' element={< ListBreeds />} />
 
 

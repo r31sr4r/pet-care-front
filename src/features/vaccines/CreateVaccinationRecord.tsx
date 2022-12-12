@@ -30,6 +30,10 @@ export const CreateVaccinationRecord = () => {
 			vet: '',
 			update_reason: '',
 			created_at: null,
+			pet: null,
+			vaccine: null,
+			vaccine_schedule: null,
+			brand: null,
 		});
 	const { enqueueSnackbar } = useSnackbar();
 
