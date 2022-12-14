@@ -35,8 +35,8 @@ export const VaccinationRecordList = () => {
 		{}
 	);
 
-	const handleClick = (vaccinationId: string) => {
-		navigate(`/pets/vaccines/${vaccinationId}`);
+	const handleClick = (vaccineId: string) => {
+		navigate(`/pets/${id}/vaccines/${vaccineId}`);
 	};
 
 	return (

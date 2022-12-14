@@ -1,4 +1,8 @@
-import { VaccinationRecord, Results, Result } from '../../types/VaccinationRecord';
+import {
+	VaccinationRecord,
+	Results,
+	Result,
+} from '../../types/VaccinationRecord';
 import { apiSlice } from '../api/apiSlice';
 
 const endpointUrl = '/vaccination-records';
@@ -17,7 +21,16 @@ const getVaccinationRecordsByPet = (pet_id: string) => {
 	};
 };
 
-function createVaccinationRecordMutation(vaccination_record: VaccinationRecord) {
+const getVaccinationRecordsByPetAndVaccine = (pet_id: string, id: string) => {
+	return {
+		url: `${endpointUrl}/vaccine/${id}?filter=${pet_id}`,
+		method: 'GET',
+	};
+};
+
+function createVaccinationRecordMutation(
+	vaccination_record: VaccinationRecord
+) {
 	return {
 		url: endpointUrl,
 		method: 'POST',
@@ -35,6 +48,14 @@ export const vaccinationRecordApiSlice: any = apiSlice.injectEndpoints({
 			query: ({ id }) => getVaccinationRecordsByPet(id),
 			providesTags: ['VaccinationRecords'],
 		}),
+		getVaccinationRecordsByPetAndVaccine: query<
+			Results,
+			{ pet_id: string; id: string }
+		>({
+			query: ({ pet_id, id }) =>
+				getVaccinationRecordsByPetAndVaccine(pet_id, id),
+			providesTags: ['VaccinationRecords'],
+		}),
 		createVaccinationRecord: mutation<Results, VaccinationRecord>({
 			query: createVaccinationRecordMutation,
 			invalidatesTags: ['VaccinationRecords'],
@@ -42,10 +63,9 @@ export const vaccinationRecordApiSlice: any = apiSlice.injectEndpoints({
 	}),
 });
 
-export const {	
+export const {
 	useGetVaccinationRecordQuery,
 	useGetVaccinationRecordsByPetQuery,
+	useGetVaccinationRecordsByPetAndVaccineQuery,
 	useCreateVaccinationRecordMutation,
 } = vaccinationRecordApiSlice;
-
-

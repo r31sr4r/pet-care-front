@@ -58,8 +58,8 @@ export const VaccinationRecordCard = ({
 										>
 											<IconButton
 												edge="end"
-												aria-label="delete"
-												onClick={() => handleClick(vaccinationGrouped[key][0].id)}
+												aria-label="detail"
+												onClick={() => handleClick(vaccinationGrouped[key][0].vaccine_id)}
 											>
 												<OpenInNewIcon />
 											</IconButton>

@@ -55,7 +55,7 @@ function App() {
 							/>
 							<Route path='/pets/:id/vaccines' element={<VaccinationRecordList />} />
 							<Route path='/pets/:id/vaccines/create' element={<CreateVaccinationRecord />} />
-							<Route path='/pets/vaccines/:id' element={<DetailVaccinationRecord />} />
+							<Route path='/pets/:pet_id/vaccines/:id' element={<DetailVaccinationRecord />} />
 							<Route path='/breeds' element={< ListBreeds />} />
 
 
