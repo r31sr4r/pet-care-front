@@ -27,6 +27,7 @@ type Props = {
 	pet: Pet;
 	isDisabled?: boolean;
 	isLoading?: boolean;
+	scheduleIdWithBooster: string;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleAppliedDateChange: (newValue: Dayjs | null) => void;
@@ -42,6 +43,7 @@ export function VaccinationRecordForm({
 	pet,
 	isDisabled,
 	isLoading,
+	scheduleIdWithBooster,
 	handleSubmit: onSubmit,
 	handleChange,
 	handleAppliedDateChange,
@@ -65,7 +67,7 @@ export function VaccinationRecordForm({
 					<Grid item xs={12} sm={6}>
 						<VaccineScheduleSelector
 							vaccineScheduleId={
-								vaccinationRecord.vaccine_schedule_id
+								scheduleIdWithBooster
 							}
 							vaccineId={vaccinationRecord.vaccine_id}
 							handleVaccineScheduleChange={

@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Typography, CssBaseline } from '@mui/material';
 import { Box, ThemeProvider } from '@mui/system';
 import * as React from 'react';
 import { Header } from './components/Header';
@@ -21,6 +21,7 @@ import { DetailVaccinationRecord } from './features/vaccines/DetailVaccinationRe
 function App() {
 	return (
 		<ThemeProvider theme={appTheme}>
+			<CssBaseline />
 			<SnackbarProvider
 				autoHideDuration={3000}
 				maxSnack={3}

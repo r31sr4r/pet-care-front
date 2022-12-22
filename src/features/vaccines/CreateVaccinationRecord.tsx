@@ -10,11 +10,13 @@ import { useGetPetQuery } from '../pets/petsSlice';
 import { useParams } from 'react-router-dom';
 
 export const CreateVaccinationRecord = () => {
+	const [scheduleWithBooster, setScheduleWithBooster] = useState<string>('');
 	const id = useParams<{ id: string }>().id || '';
 	const { data: pet } = useGetPetQuery({ id });
 	const [createVaccinationRecord, status] =
 		useCreateVaccinationRecordMutation();
 	const [isdisabled, setIsDisabled] = useState(false);
+	const [boosterDays, setBoosterDays] = useState<number>(0);
 	const [vaccinationRecordState, setVaccinationRecordState] =
 		useState<VaccinationRecord>({
 			id: '',
@@ -60,6 +62,29 @@ export const CreateVaccinationRecord = () => {
 		});
 	}
 
+	function setBoosterInterval(
+		booster_unit: string,
+		booster_interval: number
+	) {
+		switch (booster_unit) {
+			case 'DAY':
+				break;
+			case 'WEEK':
+				booster_interval = booster_interval * 7;
+				break;
+			case 'MONTH':
+				booster_interval = booster_interval * 30;
+				break;
+			case 'YEAR':
+				booster_interval = booster_interval * 365;
+				break;
+			default:
+				break;
+		}
+
+		setBoosterDays(booster_interval);
+	}
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setVaccinationRecordState({ ...vaccinationRecordState, [name]: value });
@@ -75,10 +100,19 @@ export const CreateVaccinationRecord = () => {
 		setVaccinationRecordState({ ...vaccinationRecordState, [name]: value });
 	};
 
-	const handleVaccineScheduleChange = (event: SelectChangeEvent) => {
-		console.log(event.target);
+	const handleVaccineScheduleChange = async (event: SelectChangeEvent) => {
 		const { name, value } = event.target;
-		setVaccinationRecordState({ ...vaccinationRecordState, [name]: value });
+		setScheduleWithBooster(value);
+		const vaccine_schedule_id = value.split('_')[0];
+		let booster_interval: number = value.split('_')[1] as any;
+		const booster_unit = value.split('_')[2];
+
+		setBoosterInterval(booster_unit, booster_interval);
+
+		setVaccinationRecordState({
+			...vaccinationRecordState,
+			[name]: vaccine_schedule_id,
+		});
 	};
 
 	const handleAppliedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,14 +124,16 @@ export const CreateVaccinationRecord = () => {
 	};
 
 	const handleAppliedDateChange = (newValue: Dayjs | null) => {
-		console.log(newValue);
 		setVaccinationRecordState({
 			...vaccinationRecordState,
 			application_date: newValue?.format('YYYY-MM-DD'),
+			booster_date: newValue
+				?.add(boosterDays, 'day')
+				.format('YYYY-MM-DD'),
 		});
 	};
 
-	const handleBoosterDateChange = (newValue: Dayjs | null) => {
+	const handleBoosterDateChange = (newValue: Dayjs | null | undefined) => {
 		setVaccinationRecordState({
 			...vaccinationRecordState,
 			booster_date: newValue?.format('YYYY-MM-DD'),
@@ -135,7 +171,8 @@ export const CreateVaccinationRecord = () => {
 					vaccinationRecord={vaccinationRecordState}
 					isDisabled={false}
 					isLoading={false}
-					pet={pet?.data}					
+					scheduleIdWithBooster={scheduleWithBooster}
+					pet={pet?.data}
 					handleSubmit={handleSubmit}
 					handleChange={handleChange}
 					handleBrandChange={handleBrandChange}

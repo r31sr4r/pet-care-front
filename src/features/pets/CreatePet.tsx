@@ -98,7 +98,6 @@ export const CreatePet = () => {
 			enqueueSnackbar('Pet cadastrado com sucesso', {
 				variant: 'success',
 			});
-			console.log(petState);
 			setIsDisabled(true);
 			setShowMenu(true);
 		}

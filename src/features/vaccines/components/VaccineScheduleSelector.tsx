@@ -23,7 +23,7 @@ export function VaccineScheduleSelector({
 				name="vaccine_schedule_id"
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
-				value={ isFetching ? '' : vaccineScheduleId }
+				value={isFetching ? '' : vaccineScheduleId}
 				label="Dose"
 				required
 				onChange={handleVaccineScheduleChange}
@@ -31,7 +31,10 @@ export function VaccineScheduleSelector({
 			>
 				{data?.data
 					? data.data.map((vaccine: any) => (
-							<MenuItem value={vaccine.id} key={vaccine.id} >
+							<MenuItem
+								value={`${vaccine.id}_${vaccine.booster_interval}_${vaccine.booster_unit}`}
+								key={vaccine.id}
+							>
 								{vaccine.description}
 							</MenuItem>
 					  ))
