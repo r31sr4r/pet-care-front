@@ -5,7 +5,7 @@ const endpointUrl = '/brands';
 
 const getBrandsByType = (brandType: string) => {
 	return {
-		url: `${endpointUrl}/brand-type/${brandType}`,
+		url: `${endpointUrl}/brand-type/${brandType}?per_page=100`,
 		method: 'GET',
 	};
 };

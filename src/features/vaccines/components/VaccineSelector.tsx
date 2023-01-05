@@ -6,12 +6,14 @@ type Props = {
 	vaccineId: string;
 	breedType: string;
 	handleVaccineChange: (e: SelectChangeEvent) => void;
+	isDisabled?: boolean;
 };
 
 export function VaccineSelector({
 	vaccineId,
 	breedType,
 	handleVaccineChange,
+	isDisabled,
 }: Props) {
 	const { data, isFetching, error } = useGetVaccinesByBreedTypeQuery({
 		breed_type: breedType,
@@ -22,6 +24,7 @@ export function VaccineSelector({
 			<Select
 				name="vaccine_id"
 				required
+				disabled={isDisabled}
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
 				value={ isFetching ? '' : vaccineId }

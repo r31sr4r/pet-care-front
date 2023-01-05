@@ -38,6 +38,16 @@ function createVaccinationRecordMutation(
 	};
 }
 
+function updateVaccinationRecordMutation(
+	vaccination_record: VaccinationRecord
+) {
+	return {
+		url: `${endpointUrl}/${vaccination_record.id}`,
+		method: 'PUT',
+		body: vaccination_record,
+	};
+}
+
 export const vaccinationRecordApiSlice: any = apiSlice.injectEndpoints({
 	endpoints: ({ query, mutation }) => ({
 		getVaccinationRecord: query<Result, { id: string }>({
@@ -60,6 +70,10 @@ export const vaccinationRecordApiSlice: any = apiSlice.injectEndpoints({
 			query: createVaccinationRecordMutation,
 			invalidatesTags: ['VaccinationRecords'],
 		}),
+		updateVaccinationRecord: mutation<Results, VaccinationRecord>({
+			query: updateVaccinationRecordMutation,
+			invalidatesTags: ['VaccinationRecords'],
+		}),
 	}),
 });
 
@@ -68,4 +82,5 @@ export const {
 	useGetVaccinationRecordsByPetQuery,
 	useGetVaccinationRecordsByPetAndVaccineQuery,
 	useCreateVaccinationRecordMutation,
+	useUpdateVaccinationRecordMutation,
 } = vaccinationRecordApiSlice;

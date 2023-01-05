@@ -33,6 +33,7 @@ export const DetailVaccinationRecord = () => {
 		color: theme.palette.text.secondary,
 	}));
 	const vaccineListPath = `/pets/${pet_id}/vaccines`;
+	const vaccineEditPath = `/pets/${pet_id}/vaccines/${id}/edit`;
 
 	return (
 		<Box>
@@ -64,8 +65,16 @@ export const DetailVaccinationRecord = () => {
 					<Box>
 						{vaccinationRecord?.data.map(
 							(vaccination: VaccinationRecord) => (
-								<Box key={vaccination.id} sx={{ flexGrow: 1 }} mr={2} mb={2}>
-									<Card variant="outlined" sx={{borderRadius: 2}}>
+								<Box
+									key={vaccination.id}
+									sx={{ flexGrow: 1 }}
+									mr={2}
+									mb={2}
+								>
+									<Card
+										variant="outlined"
+										sx={{ borderRadius: 2 }}
+									>
 										<CardContent>
 											<Grid container spacing={0}>
 												<Grid item xs={8}>
@@ -83,10 +92,11 @@ export const DetailVaccinationRecord = () => {
 													textAlign="end"
 												>
 													<Item>
-														{formatDate(
-															vaccination.application_date ||
-																''
-														)}
+														{vaccination.application_date
+															? formatDate(
+																	vaccination.application_date
+															  )
+															: 'Sem data'}
 													</Item>
 												</Grid>
 											</Grid>
@@ -115,10 +125,29 @@ export const DetailVaccinationRecord = () => {
 												<Typography variant="subtitle2">
 													Veterinário
 												</Typography>
-												<Typography variant="overline">
-													{vaccination.vet ||
-														'Não informado'}
-												</Typography>
+												<Grid container>
+													<Grid item xs={12} sm={10}>
+														<Typography variant="overline">
+															{vaccination.vet ||
+																'Não informado'}
+														</Typography>
+													</Grid>
+													<Grid
+														item
+														xs={12}
+														sm={2}
+														textAlign={'end'}
+													>
+														<Button
+															size="small"
+															variant="contained"
+															component={Link}
+															to={`/pets/${pet_id}/vaccines/${vaccination.id}/edit`}
+														>
+															Editar
+														</Button>
+													</Grid>
+												</Grid>
 											</Box>
 										</CardContent>
 									</Card>
@@ -128,11 +157,15 @@ export const DetailVaccinationRecord = () => {
 					</Box>
 				</Box>
 				<Box display="flex" gap={2} ml={2}>
-					<Button variant="contained" component={Link} to={vaccineListPath}>
+					<Button
+						variant="contained"
+						component={Link}
+						to={vaccineListPath}
+					>
 						Voltar
 					</Button>
 				</Box>
-				<Box display="flex" p={1}/>
+				<Box display="flex" p={1} />
 			</Paper>
 		</Box>
 	);

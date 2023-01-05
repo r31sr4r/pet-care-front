@@ -9,6 +9,7 @@ import {
 	Stack,
 	Switch,
 	TextField,
+	TextFieldProps,
 } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -17,14 +18,14 @@ import { Dayjs } from 'dayjs';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { VaccinationRecord } from '../../../types/VaccinationRecord';
-import { Pet } from '../../../types/Pet';
 import { BrandSelector } from '../../brands/components/BrandSelector';
 import { VaccineScheduleSelector } from './VaccineScheduleSelector';
 import { VaccineSelector } from './VaccineSelector';
 
 type Props = {
 	vaccinationRecord: VaccinationRecord;
-	pet: Pet;
+	petID: string;
+	petType: string;
 	isDisabled?: boolean;
 	isLoading?: boolean;
 	scheduleIdWithBooster: string;
@@ -40,7 +41,8 @@ type Props = {
 
 export function VaccinationRecordForm({
 	vaccinationRecord,
-	pet,
+	petID,
+	petType,
 	isDisabled,
 	isLoading,
 	scheduleIdWithBooster,
@@ -60,19 +62,19 @@ export function VaccinationRecordForm({
 					<Grid item xs={12} sm={6}>
 						<VaccineSelector
 							vaccineId={vaccinationRecord.vaccine_id}
-							breedType={pet.type}
+							breedType={petType}
 							handleVaccineChange={handleVaccineChange}
+							isDisabled={isDisabled}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<VaccineScheduleSelector
-							vaccineScheduleId={
-								scheduleIdWithBooster
-							}
+							vaccineScheduleId={scheduleIdWithBooster}
 							vaccineId={vaccinationRecord.vaccine_id}
 							handleVaccineScheduleChange={
 								handleVaccineScheduleChange
 							}
+							isDisabled={isDisabled}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -80,6 +82,7 @@ export function VaccinationRecordForm({
 							brandId={vaccinationRecord.brand_id}
 							brandType="VACCINE"
 							handleBrandChange={handleBrandChange}
+							isDisabled={isDisabled}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -89,6 +92,7 @@ export function VaccinationRecordForm({
 									<Switch
 										name="was_applied"
 										color="secondary"
+										disabled={isDisabled}
 										onChange={handleAppliedChange}
 										checked={vaccinationRecord.was_applied}
 										inputProps={{
@@ -107,13 +111,20 @@ export function VaccinationRecordForm({
 									<MobileDatePicker
 										label="Data da Apliciação"
 										inputFormat="DD/MM/YYYY"
+										disabled={isDisabled}
 										value={
 											vaccinationRecord.application_date
+												?.length
+												? vaccinationRecord.application_date.slice(
+														0,
+														10
+												  )
+												: null
 										}
 										onChange={handleAppliedDateChange}
-										renderInput={(params) => (
-											<TextField {...params} />
-										)}
+										renderInput={(
+											params: TextFieldProps
+										) => <TextField {...params} required />}
 									/>
 								</Stack>
 							</LocalizationProvider>
@@ -126,7 +137,16 @@ export function VaccinationRecordForm({
 									<MobileDatePicker
 										label="Data da Próxima Dose"
 										inputFormat="DD/MM/YYYY"
-										value={vaccinationRecord.booster_date}
+										disabled={isDisabled}
+										value={
+											vaccinationRecord.booster_date
+												?.length
+												? vaccinationRecord.booster_date.slice(
+														0,
+														10
+												  )
+												: null
+										}
 										onChange={handleBoosterDateChange}
 										renderInput={(params) => (
 											<TextField {...params} />
@@ -177,7 +197,7 @@ export function VaccinationRecordForm({
 							<Button
 								variant="contained"
 								component={Link}
-								to={`/pets/${pet.id}/vaccines`}
+								to={`/pets/${petID}/vaccines`}
 							>
 								Voltar
 							</Button>

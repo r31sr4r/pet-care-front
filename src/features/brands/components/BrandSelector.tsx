@@ -6,12 +6,14 @@ type Props = {
 	brandId: string | null | undefined;
 	brandType: string;
 	handleBrandChange: (e: SelectChangeEvent) => void;
+	isDisabled?: boolean;
 };
 
 export function BrandSelector({
 	brandId,
 	brandType,
 	handleBrandChange,
+	isDisabled,
 }: Props) {
 	const { data, isFetching, error } = useGetBrandsByTypeQuery({
 		brandType: brandType,
@@ -23,6 +25,7 @@ export function BrandSelector({
 				name="brand_id"
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
+				disabled={isDisabled}
 				value={ brandId || '' }
 				label="Marca"
 				onChange={handleBrandChange}

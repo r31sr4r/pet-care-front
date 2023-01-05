@@ -7,16 +7,28 @@ import { useSnackbar } from 'notistack';
 import { useParams } from 'react-router-dom';
 import { VaccinationRecord } from '../../types/VaccinationRecord';
 import { useGetPetQuery } from '../pets/petsSlice';
-import { useCreateVaccinationRecordMutation } from './vaccinationRecordsSlice';
+import {
+	useGetVaccinationRecordQuery,
+	useUpdateVaccinationRecordMutation,
+} from './vaccinationRecordsSlice';
+import { useGetVaccineScheduleByIdQuery } from './vaccineSchedulesSlice';
 
-export const CreateVaccinationRecord = () => {
+export const EditVaccinationRecord = () => {
 	const [scheduleWithBooster, setScheduleWithBooster] = useState<string>('');
+	const pet_id = useParams<{ pet_id: string }>().pet_id || '';
 	const id = useParams<{ id: string }>().id || '';
-	const { data: pet } = useGetPetQuery({ id });	
+	const { data: pet, isFetching } = useGetPetQuery({ id: pet_id });
+	const { data: vaccinationRecord, isFetching: isFetchingVaccinationRecord } =
+		useGetVaccinationRecordQuery({ id });
 
-	const [createVaccinationRecord, status] =
-		useCreateVaccinationRecordMutation();
-	const [isDisabled, setIsDisabled] = useState(false);
+	const [vaccineScheduleId, setVaccineScheduleId] = useState<string>('');
+	const { data: vaccineSchedule } = useGetVaccineScheduleByIdQuery({
+		id: vaccineScheduleId,
+	});
+
+	const [UpdateVaccinationRecord, status] =
+		useUpdateVaccinationRecordMutation();
+
 	const [boosterDays, setBoosterDays] = useState<number>(0);
 	const [vaccinationRecordState, setVaccinationRecordState] =
 		useState<VaccinationRecord>({
@@ -42,25 +54,7 @@ export const CreateVaccinationRecord = () => {
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		const payload = {
-			pet_id: pet?.data?.id,
-			vaccine_id: vaccinationRecordState.vaccine_id,
-			vaccine_schedule_id: vaccinationRecordState.vaccine_schedule_id,
-			brand_id: vaccinationRecordState.brand_id || '822cd89c-4c47-49d3-a208-a430155b5110',
-			was_applied: vaccinationRecordState.was_applied,
-			application_date: vaccinationRecordState.application_date,
-			booster_date: vaccinationRecordState.booster_date,
-			notes: vaccinationRecordState.notes,
-			clinic: vaccinationRecordState.clinic,
-			vet: vaccinationRecordState.vet,
-			update_reason: vaccinationRecordState.update_reason,
-		};
-
-		const result = await createVaccinationRecord(payload);
-		setVaccinationRecordState({
-			...vaccinationRecordState,
-			id: result.data?.data.id,
-		});
+		await UpdateVaccinationRecord(vaccinationRecordState);
 	}
 
 	function setBoosterInterval(
@@ -142,14 +136,31 @@ export const CreateVaccinationRecord = () => {
 	};
 
 	useEffect(() => {
+		if (vaccinationRecord) {
+			setVaccinationRecordState(vaccinationRecord.data);
+			setScheduleWithBooster(
+				`${vaccinationRecord.data.vaccine_schedule_id}_${vaccinationRecord.data.vaccine_schedule?.booster_interval}_${vaccinationRecord.data.vaccine_schedule?.booster_unit}`
+			);
+			setVaccineScheduleId(vaccinationRecord.data.vaccine_schedule_id);
+		}
+	}, [vaccinationRecord]);
+
+	useEffect(() => {
+		if (vaccineSchedule) {
+			setScheduleWithBooster(
+				`${vaccineScheduleId}_${vaccineSchedule.data.booster_interval}_${vaccineSchedule.data.booster_unit}`
+			);
+		}
+	}, [vaccineSchedule]);
+
+	useEffect(() => {
 		if (status.isSuccess) {
-			enqueueSnackbar('Vacina cadastrada com sucesso', {
+			enqueueSnackbar('Vacina atualizada com sucesso', {
 				variant: 'success',
 			});
-			setIsDisabled(true);
 		}
 		if (status.error) {
-			enqueueSnackbar('Ocorreu um erro ao cadastrar a vacina', {
+			enqueueSnackbar('Ocorreu um erro ao atualizar a vacina', {
 				variant: 'error',
 			});
 		}
@@ -160,7 +171,7 @@ export const CreateVaccinationRecord = () => {
 			<Paper>
 				<Box p={2}>
 					<Box>
-						<Typography variant="h4">Registrar Vacina</Typography>
+						<Typography variant="h4">Editar Vacina</Typography>
 					</Box>
 				</Box>
 				<Box p={2}>
@@ -170,8 +181,12 @@ export const CreateVaccinationRecord = () => {
 				</Box>
 				<VaccinationRecordForm
 					vaccinationRecord={vaccinationRecordState}
-					isDisabled={status.isLoading || isDisabled}
-					isLoading={status.isLoading}
+					isDisabled={status.isLoading}
+					isLoading={
+						status.isLoading ||
+						isFetching ||
+						isFetchingVaccinationRecord
+					}
 					scheduleIdWithBooster={scheduleWithBooster}
 					petID={pet?.data?.id}
 					petType={pet?.data?.type}

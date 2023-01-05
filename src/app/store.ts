@@ -5,7 +5,7 @@ import {
 	combineReducers,
 	PreloadedState,
 } from '@reduxjs/toolkit';
-import petsReducer, { petApiSlice } from '../features/pets/petsSlice';
+import { petApiSlice } from '../features/pets/petsSlice';
 import breedsReducer, { breedApiSlice } from '../features/breeds/breedsSlice';
 import { apiSlice } from '../features/api/apiSlice';
 import { userApiSlice } from '../features/users/usersSlice';
@@ -15,7 +15,6 @@ import { vaccineScheduleApiSlice } from '../features/vaccines/vaccineSchedulesSl
 import { vaccinationRecordApiSlice } from '../features/vaccines/vaccinationRecordsSlice';
 
 const rootReducer = combineReducers({
-	pets: petsReducer,
 	breeds: breedsReducer,		
 	[apiSlice.reducerPath]: apiSlice.reducer,
 	[breedApiSlice.reducerPath]: apiSlice.reducer,

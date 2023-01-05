@@ -6,12 +6,14 @@ type Props = {
 	vaccineScheduleId: string;
 	vaccineId: string;
 	handleVaccineScheduleChange: (e: SelectChangeEvent) => void;
+	isDisabled?: boolean;
 };
 
 export function VaccineScheduleSelector({
 	vaccineScheduleId,
 	vaccineId,
 	handleVaccineScheduleChange,
+	isDisabled,
 }: Props) {
 	const { data, isFetching, error } = useGetVaccineSchedulesByVaccineQuery({
 		vaccine_id: vaccineId === '' ? '0' : vaccineId,
@@ -22,6 +24,7 @@ export function VaccineScheduleSelector({
 			<Select
 				name="vaccine_schedule_id"
 				labelId="demo-simple-select-label"
+				disabled={isDisabled}
 				id="demo-simple-select"
 				value={isFetching ? '' : vaccineScheduleId}
 				label="Dose"

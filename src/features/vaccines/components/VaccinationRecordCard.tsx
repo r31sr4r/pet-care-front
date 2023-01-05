@@ -12,6 +12,7 @@ import {
 import { VaccinationRecord } from '../../../types/VaccinationRecord';
 import Moment from 'moment';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import Formatters  from './../../../utils/ui/Formatters';
 
 type Props = {
 	vaccinationGrouped: any;
@@ -26,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 	color: theme.palette.text.secondary,
 }));
 
-const formatDate = (date: string) => Moment(date).format('DD/MM/YYYY');
+// const formatDate = (date: string) => Moment(date).format('DD/MM/YYYY');
 
 export const VaccinationRecordCard = ({
 	vaccinationGrouped,
@@ -59,7 +60,13 @@ export const VaccinationRecordCard = ({
 											<IconButton
 												edge="end"
 												aria-label="detail"
-												onClick={() => handleClick(vaccinationGrouped[key][0].vaccine_id)}
+												onClick={() =>
+													handleClick(
+														vaccinationGrouped[
+															key
+														][0].vaccine_id
+													)
+												}
 											>
 												<OpenInNewIcon />
 											</IconButton>
@@ -84,10 +91,11 @@ export const VaccinationRecordCard = ({
 																}
 															</Typography>
 															<Typography variant="body2">
-																{formatDate(
-																	vaccination?.application_date ||
-																		''
-																)}
+																{vaccination?.application_date
+																	? Formatters.formatDate(
+																			vaccination?.application_date
+																	  )
+																	: 'Data não informada'}
 															</Typography>
 														</Item>
 													</Box>
