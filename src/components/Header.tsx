@@ -4,18 +4,26 @@ import {
 	AppBar,
 	Box,
 	Button,
-	IconButton, Menu,
+	IconButton,
+	Menu,
 	MenuItem,
 	Toolbar,
-	Typography
+	Typography,
 } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo_white from '../assets/images/logo-white.png';
 import { UserData } from '../utils/security/UserData';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
-
-export function Header() {
+export function Header({
+	toggle,
+	theme,
+}: {
+	toggle: () => void;
+	theme: string;
+}) {
 	let navigate = useNavigate();
 	const token = localStorage.getItem('token');
 	const [userLogged, setUserLogged] = React.useState<boolean>(token !== null);
@@ -43,9 +51,8 @@ export function Header() {
 		setAnchorEl(null);
 		if (ev.nativeEvent.target.outerText === 'Sair') {
 			handleLogout();
-		}
-		else if (ev.nativeEvent.target.outerText === 'Alterar Senha') {
-			const id  = UserData()?.user.id
+		} else if (ev.nativeEvent.target.outerText === 'Alterar Senha') {
+			const id = UserData()?.user.id;
 			navigate(`/user/change-password`);
 		}
 	};
@@ -73,6 +80,18 @@ export function Header() {
 					>
 						Pet Care Club
 					</Typography>
+
+					<IconButton
+						sx={{ ml: 1 }}
+						onClick={toggle}
+						color="inherit"
+					>
+						{theme === 'dark' ? (
+							<Brightness7Icon />
+						) : (
+							<Brightness4Icon />
+						)}
+					</IconButton>
 
 					{!userLogged ? (
 						<Button color="inherit" onClick={handleLogin}>

@@ -11,6 +11,7 @@ import {
 	styled,
 	Tooltip,
 	Divider,
+	Typography,
 } from '@mui/material';
 import { Results } from '../../../types/Pet';
 import { SelectPetType } from '../../../utils/SelectPetType';
@@ -50,8 +51,10 @@ export const Petlist = ({ results, handleClick, handleVaccine }: Props) => {
 								<PetsIcon />
 							</Avatar>
 						</ListItemAvatar>
-						<ListItemText
-							primary={pet.name}
+						<ListItemText 
+							primary={
+								<Typography color={'text.primary'}>{pet.name}</Typography>								
+							} 
 							secondary={`${SelectPetType(pet.type)} ${
 								pet.breed ? pet.breed : ''
 							}`}

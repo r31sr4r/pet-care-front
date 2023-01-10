@@ -54,12 +54,12 @@ export const VaccinationRecordList = () => {
 				<Box>
 					<Grid container>
 						<Grid item xs={12} md={4}>
-							<Typography variant="h4">
+							<Typography variant="h4" color='text.primary'>
 								Cartão de Vacinas
 							</Typography>
 						</Grid>
 						<Grid item xs={12} md={8}>
-							<Typography variant="h4">
+							<Typography variant="h4" color='text.primary'>
 								{pet?.data?.name}
 							</Typography>
 						</Grid>

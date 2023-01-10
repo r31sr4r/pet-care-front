@@ -27,7 +27,6 @@ const Item = styled(Paper)(({ theme }) => ({
 	color: theme.palette.text.secondary,
 }));
 
-// const formatDate = (date: string) => Moment(date).format('DD/MM/YYYY');
 
 export const VaccinationRecordCard = ({
 	vaccinationGrouped,

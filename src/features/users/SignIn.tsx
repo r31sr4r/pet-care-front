@@ -68,7 +68,7 @@ export default function SignIn() {
 				<Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
 					<LockOutlinedIcon />
 				</Avatar>
-				<Typography component="h1" variant="h5">
+				<Typography component="h1" variant="h5" color={'text.primary'}>
 					Sign in
 				</Typography>
 				<Box
@@ -97,8 +97,8 @@ export default function SignIn() {
 						id="password"
 						autoComplete="current-password"
 					/>
-					<FormControlLabel
-						control={<Checkbox value="remember" color="primary" />}
+					<FormControlLabel sx={{color:'text.primary'}}
+						control={<Checkbox value="remember" color="primary" />}												
 						label="Lembrar meus dados"
 					/>
 					<Button

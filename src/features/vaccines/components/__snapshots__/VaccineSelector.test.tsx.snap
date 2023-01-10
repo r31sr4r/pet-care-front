@@ -14,6 +14,7 @@ exports[`VaccineSelector should render successfully 1`] = `
     </label>
     <div
       class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+      required=""
     >
       <div
         aria-expanded="false"
@@ -33,7 +34,8 @@ exports[`VaccineSelector should render successfully 1`] = `
       <input
         aria-hidden="true"
         class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
-        name="vaccine"
+        name="vaccine_id"
+        required=""
         tabindex="-1"
         value=""
       />
@@ -56,7 +58,7 @@ exports[`VaccineSelector should render successfully 1`] = `
           class="css-yjsfm1"
         >
           <span>
-            Vacina
+            Vacina *
           </span>
         </legend>
       </fieldset>

@@ -65,11 +65,11 @@ exports[`PeList should render with pet breed 1`] = `
         <div
           class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
         >
-          <span
-            class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
           >
             Test
-          </span>
+          </p>
           <p
             class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-83ijpv-MuiTypography-root"
           >
@@ -186,11 +186,11 @@ exports[`PeList should render with results 1`] = `
         <div
           class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
         >
-          <span
-            class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1gqyz35-MuiTypography-root"
           >
             Test
-          </span>
+          </p>
           <p
             class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-83ijpv-MuiTypography-root"
           >

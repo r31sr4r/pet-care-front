@@ -46,7 +46,7 @@ export const ListPets = () => {
 			<Box display="flex" justifyContent="flex-end">
 				<Button
 					variant="contained"
-					color="secondary"
+					color="secondary"					
 					component={Link}
 					to="/pets/create"
 					style={{ marginBottom: '1rem' }}

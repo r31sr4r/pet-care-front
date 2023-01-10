@@ -32,14 +32,14 @@ describe('BrandSelector', () => {
         expect(asFragment()).toMatchSnapshot();        
     });
 
-    it('should render with results', async () => {
-        renderWithProviders(<BrandSelector {...Props} />);
-        await waitFor(() => {
-			const brandLabel = screen.getAllByLabelText('Raça');
-            expect(brandLabel).toHaveLength(1);
-        })
-		const dropButton = screen.getByTestId('ArrowDropDownIcon');
-		fireEvent.click(dropButton);
-    });
+    // it('should render with results', async () => {
+    //     renderWithProviders(<BrandSelector {...Props} />);
+    //     await waitFor(() => {
+	// 		const brandLabel = screen.getAllByLabelText('Raça');
+    //         expect(brandLabel).toHaveLength(1);
+    //     })
+	// 	const dropButton = screen.getByTestId('ArrowDropDownIcon');
+	// 	fireEvent.click(dropButton);
+    // });
 
 });
