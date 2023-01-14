@@ -20,9 +20,11 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 export function Header({
 	toggle,
 	theme,
+	handleDwawerToggle,
 }: {
 	toggle: () => void;
 	theme: string;
+	handleDwawerToggle: () => void;
 }) {
 	let navigate = useNavigate();
 	const token = localStorage.getItem('token');
@@ -66,7 +68,8 @@ export function Header({
 						edge="start"
 						color="inherit"
 						aria-label="menu"
-						sx={{ mr: 2 }}
+						onClick={handleDwawerToggle}
+						sx={{ mr: 2, display: { sm: 'none' } }}
 					>
 						<MenuIcon />
 					</IconButton>

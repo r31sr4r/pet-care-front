@@ -40,7 +40,7 @@ export const VaccinationRecordList = () => {
 	};
 
 	return (
-		<Box maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+		<Box maxWidth="lg" sx={{ mt: 1, mb: 4 }}>
 			<Backdrop
 				sx={{
 					color: '#fff',
@@ -77,7 +77,7 @@ export const VaccinationRecordList = () => {
 					Registrar Vacina
 				</Button>
 			</Box>
-			<Paper>
+			<Paper >
 				<Box sx={{ p: 2 }}>
 					{!isFetching &&
 						(vaccinationGrouped === undefined ||

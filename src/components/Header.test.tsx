@@ -4,9 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 
 describe('Header', () => {
     it('should render successfully', () => {
-        const { asFragment } = render(<Header 
+        const { asFragment } = render(<Header             
             toggle={() => {}}
             theme="dark"
+            handleDwawerToggle={() => {}}
              />, {
 			wrapper: BrowserRouter,
 		});

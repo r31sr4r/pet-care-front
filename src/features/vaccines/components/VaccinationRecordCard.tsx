@@ -1,3 +1,4 @@
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {
 	Box,
 	Divider,
@@ -7,12 +8,10 @@ import {
 	Stack,
 	styled,
 	Tooltip,
-	Typography,
+	Typography
 } from '@mui/material';
 import { VaccinationRecord } from '../../../types/VaccinationRecord';
-import Moment from 'moment';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import Formatters  from './../../../utils/ui/Formatters';
+import Formatters from './../../../utils/ui/Formatters';
 
 type Props = {
 	vaccinationGrouped: any;

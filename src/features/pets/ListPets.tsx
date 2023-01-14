@@ -33,7 +33,7 @@ export const ListPets = () => {
 	}
 
 	return (
-		<Box maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+		<Box maxWidth="lg" sx={{ mt: 1, mb: 4 }}>
 			<Backdrop
 				sx={{
 					color: '#fff',
@@ -43,10 +43,17 @@ export const ListPets = () => {
 			>
 				<CircularProgress color="inherit" />
 			</Backdrop>
+			<Box>
+				<Box>
+					<Typography variant="h4" color="text.primary">
+						Meus Pets
+					</Typography>
+				</Box>
+			</Box>
 			<Box display="flex" justifyContent="flex-end">
 				<Button
 					variant="contained"
-					color="secondary"					
+					color="secondary"
 					component={Link}
 					to="/pets/create"
 					style={{ marginBottom: '1rem' }}
