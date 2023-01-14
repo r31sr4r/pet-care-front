@@ -15,7 +15,7 @@ import { DetailVaccinationRecord } from './features/vaccines/DetailVaccinationRe
 import { EditVaccinationRecord } from './features/vaccines/EditVaccinationRecord';
 import { VaccinationRecordList } from './features/vaccines/VaccinationRecordList';
 
-function App() {	
+function App() {
 	return (
 		<Layout>
 			<Routes>
