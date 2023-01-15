@@ -19,7 +19,7 @@ function App() {
 	return (
 		<Layout>
 			<Routes>
-				<Route path="/" element={<ListPets />} />
+				<Route path="/" element={<SignIn />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/signin" element={<SignIn />} />
 				<Route

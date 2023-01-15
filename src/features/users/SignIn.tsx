@@ -36,7 +36,7 @@ export default function SignIn() {
 
 	useEffect(() => {
 		if (status.isSuccess) {
-			navigate('/');
+			navigate('/pets');
 		} else if (status?.error?.status === 401) {
 			enqueueSnackbar('Usuário ou senha inválidos', {
 				variant: 'error',
