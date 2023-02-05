@@ -6,8 +6,11 @@ import {
 	Typography,
 	Box,
 	Drawer,
+	ListItemButton,
+	ListItemText,
 } from '@mui/material';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -32,17 +35,27 @@ export default function ResponsiveDrawer({ open, onClose }: Props) {
 		<div>
 			<Toolbar>
 				<Typography variant="h6" noWrap component="div">
-					Responsive drawer
+					Menu
 				</Typography>
 				<Divider />
-				<List>
-					{routes.map((route) => (
-						<ListItem disablePadding key={route.name}>
-							<Typography>{route.name}</Typography>
-						</ListItem>
-					))}
-				</List>
 			</Toolbar>
+
+			<List>
+				{routes.map((route) => (
+					<Link
+						key={route.path}
+						to={route.path}
+						onClick={onClose}
+						style={{ textDecoration: 'none', color: 'inherit' }}
+					>
+						<ListItem disablePadding>
+							<ListItemButton>
+								<ListItemText>{route.name}</ListItemText>
+							</ListItemButton>
+						</ListItem>
+					</Link>
+				))}
+			</List>
 		</div>
 	);
 
@@ -50,12 +63,11 @@ export default function ResponsiveDrawer({ open, onClose }: Props) {
 		<Box
 			component="nav"
 			sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-			
 		>
 			<Drawer
 				variant="temporary"
 				open={open}
-				onClose={onClose}				
+				onClose={onClose}
 				ModalProps={{
 					keepMounted: true, // Better open performance on mobile.
 				}}
@@ -64,7 +76,7 @@ export default function ResponsiveDrawer({ open, onClose }: Props) {
 					'& .MuiDrawer-paper': {
 						boxSizing: 'border-box',
 						width: drawerWidth,
-					},					
+					},
 				}}
 			>
 				{drawer}

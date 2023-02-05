@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { redirect, useNavigate } from 'react-router-dom';
 
-export const baseUrl = 'http://localhost:3001';
+export const baseUrl = 'https://api-petcareclub.duckdns.org';
 
 const bq = fetchBaseQuery({
 	baseUrl,
