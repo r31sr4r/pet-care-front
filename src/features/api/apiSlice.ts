@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { redirect, useNavigate } from 'react-router-dom';
 
-export const baseUrl = 'https://api-petcareclub.duckdns.org';
+//export const baseUrl = 'http://api-petcareclub.duckdns.org';
+export const baseUrl = 'http://localhost:3001';
 
 const bq = fetchBaseQuery({
 	baseUrl,
@@ -30,6 +31,7 @@ export const apiSlice = createApi({
 		'Brands',
 		'VaccineSchedules',
 		'VaccinationRecords',
+		'DewormerRecords',
 	],
 	endpoints: (builder) => ({}),
 	async baseQuery(args, api, extraOptions) {
