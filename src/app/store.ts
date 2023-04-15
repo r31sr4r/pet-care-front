@@ -13,6 +13,7 @@ import { vaccineApiSlice } from '../features/vaccines/vaccinesSlice';
 import { brandApiSlice } from '../features/brands/brandsSlice';
 import { vaccineScheduleApiSlice } from '../features/vaccines/vaccineSchedulesSlice';
 import { vaccinationRecordApiSlice } from '../features/vaccines/vaccinationRecordsSlice';
+import { dewormerRecordApiSlice } from '../features/dewormers/dewormerRecordsSlice';
 
 const rootReducer = combineReducers({
 	breeds: breedsReducer,		
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
 	[brandApiSlice.reducerPath]: apiSlice.reducer,
 	[vaccineScheduleApiSlice.reducerPath]: apiSlice.reducer,
 	[vaccinationRecordApiSlice.reducerPath]: apiSlice.reducer,
+	[dewormerRecordApiSlice.reducerPath]: apiSlice.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
