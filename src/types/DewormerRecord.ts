@@ -33,7 +33,7 @@ export interface DewormerRecord {
 	clinic: string | null;
 	vet: string | null;
 	update_reason: string | null;	
-	created_at: string;
+	created_at: string | null;
 	pet: Pet | null;
 	brand: Brand | null;
 }

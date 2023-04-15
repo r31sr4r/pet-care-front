@@ -15,6 +15,7 @@ import { DetailVaccinationRecord } from './features/vaccines/DetailVaccinationRe
 import { EditVaccinationRecord } from './features/vaccines/EditVaccinationRecord';
 import { VaccinationRecordList } from './features/vaccines/VaccinationRecordList';
 import { DewormerRecordsList } from './features/dewormers/ListDewormerRecords';
+import { CreateDewormerRecord } from './features/dewormers/CreateDewormerRecord';
 
 function App() {
 	return (
@@ -52,6 +53,10 @@ function App() {
 				<Route
 					path="/pets/:id/dewormer-records"
 					element={<DewormerRecordsList />}
+				/>
+				<Route
+					path="/pets/:id/dewormer-records/create"
+					element={<CreateDewormerRecord />}
 				/>
 
 

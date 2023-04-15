@@ -89,8 +89,8 @@ export const DewormerRecordsList = () => {
 				<Button
 					variant="contained"
 					color="secondary"
-					component={Link}
-					to="/dewormer-records/create"
+					component={Link}					
+					to={`/pets/${id}/dewormer-records/create`}
 					style={{ marginBottom: '1rem' }}
 				>
 					Registrar Vermifugação
