@@ -9,16 +9,15 @@ import { useGetPetQuery } from '../pets/petsSlice';
 import { useCreateDewormerRecordMutation } from './dewormerRecordsSlice';
 import { Constants } from '../../utils/constants/Constants';
 import { DewormerRecordForm } from './components/DewormerRecordForm';
+import { BoosterUnitEnum } from '../../utils/enum/BoosterUnitEnum';
 
 export const CreateDewormerRecord = () => {
-	const [scheduleWithBooster, setScheduleWithBooster] = useState<string>('');
 	const id = useParams<{ id: string }>().id || '';
 	const { data: pet } = useGetPetQuery({ id });	
 
 	const [createDewormerRecord, status] =
 		useCreateDewormerRecordMutation();
 	const [isDisabled, setIsDisabled] = useState(false);
-	const [boosterDays, setBoosterDays] = useState<number>(0);
 	const [dewormerRecordState, setDewormerRecordState] =
 		useState<DewormerRecord>({
 			id: '',
@@ -26,7 +25,7 @@ export const CreateDewormerRecord = () => {
 			brand_id: '',
 			dewormer_name: '',
 			booster_interval: 0,
-			booster_unit: '',
+			booster_unit: BoosterUnitEnum.DAY,
 			was_applied: true,
 			application_date: null,
 			booster_date: null,
@@ -45,6 +44,9 @@ export const CreateDewormerRecord = () => {
 		const payload = {
 			pet_id: pet?.data?.id,
 			brand_id: dewormerRecordState.brand_id || Constants.DEFAULT_BRAND_ID,
+			dewormer_name: dewormerRecordState.dewormer_name,
+			booster_interval: parseInt(dewormerRecordState.booster_interval as any),
+			booster_unit: dewormerRecordState.booster_unit,
 			was_applied: dewormerRecordState.was_applied,
 			application_date: dewormerRecordState.application_date,
 			booster_date: dewormerRecordState.booster_date,
@@ -61,57 +63,14 @@ export const CreateDewormerRecord = () => {
 		});
 	}
 
-	function setBoosterInterval(
-		booster_unit: string,
-		booster_interval: number
-	) {
-		switch (booster_unit) {
-			case 'DAY':
-				break;
-			case 'WEEK':
-				booster_interval = booster_interval * 7;
-				break;
-			case 'MONTH':
-				booster_interval = booster_interval * 30;
-				break;
-			case 'YEAR':
-				booster_interval = booster_interval * 365;
-				break;
-			default:
-				break;
-		}
-
-		setBoosterDays(booster_interval);
-	}
-
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
-		setDewormerRecordState({ ...dewormerRecordState, [name]: value });
-	};
-
-	const handleVaccineChange = (event: SelectChangeEvent) => {
-		const { name, value } = event.target;
 		setDewormerRecordState({ ...dewormerRecordState, [name]: value });
 	};
 
 	const handleBrandChange = (event: SelectChangeEvent) => {
 		const { name, value } = event.target;
 		setDewormerRecordState({ ...dewormerRecordState, [name]: value });
-	};
-
-	const handleVaccineScheduleChange = async (event: SelectChangeEvent) => {
-		const { name, value } = event.target;
-		setScheduleWithBooster(value);
-		const vaccine_schedule_id = value.split('_')[0];
-		let booster_interval: number = value.split('_')[1] as any;
-		const booster_unit = value.split('_')[2];
-
-		setBoosterInterval(booster_unit, booster_interval);
-
-		setDewormerRecordState({
-			...dewormerRecordState,
-			[name]: vaccine_schedule_id,
-		});
 	};
 
 	const handleAppliedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,7 +86,7 @@ export const CreateDewormerRecord = () => {
 			...dewormerRecordState,
 			application_date: newValue?.format('YYYY-MM-DD'),
 			booster_date: newValue
-				?.add(boosterDays, 'day')
+				?.add(dewormerRecordState.booster_interval, 'day')
 				.format('YYYY-MM-DD'),
 		});
 	};
@@ -141,13 +100,13 @@ export const CreateDewormerRecord = () => {
 
 	useEffect(() => {
 		if (status.isSuccess) {
-			enqueueSnackbar('Vacina cadastrada com sucesso', {
+			enqueueSnackbar('Vermifugação cadastrada com sucesso', {
 				variant: 'success',
 			});
 			setIsDisabled(true);
 		}
 		if (status.error) {
-			enqueueSnackbar('Ocorreu um erro ao cadastrar a vacina', {
+			enqueueSnackbar('Ocorreu um erro ao cadastrar a vermifugação', {
 				variant: 'error',
 			});
 		}
@@ -158,7 +117,7 @@ export const CreateDewormerRecord = () => {
 			<Paper>
 				<Box p={2}>
 					<Box>
-						<Typography variant="h4">Registrar Vacina</Typography>
+						<Typography variant="h4">Registrar Vermifugação</Typography>
 					</Box>
 				</Box>
 				<Box p={2}>
@@ -170,14 +129,10 @@ export const CreateDewormerRecord = () => {
 					dewormerRecord={dewormerRecordState}
 					isDisabled={status.isLoading || isDisabled}
 					isLoading={status.isLoading}
-					scheduleIdWithBooster={scheduleWithBooster}
 					petID={pet?.data?.id}
-					petType={pet?.data?.type}
 					handleSubmit={handleSubmit}
 					handleChange={handleChange}
 					handleBrandChange={handleBrandChange}
-					handleVaccineChange={handleVaccineChange}
-					handleVaccineScheduleChange={handleVaccineScheduleChange}
 					handleAppliedChange={handleAppliedChange}
 					handleAppliedDateChange={handleAppliedDateChange}
 					handleBoosterDateChange={handleBoosterDateChange}

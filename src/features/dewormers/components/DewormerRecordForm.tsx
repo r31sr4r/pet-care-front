@@ -24,41 +24,33 @@ import { BrandTypesEnum } from '../../../utils/enum/BrandTypesEnum';
 type Props = {
 	dewormerRecord: DewormerRecord;
 	petID: string;
-	petType: string;
 	isDisabled?: boolean;
 	isLoading?: boolean;
-	scheduleIdWithBooster: string;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleAppliedDateChange: (newValue: Dayjs | null) => void;
 	handleBoosterDateChange: (newValue: Dayjs | null) => void;
 	handleAppliedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleBrandChange: (e: SelectChangeEvent) => void;
-	handleVaccineChange: (e: SelectChangeEvent) => void;
-	handleVaccineScheduleChange: (e: SelectChangeEvent) => void;
 };
 
 export function DewormerRecordForm({
 	dewormerRecord,
 	petID,
-	petType,
 	isDisabled,
 	isLoading,
-	scheduleIdWithBooster,
 	handleSubmit: onSubmit,
 	handleChange,
 	handleAppliedDateChange,
 	handleBoosterDateChange,
 	handleAppliedChange,
-	handleVaccineChange,
 	handleBrandChange,
-	handleVaccineScheduleChange,
 }: Props) {
 	return (
 		<Box p={2}>
 			<form onSubmit={onSubmit}>
 				<Grid container spacing={3}>
-					<Grid item xs={12}>
+					<Grid item xs={12} sm={6}>
 						<FormControl fullWidth>
 							<TextField
 								required
@@ -70,6 +62,20 @@ export function DewormerRecordForm({
 							/>
 						</FormControl>
 					</Grid>
+					<Grid item xs={12} sm={6}>
+						<FormControl fullWidth>
+							<TextField
+								required
+								name="booster_interval"
+								label="Duração (dias)"
+								type="number"		
+								InputProps={{ inputProps: { min: "0", max: "360", step: "1" } }}						
+								value={dewormerRecord.booster_interval >= 0 ? dewormerRecord.booster_interval : 0}
+								disabled={isDisabled}
+								onChange={handleChange}
+							/>
+						</FormControl>
+					</Grid>					
 					<Grid item xs={12} sm={6}>
 						<BrandSelector
 							brandId={dewormerRecord.brand_id}
