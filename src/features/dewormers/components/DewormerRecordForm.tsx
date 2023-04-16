@@ -32,6 +32,7 @@ type Props = {
 	handleBoosterDateChange: (newValue: Dayjs | null) => void;
 	handleAppliedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleBrandChange: (e: SelectChangeEvent) => void;
+	handleBoosterIntervalChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export function DewormerRecordForm({
@@ -45,6 +46,7 @@ export function DewormerRecordForm({
 	handleBoosterDateChange,
 	handleAppliedChange,
 	handleBrandChange,
+	handleBoosterIntervalChange
 }: Props) {
 	return (
 		<Box p={2}>
@@ -72,7 +74,7 @@ export function DewormerRecordForm({
 								InputProps={{ inputProps: { min: "0", max: "360", step: "1" } }}						
 								value={dewormerRecord.booster_interval >= 0 ? dewormerRecord.booster_interval : 0}
 								disabled={isDisabled}
-								onChange={handleChange}
+								onChange={handleBoosterIntervalChange}
 							/>
 						</FormControl>
 					</Grid>					
@@ -196,7 +198,7 @@ export function DewormerRecordForm({
 							<Button
 								variant="contained"
 								component={Link}
-								to={`/pets/${petID}/vaccines`}
+								to={`/pets/${petID}/dewormer-records`}
 							>
 								Voltar
 							</Button>

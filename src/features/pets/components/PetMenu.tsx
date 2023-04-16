@@ -7,17 +7,23 @@ import {
 	Grid,
 } from '@mui/material';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 type Props = {
 	petId: string;
 	handleVaccine: (petId: any) => void;
+	handleDewormerRecords: (petId: any) => void;
 };
 
-export const PetMenu = ({ petId, handleVaccine }: Props) => {
+export const PetMenu = ({
+	petId,
+	handleVaccine,
+	handleDewormerRecords,
+}: Props) => {
 	return (
 		<Box mb={2}>
-			<Grid container spacing={2} direction="column">
-				<Grid item xs={3}>
+			<Grid container spacing={2} direction="row">
+				<Grid item>
 					<Tooltip
 						title="Vacinas"
 						placement="left-start"
@@ -31,7 +37,7 @@ export const PetMenu = ({ petId, handleVaccine }: Props) => {
 							<VaccinesIcon fontSize="large" />
 						</IconButton>
 					</Tooltip>
-					<Grid item xs={3}>
+					<Grid item>
 						<Typography
 							variant="caption"
 							gutterBottom
@@ -40,6 +46,36 @@ export const PetMenu = ({ petId, handleVaccine }: Props) => {
 							Vacinas
 						</Typography>
 					</Grid>
+				</Grid>
+				<Grid item>
+					<Box
+						display="flex"
+						flexDirection="column"
+						alignItems="center"
+					>
+						<Tooltip
+							title="Vermifugação"
+							placement="left-start"
+							sx={{ mr: 0.3, ml: 2 }}
+						>
+							<IconButton
+								edge="end"
+								aria-label="Vermifugação"
+								onClick={() => handleDewormerRecords(petId)}
+							>
+								<ListAltIcon fontSize="large" />
+							</IconButton>
+						</Tooltip>
+						<Grid item>
+							<Typography
+								variant="caption"
+								gutterBottom
+								sx={{ ml: 2.3 }}
+							>
+								Vermifugação
+							</Typography>
+						</Grid>
+					</Box>
 				</Grid>
 			</Grid>
 			<Divider />

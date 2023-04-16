@@ -44,6 +44,10 @@ export const EditPet = () => {
 		navigate(`/pets/${petId}/vaccines`);
 	};
 
+	const handleDewormerRecords = (petId: any) => {
+		navigate(`/pets/${petId}/dewormer-records`);
+	};
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setPetState({ ...petState, [name]: value });
@@ -111,6 +115,7 @@ export const EditPet = () => {
 					<PetMenu 
 						petId={petState.id}
 						handleVaccine={handleVaccine}
+						handleDewormerRecords={handleDewormerRecords}
 					/>
 				</Box>
 

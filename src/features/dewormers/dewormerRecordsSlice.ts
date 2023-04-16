@@ -53,6 +53,13 @@ const getDewormerRecordById = ({ id }: { id: string }) => {
 	};
 };
 
+const getDewormerRecordByGuidId = (id: string ) => {
+	return {
+		url: `${endpointUrl}/${id}`,
+		method: 'GET',
+	};
+};
+
 const getDewormerRecordsByPet = (pet_id: string) => {
 	return {
 		url: `${endpointUrl}?filter=${pet_id}`,
@@ -97,6 +104,10 @@ export const dewormerRecordApiSlice: any = apiSlice.injectEndpoints({
 			query: getDewormerRecordById,
 			providesTags: ['DewormerRecords'],
 		}),
+		getDewormerRecordsByGuidId: query<Results, { id: string }>({
+			query: ({ id }) => getDewormerRecordByGuidId(id),
+			providesTags: ['DewormerRecords'],
+		}),
 		getDewormerRecordsByPet: query<Results, { id: string }>({
 			query: ({ id }) => getDewormerRecordsByPet(id),
 			providesTags: ['DewormerRecords'],
@@ -121,6 +132,7 @@ export const {
 	useGetDewormerRecordsQuery,
 	useGetDewormerRecordsByIdQuery,
 	useGetDewormerRecordsByPetQuery,
+	useGetDewormerRecordsByGuidIdQuery,
 	useCreateDewormerRecordMutation,
 	useUpdateDewormerRecordMutation,
 	useDeleteDewormerRecordMutation,

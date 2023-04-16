@@ -47,6 +47,7 @@ export function DewormerRecordsTable({
 		const { data: dewormer_records } = data;
 		return dewormer_records.map((record) => ({
 			id: record.id,
+			pet_id: record.pet_id,
 			name: record.dewormer_name,            
 			application_date: record.application_date == null ? 
 				'' : 
@@ -93,7 +94,7 @@ export function DewormerRecordsTable({
 		return (
 			<Link
 				style={{ textDecoration: 'none' }}
-				to={`/categories/edit/${rowData.id}`}
+				to={`/pets/${rowData.row.pet_id}/dewormer-records/${rowData.id}/edit`}
 			>
 				<Typography color="primary">{rowData.value}</Typography>
 			</Link>

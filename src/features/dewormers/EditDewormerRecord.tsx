@@ -1,23 +1,28 @@
 import { Box, Paper, SelectChangeEvent, Typography } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
+import { DewormerRecordForm } from './components/DewormerRecordForm';
 
 import { useSnackbar } from 'notistack';
 import { useParams } from 'react-router-dom';
 import { DewormerRecord } from '../../types/DewormerRecord';
 import { useGetPetQuery } from '../pets/petsSlice';
-import { useCreateDewormerRecordMutation } from './dewormerRecordsSlice';
-import { Constants } from '../../utils/constants/Constants';
-import { DewormerRecordForm } from './components/DewormerRecordForm';
+import {
+	useGetDewormerRecordsByGuidIdQuery,
+	useUpdateDewormerRecordMutation,
+} from './dewormerRecordsSlice';
 import { BoosterUnitEnum } from '../../utils/enum/BoosterUnitEnum';
 
-export const CreateDewormerRecord = () => {
+export const EditDewormerRecord = () => {
+	const pet_id = useParams<{ pet_id: string }>().pet_id || '';
 	const id = useParams<{ id: string }>().id || '';
-	const { data: pet } = useGetPetQuery({ id });	
+	const { data: pet, isFetching } = useGetPetQuery({ id: pet_id });
+	const { data: dewormerRecord, isFetching: isFetchingDewormerRecord } =
+		useGetDewormerRecordsByGuidIdQuery({ id: id });
 
-	const [createDewormerRecord, status] =
-		useCreateDewormerRecordMutation();
-	const [isDisabled, setIsDisabled] = useState(false);
+	const [UpdateDewormerRecord, status] =
+		useUpdateDewormerRecordMutation();
+
 	const [dewormerRecordState, setDewormerRecordState] =
 		useState<DewormerRecord>({
 			id: '',
@@ -40,27 +45,8 @@ export const CreateDewormerRecord = () => {
 	const { enqueueSnackbar } = useSnackbar();
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
-		const payload = {
-			pet_id: pet?.data?.id,
-			brand_id: dewormerRecordState.brand_id || Constants.DEFAULT_BRAND_ID,
-			dewormer_name: dewormerRecordState.dewormer_name,
-			booster_interval: parseInt(dewormerRecordState.booster_interval as any),
-			booster_unit: dewormerRecordState.booster_unit,
-			was_applied: dewormerRecordState.was_applied,
-			application_date: dewormerRecordState.application_date,
-			booster_date: dewormerRecordState.booster_date,
-			notes: dewormerRecordState.notes,
-			clinic: dewormerRecordState.clinic,
-			vet: dewormerRecordState.vet,
-			update_reason: dewormerRecordState.update_reason,
-		};
-
-		const result = await createDewormerRecord(payload);
-		setDewormerRecordState({
-			...dewormerRecordState,
-			id: result.data?.data.id,
-		});
+		e.preventDefault();		
+		await UpdateDewormerRecord(dewormerRecordState);
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,14 +90,19 @@ export const CreateDewormerRecord = () => {
 	};
 
 	useEffect(() => {
+		if (dewormerRecord) {
+			setDewormerRecordState(dewormerRecord.data);
+		}
+	}, [dewormerRecord]);
+
+	useEffect(() => {
 		if (status.isSuccess) {
-			enqueueSnackbar('Vermifugação cadastrada com sucesso', {
+			enqueueSnackbar('Vermifugação atualizada com sucesso', {
 				variant: 'success',
 			});
-			setIsDisabled(true);
 		}
 		if (status.error) {
-			enqueueSnackbar('Ocorreu um erro ao cadastrar a vermifugação', {
+			enqueueSnackbar('Ocorreu um erro ao atualizar a vermifugação', {
 				variant: 'error',
 			});
 		}
@@ -122,7 +113,7 @@ export const CreateDewormerRecord = () => {
 			<Paper>
 				<Box p={2}>
 					<Box>
-						<Typography variant="h4">Registrar Vermifugação</Typography>
+						<Typography variant="h4">Editar Vermifugação</Typography>
 					</Box>
 				</Box>
 				<Box p={2}>
@@ -132,8 +123,12 @@ export const CreateDewormerRecord = () => {
 				</Box>
 				<DewormerRecordForm
 					dewormerRecord={dewormerRecordState}
-					isDisabled={status.isLoading || isDisabled}
-					isLoading={status.isLoading}
+					isDisabled={status.isLoading}
+					isLoading={
+						status.isLoading ||
+						isFetching ||
+						isFetchingDewormerRecord
+					}
 					petID={pet?.data?.id}
 					handleSubmit={handleSubmit}
 					handleChange={handleChange}
