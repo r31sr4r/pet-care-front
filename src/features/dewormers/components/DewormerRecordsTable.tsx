@@ -1,16 +1,15 @@
-import { Box, IconButton, Typography } from '@mui/material';
-import { Results } from '../../../types/DewormerRecord';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from 'react-router-dom';
+import { Box, Typography } from '@mui/material';
 import {
 	DataGrid,
 	GridColDef,
-	GridRowsProp,
-	GridToolbar,
 	GridFilterModel,
-	GridRenderCellParams
+	GridRowsProp,
+	GridToolbar
 } from '@mui/x-data-grid';
+import { Link } from 'react-router-dom';
+import { Results } from '../../../types/DewormerRecord';
 import { SelectBoosterUnit } from '../../../utils/SelectBoosterUnit';
+import Formatters from '../../../utils/ui/Formatters';
 
 type Props = {
 	data: Results | undefined;
@@ -36,10 +35,7 @@ export function DewormerRecordsTable({
 }: Props) {
 	const componentProps = {
 		toolbar: {
-			showQuickFilter: true,
-			quickFilterProps: {
-				debounceMs: 500,
-			},
+			showQuickFilter: false,			
 		},
 	};
 
@@ -51,9 +47,7 @@ export function DewormerRecordsTable({
 			name: record.dewormer_name,            
 			application_date: record.application_date == null ? 
 				'' : 
-				new Date(record.application_date).toLocaleDateString(
-				'pt-BR'
-			),           
+				Formatters.formatDate(record.application_date),       
 			duration: `${record.booster_interval} - ${SelectBoosterUnit(record.booster_interval, record.booster_unit)}`,
 		}));
 	};
@@ -81,13 +75,6 @@ export function DewormerRecordsTable({
 			flex: 1,
 			renderCell: renderDurationCell,
 		},
-		{
-			field: 'id',
-			headerName: 'Actions',
-			type: 'string',
-			flex: 1,
-			renderCell: renderActionsCell,
-		},
 	];
 
 	function renderNameCell(rowData: any) {
@@ -103,30 +90,28 @@ export function DewormerRecordsTable({
 
 	function renderApplicationDateCell(rowData: any) {
 		return (
-			<Typography color={rowData.value ? 'primary' : 'secondary'}>
-				{rowData.value}
-			</Typography>
+			<Link
+			style={{ textDecoration: 'none' }}
+			to={`/pets/${rowData.row.pet_id}/dewormer-records/${rowData.id}/edit`}
+			>
+				<Typography color={rowData.value ? 'primary' : 'secondary'}>
+					{rowData.value}
+				</Typography>
+			</Link>
 		);
 	}
 
 	function renderDurationCell(rowData: any) {
 		return (
-			<Typography color={rowData.value ? 'primary' : 'secondary'}>
-				{rowData.value}
-			</Typography>
-		);
-	}
-
-	function renderActionsCell(params: GridRenderCellParams) {
-		return (
-			<IconButton
-				color="secondary"
-				onClick={() => handleDelete(params.value)}
-				arial-label="delete"
-				data-testid="delete-button"
+			<Link
+			style={{ textDecoration: 'none' }}
+			to={`/pets/${rowData.row.pet_id}/dewormer-records/${rowData.id}/edit`}
 			>
-				<DeleteIcon />
-			</IconButton>
+				<Typography color={rowData.value ? 'primary' : 'secondary'}>
+					{rowData.value}
+				</Typography>
+			</Link>
+
 		);
 	}
 

@@ -1,6 +1,7 @@
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import PetsIcon from '@mui/icons-material/Pets';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import {
 	Avatar,
 	IconButton,
@@ -19,10 +20,16 @@ import { SelectPetType } from '../../../utils/SelectPetType';
 type Props = {
 	results: Results | undefined;
 	handleClick: (pet: any) => void;
+	handleDewormerRecords: (pet: any) => void;
 	handleVaccine: (pet: any) => void;
 };
 
-export const Petlist = ({ results, handleClick, handleVaccine }: Props) => {
+export const Petlist = ({
+	results,
+	handleClick,
+	handleDewormerRecords,
+	handleVaccine,
+}: Props) => {
 	const ListStyle = styled('div')(({ theme }) => ({
 		backgroundColor: theme.palette.background.paper,
 	}));
@@ -51,14 +58,29 @@ export const Petlist = ({ results, handleClick, handleVaccine }: Props) => {
 								<PetsIcon />
 							</Avatar>
 						</ListItemAvatar>
-						<ListItemText 
+						<ListItemText
 							primary={
-								<Typography color={'text.primary'}>{pet.name}</Typography>								
-							} 
+								<Typography color={'text.primary'}>
+									{pet.name}
+								</Typography>
+							}
 							secondary={`${SelectPetType(pet.type)} ${
 								pet.breed ? pet.breed : ''
 							}`}
 						/>
+						<Tooltip
+							title="Vermifugação"
+							placement="left-start"
+							sx={{ mr: 0.3 }}
+						>
+							<IconButton
+								edge="end"
+								aria-label="vermifugação"
+								onClick={() => handleDewormerRecords(pet)}
+							>
+								<ListAltIcon />
+							</IconButton>
+						</Tooltip>
 						<Tooltip
 							title="Vacinas"
 							placement="left-start"

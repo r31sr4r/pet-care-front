@@ -10,16 +10,17 @@ import {
 import { DewormerRecordsTable } from './components/DewormerRecordsTable';
 import { useGetPetQuery } from '../pets/petsSlice';
 
+
 export const DewormerRecordsList = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const id = useParams<{ id: string }>().id || '';
 	const { data: pet } = useGetPetQuery({ id });
-
+	
 	const [options, setOptions] = useState({
 		page: 1,
 		filter: id,
-		per_page: 10,
-		rowsPerPage: [10, 25, 30],
+		per_page: 5,
+		rowsPerPage: [5, 10, 15],
 	});
 	const { data, isFetching, error } = useGetDewormerRecordsQuery(options);
 	const [deleteDewormerRecord, deleteDewormerRecordStatus] =
