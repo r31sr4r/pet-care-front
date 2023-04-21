@@ -28,10 +28,10 @@ exports[`EditPet should render successfully 1`] = `
           class="MuiBox-root css-1qm1lh"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-column css-1rl1og4-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
           >
             <div
-              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3 css-1equabv-MuiGrid-root"
+              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <button
                 aria-label="vacinas"
@@ -56,13 +56,52 @@ exports[`EditPet should render successfully 1`] = `
                 />
               </button>
               <div
-                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3 css-1equabv-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <span
                   class="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-zl89d7-MuiTypography-root"
                 >
                   Vacinas
                 </span>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+            >
+              <div
+                class="MuiBox-root css-dvxtzn"
+              >
+                <button
+                  aria-label="Vermifugação"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1jdufwn-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-tzssek-MuiSvgIcon-root"
+                    data-testid="ListAltIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M19 5v14H5V5h14m1.1-2H3.9c-.5 0-.9.4-.9.9v16.2c0 .4.4.9.9.9h16.2c.4 0 .9-.5.9-.9V3.9c0-.5-.5-.9-.9-.9zM11 7h6v2h-6V7zm0 4h6v2h-6v-2zm0 4h6v2h-6zM7 7h2v2H7zm0 4h2v2H7zm0 4h2v2H7z"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+                <div
+                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-zl89d7-MuiTypography-root"
+                  >
+                    Vermifugação
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -90,8 +129,8 @@ exports[`EditPet should render successfully 1`] = `
                   <label
                     class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
                     data-shrink="false"
-                    for=":r1:"
-                    id=":r1:-label"
+                    for=":r2:"
+                    id=":r2:-label"
                   >
                     Name
                     <span
@@ -107,7 +146,7 @@ exports[`EditPet should render successfully 1`] = `
                     <input
                       aria-invalid="false"
                       class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r1:"
+                      id=":r2:"
                       name="name"
                       required=""
                       type="text"
@@ -272,20 +311,20 @@ exports[`EditPet should render successfully 1`] = `
                     <label
                       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="false"
-                      for=":r2:"
-                      id=":r2:-label"
+                      for=":r3:"
+                      id=":r3:-label"
                     >
                       Data de Nascimento
                     </label>
                     <div
-                      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-readOnly css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+                      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl Mui-readOnly css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
                     >
                       <input
                         aria-invalid="false"
                         aria-label="Choose date"
                         aria-readonly="true"
-                        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-readOnly css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-                        id=":r2:"
+                        class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                        id=":r3:"
                         readonly=""
                         type="text"
                         value=""
@@ -435,8 +474,8 @@ exports[`EditPet should render successfully 1`] = `
                   <label
                     class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
                     data-shrink="false"
-                    for=":r5:"
-                    id=":r5:-label"
+                    for=":r6:"
+                    id=":r6:-label"
                   >
                     Microchip
                   </label>
@@ -446,7 +485,7 @@ exports[`EditPet should render successfully 1`] = `
                     <input
                       aria-invalid="false"
                       class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r5:"
+                      id=":r6:"
                       name="microchip"
                       type="text"
                       value=""

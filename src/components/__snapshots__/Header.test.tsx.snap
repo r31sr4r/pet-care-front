@@ -13,7 +13,7 @@ exports[`Header should render successfully 1`] = `
       >
         <button
           aria-label="menu"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeLarge css-ancrnh-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeLarge css-w9hjgi-MuiButtonBase-root-MuiIconButton-root"
           tabindex="0"
           type="button"
         >

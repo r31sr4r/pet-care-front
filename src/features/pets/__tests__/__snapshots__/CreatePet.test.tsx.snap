@@ -233,13 +233,13 @@ exports[`CreatePet should render successfully 1`] = `
                       Data de Nascimento
                     </label>
                     <div
-                      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-readOnly css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+                      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl Mui-readOnly css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
                     >
                       <input
                         aria-invalid="false"
                         aria-label="Choose date"
                         aria-readonly="true"
-                        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-readOnly css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                        class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                         id=":r1:"
                         readonly=""
                         type="text"
