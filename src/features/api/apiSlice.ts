@@ -32,6 +32,7 @@ export const apiSlice = createApi({
 		'VaccineSchedules',
 		'VaccinationRecords',
 		'DewormerRecords',
+		'FleasAndTicksControll'
 	],
 	endpoints: (builder) => ({}),
 	async baseQuery(args, api, extraOptions) {
