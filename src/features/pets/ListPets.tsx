@@ -20,6 +20,10 @@ export const ListPets = () => {
 		navigate(`/pets/edit/${pet.id}`);
 	};
 
+	const handleFleasAndTicksControll = (pet: any) => {
+		navigate(`/pets/${pet.id}/fleas-and-ticks-controll`);
+	};
+
 	const handleDewormerRecords = (pet: any) => {
 		navigate(`/pets/${pet.id}/dewormer-records`);
 	};
@@ -68,6 +72,7 @@ export const ListPets = () => {
 			<Petlist
 				results={data}
 				handleClick={handleClick}
+				handleFleasAndTicksControll={handleFleasAndTicksControll}
 				handleDewormerRecords={handleDewormerRecords}
 				handleVaccine={handleVaccine}
 			/>

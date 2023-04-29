@@ -61,6 +61,10 @@ export const CreatePet = () => {
 		navigate(`/pets/${petId}/vaccines`);
 	};
 
+	const handleFleasAndTicksControll = (petId: any) => {
+		navigate(`/pets/${petId}/fleas-and-ticks-controll`);
+	};
+
 	const handleDewormerRecords = (petId: any) => {
 		navigate(`/pets/${petId}/dewormer-records`);
 	};
@@ -127,6 +131,7 @@ export const CreatePet = () => {
 								petId={petState.id}
 								handleVaccine={handleVaccine}
 								handleDewormerRecords={handleDewormerRecords}
+								handleFleasAndTicksControll={handleFleasAndTicksControll}
 							/>
 						) : (
 							<div />

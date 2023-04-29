@@ -97,12 +97,12 @@ export const EditFleasAndTicksControll = () => {
 
 	useEffect(() => {
 		if (status.isSuccess) {
-			enqueueSnackbar('Vermifugação atualizada com sucesso', {
+			enqueueSnackbar('Controle atualizada com sucesso', {
 				variant: 'success',
 			});
 		}
 		if (status.error) {
-			enqueueSnackbar('Ocorreu um erro ao atualizar a vermifugação', {
+			enqueueSnackbar('Ocorreu um erro ao atualizar a controle', {
 				variant: 'error',
 			});
 		}

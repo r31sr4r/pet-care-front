@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { GridFilterModel } from '@mui/x-data-grid';
 import { useSnackbar } from 'notistack';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
 	useGetFleasAndTicksControllQuery,
@@ -12,7 +12,6 @@ import { useGetPetQuery } from '../pets/petsSlice';
 
 
 export const FleasAndTicksControllList = () => {
-	const { enqueueSnackbar } = useSnackbar();
 	const id = useParams<{ id: string }>().id || '';
 	const { data: pet } = useGetPetQuery({ id });
 	
@@ -23,26 +22,12 @@ export const FleasAndTicksControllList = () => {
 		rowsPerPage: [5, 10, 15],
 	});
 	const { data, isFetching, error } = useGetFleasAndTicksControllQuery(options);
-	const [deleteFleasAndTicksControll, deleteFleasAndTicksControlltatus] =
-		useDeleteFleasAndTicksControllMutation();
-
-	useEffect(() => {
-		if (deleteFleasAndTicksControlltatus.isSuccess) {
-			enqueueSnackbar('Dewormer Record deleted successfully', {
-				variant: 'success',
-			});
-		}
-		if (deleteFleasAndTicksControlltatus.error) {
-			enqueueSnackbar('Error deleting cdewormersRecord', {
-				variant: 'error',
-			});
-		}
-	}, [deleteFleasAndTicksControlltatus, enqueueSnackbar]);
+	const [deleteFleasAndTicksControll ] = useDeleteFleasAndTicksControllMutation();
 
 	if (error) {
 		return (
 			<Typography color="error">
-				Ocorreu um erro ao carregar a lista de vermifugação
+				Ocorreu um erro ao carregar a lista de controle de pulgas e carrapatos
 			</Typography>
 		);
 	}
@@ -91,7 +76,7 @@ export const FleasAndTicksControllList = () => {
 					variant="contained"
 					color="secondary"
 					component={Link}					
-					to={`/pets/${id}/dewormer-records/create`}
+					to={`/pets/${id}/fleas-and-ticks-controll/create`}
 					style={{ marginBottom: '1rem' }}
 				>
 					Registrar

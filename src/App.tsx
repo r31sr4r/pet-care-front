@@ -17,6 +17,9 @@ import { VaccinationRecordList } from './features/vaccines/VaccinationRecordList
 import { DewormerRecordsList } from './features/dewormers/ListDewormerRecords';
 import { CreateDewormerRecord } from './features/dewormers/CreateDewormerRecord';
 import { EditDewormerRecord } from './features/dewormers/EditDewormerRecord';
+import { FleasAndTicksControllList } from './features/fleas-and-ticks-controll/ListFleasAndTicksControll';
+import { CreateFleasAndTicksControll } from './features/fleas-and-ticks-controll/CreateFleasAndTicksControll';
+import { EditFleasAndTicksControll } from './features/fleas-and-ticks-controll/EditFleasAndTicksControll';
 
 function App() {
 	return (
@@ -62,6 +65,19 @@ function App() {
 				<Route
 					path="/pets/:pet_id/dewormer-records/:id/edit"
 					element={<EditDewormerRecord />}
+				/>
+
+				<Route
+					path="/pets/:id/fleas-and-ticks-controll"
+					element={<FleasAndTicksControllList />}
+				/>
+				<Route
+					path="/pets/:id/fleas-and-ticks-controll/create"
+					element={<CreateFleasAndTicksControll />}
+				/>
+				<Route
+					path="/pets/:pet_id/fleas-and-ticks-controll/:id/edit"
+					element={<EditFleasAndTicksControll />}
 				/>
 
 				<Route

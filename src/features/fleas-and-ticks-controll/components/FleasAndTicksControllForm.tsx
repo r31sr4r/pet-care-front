@@ -56,7 +56,7 @@ export function FleasAndTicksControllForm({
 						<FormControl fullWidth>
 							<TextField
 								required
-								name="dewormer_name"
+								name="medication_name"
 								label="Nome do Medicamento"
 								value={fleasAndTicksControll.medication_name}
 								disabled={isDisabled}
@@ -198,7 +198,7 @@ export function FleasAndTicksControllForm({
 							<Button
 								variant="contained"
 								component={Link}
-								to={`/pets/${petID}/dewormer-records`}
+								to={`/pets/${petID}/fleas-and-ticks-controll`}
 							>
 								Voltar
 							</Button>

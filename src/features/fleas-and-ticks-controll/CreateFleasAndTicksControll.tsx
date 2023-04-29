@@ -44,7 +44,7 @@ export const CreateFleasAndTicksControll = () => {
 		const payload = {
 			pet_id: pet?.data?.id,
 			brand_id: fleasAndTicksControllState.brand_id || Constants.DEFAULT_BRAND_ID,
-			dewormer_name: fleasAndTicksControllState.medication_name,
+			medication_name: fleasAndTicksControllState.medication_name,
 			booster_interval: parseInt(fleasAndTicksControllState.booster_interval as any),
 			booster_unit: fleasAndTicksControllState.booster_unit,
 			was_applied: fleasAndTicksControllState.was_applied,
@@ -105,13 +105,13 @@ export const CreateFleasAndTicksControll = () => {
 
 	useEffect(() => {
 		if (status.isSuccess) {
-			enqueueSnackbar('Vermifugação cadastrada com sucesso', {
+			enqueueSnackbar('Controle cadastrado com sucesso', {
 				variant: 'success',
 			});
 			setIsDisabled(true);
 		}
 		if (status.error) {
-			enqueueSnackbar('Ocorreu um erro ao cadastrar seu registro', {
+			enqueueSnackbar('Ocorreu um erro ao cadastrar seu controle', {
 				variant: 'error',
 			});
 		}
@@ -122,7 +122,7 @@ export const CreateFleasAndTicksControll = () => {
 			<Paper>
 				<Box p={2}>
 					<Box>
-						<Typography variant="h4">Registrar Vermifugação</Typography>
+						<Typography variant="h4">Registrar Controle de Pulgas e Carrapatos</Typography>
 					</Box>
 				</Box>
 				<Box p={2}>

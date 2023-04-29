@@ -81,7 +81,7 @@ export function FleasAndTicksControllTable({
 		return (
 			<Link
 				style={{ textDecoration: 'none' }}
-				to={`/pets/${rowData.row.pet_id}/dewormer-records/${rowData.id}/edit`}
+				to={`/pets/${rowData.row.pet_id}/fleas-and-ticks-controll/${rowData.id}/edit`}
 			>
 				<Typography color="primary">{rowData.value}</Typography>
 			</Link>
@@ -92,7 +92,7 @@ export function FleasAndTicksControllTable({
 		return (
 			<Link
 			style={{ textDecoration: 'none' }}
-			to={`/pets/${rowData.row.pet_id}/dewormer-records/${rowData.id}/edit`}
+			to={`/pets/${rowData.row.pet_id}/fleas-and-ticks-controll/${rowData.id}/edit`}
 			>
 				<Typography color={rowData.value ? 'primary' : 'secondary'}>
 					{rowData.value}
@@ -105,7 +105,7 @@ export function FleasAndTicksControllTable({
 		return (
 			<Link
 			style={{ textDecoration: 'none' }}
-			to={`/pets/${rowData.row.pet_id}/dewormer-records/${rowData.id}/edit`}
+			to={`/pets/${rowData.row.pet_id}/fleas-and-ticks-controll/${rowData.id}/edit`}
 			>
 				<Typography color={rowData.value ? 'primary' : 'secondary'}>
 					{rowData.value}

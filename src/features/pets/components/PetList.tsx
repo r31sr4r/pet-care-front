@@ -2,6 +2,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import PetsIcon from '@mui/icons-material/Pets';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import PestControlIcon from '@mui/icons-material/PestControl';
 import {
 	Avatar,
 	IconButton,
@@ -20,6 +21,7 @@ import { SelectPetType } from '../../../utils/SelectPetType';
 type Props = {
 	results: Results | undefined;
 	handleClick: (pet: any) => void;
+	handleFleasAndTicksControll: (pet: any) => void;
 	handleDewormerRecords: (pet: any) => void;
 	handleVaccine: (pet: any) => void;
 };
@@ -27,6 +29,7 @@ type Props = {
 export const Petlist = ({
 	results,
 	handleClick,
+	handleFleasAndTicksControll,
 	handleDewormerRecords,
 	handleVaccine,
 }: Props) => {
@@ -68,6 +71,19 @@ export const Petlist = ({
 								pet.breed ? pet.breed : ''
 							}`}
 						/>
+						<Tooltip
+							title="Pulgas e Carrapatos"
+							placement="left-start"
+							sx={{ mr: 0.3 }}
+						>
+							<IconButton
+								edge="end"
+								aria-label="Pulgas e Carrapatos"
+								onClick={() => handleFleasAndTicksControll(pet)}
+							>
+								<PestControlIcon />
+							</IconButton>
+						</Tooltip>
 						<Tooltip
 							title="Vermifugação"
 							placement="left-start"
