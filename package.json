@@ -29,8 +29,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start",    
+    "build": "react-scripts build && cp .htaccess build/",
     "test": "react-scripts test",
     "test:cov": "react-scripts test --coverage",
     "eject": "react-scripts eject"
