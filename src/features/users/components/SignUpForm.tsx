@@ -48,10 +48,10 @@ export function SignUpForm({
 			<Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
 				<LockOutlinedIcon />
 			</Avatar>
-			<Typography component="h1" variant="h5">
+			<Typography component="h1" variant="h5" color={'text.primary'}>
 				Criar Conta
 			</Typography>
-			<Typography component="h1" variant="h6">
+			<Typography component="h1" variant="h6" color={'text.primary'}>
 				{userType}
 			</Typography>
 			<Box
