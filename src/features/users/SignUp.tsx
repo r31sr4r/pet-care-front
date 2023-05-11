@@ -11,7 +11,7 @@ import { User } from '../../types/User';
 export default function SignUp() {
 	const location = useLocation();
 	let navigate = useNavigate();	
-	const userType = location.state?.group === 'customer' ? 'Dono de Pets' : 'Veterinário';
+	const userType: string = location.state?.group === 'vet' ? 'Veterinário' : 'Dono de Pets';
 
 	const { enqueueSnackbar } = useSnackbar();
 	const [createUser, status] = useCreateUserMutation();

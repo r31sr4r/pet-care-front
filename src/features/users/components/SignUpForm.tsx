@@ -10,6 +10,8 @@ import React, { useState } from 'react';
 import { User } from '../../../types/User';
 import { EmailInputField } from '../../../utils/components/email/EmailInputField';
 import { PasswordAndConfirmPasswordValidation } from '../../../utils/components/password/PasswordAndConfirmPasswordValidation';
+import { useNavigate } from 'react-router-dom';
+import config from '../../../config/config';
 
 type Props = {
 	user: User;
@@ -27,6 +29,9 @@ export function SignUpForm({
 	handleChange,
 }: Props) {
 	const [nameError, setNameError] = useState(false);
+	const enableUserTypeSelection = config.isUserTypeSelectionEnabled();
+	
+	const navigate = useNavigate();
 
 	const handleNameValidation = () => {
 		if (user.name.length < 3 && user.name) {
@@ -35,6 +40,14 @@ export function SignUpForm({
 			setNameError(false);
 		}
 	};
+
+	const handleBackClick = () => {
+		if (enableUserTypeSelection) {
+		  navigate('/type');
+		} else {
+		  navigate('/signin');
+		}
+	  };
 
 	return (
 		<Box
@@ -104,7 +117,7 @@ export function SignUpForm({
 				</Button>
 				<Grid container justifyContent="flex-end">
 					<Grid item xs>
-						<Link href="/type" variant="body2">
+						<Link href="#" variant="body2" onClick={handleBackClick}>
 							Voltar
 						</Link>
 					</Grid>

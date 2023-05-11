@@ -15,6 +15,7 @@ import { Copyright } from '../../utils/components/copyright/Copyright';
 import { useSignInUserMutation } from './usersSlice';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
+import config from '../../config/config';
 
 export default function SignIn() {
 	let navigate = useNavigate();
@@ -53,6 +54,19 @@ export default function SignIn() {
 	function removeToken() {
 		localStorage.removeItem('token');
 	}
+
+	const handleCreateAccountClick = () => {
+		const defaultUserType = config.getDefaultUserType();
+		const enableUserTypeSelection = config.isUserTypeSelectionEnabled()
+		
+		if (enableUserTypeSelection) {
+		  navigate('/type');
+		} else {
+		  const state = { group: defaultUserType };
+		  navigate('/signup', { state });
+		}
+	  };
+	  
 
 	return (
 		<Container component="main" maxWidth="xs">
@@ -116,7 +130,7 @@ export default function SignIn() {
 							</Link>
 						</Grid>
 						<Grid item>
-							<Link href="/type" variant="body2">
+							<Link href="#" variant="body2" onClick={handleCreateAccountClick}>
 								{'Não possui uma conta? Criar'}
 							</Link>
 						</Grid>

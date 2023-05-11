@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { redirect, useNavigate } from 'react-router-dom';
+import config from '../../config/config';
 
-export const baseUrl = process.env.REACT_APP_BASE_URL;
+export const baseUrl = config.getBaseUrl();
 
 const bq = fetchBaseQuery({
 	baseUrl,
