@@ -32,12 +32,17 @@ export function Header({
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
 	const handleLogout = () => {
-		setUserLogged(false);
-		localStorage.removeItem('token');
-		navigate('/signin');
+		setAnchorEl(null); 
+		setTimeout(() => {
+			setUserLogged(false);
+			localStorage.removeItem('token');
+			navigate('/signin');
+		}, 300);  
 	};
+	
 
 	const handleLogin = () => {
+		setAnchorEl(null);
 		navigate('/signin');
 	};
 
@@ -47,16 +52,19 @@ export function Header({
 
 	const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
-	};
+	};	
 
-	const handleClose = (ev: any) => {
+	const handlePasswordChange = () => {
+		const id = UserData()?.user.id;
+		navigate(`/user/change-password`);
+	};
+	
+	const handleAccount = () => {
 		setAnchorEl(null);
-		if (ev.nativeEvent.target.outerText === 'Sair') {
-			handleLogout();
-		} else if (ev.nativeEvent.target.outerText === 'Alterar Senha') {
-			const id = UserData()?.user.id;
-			navigate(`/user/change-password`);
-		}
+	};
+	
+	const handleMenuClose = () => {
+		setAnchorEl(null);
 	};
 
 	return (
@@ -125,15 +133,11 @@ export function Header({
 									horizontal: 'right',
 								}}
 								open={Boolean(anchorEl)}
-								onClose={handleClose}
+								onClose={handleMenuClose}
 							>
-								<MenuItem onClick={handleClose}>
-									Alterar Senha
-								</MenuItem>
-								<MenuItem onClick={handleClose}>
-									Minha Conta
-								</MenuItem>
-								<MenuItem onClick={handleClose}>Sair</MenuItem>
+								<MenuItem onClick={handlePasswordChange}>Alterar Senha</MenuItem>
+								{/* <MenuItem onClick={handleAccount}>Minha Conta</MenuItem> */}
+								<MenuItem onClick={handleLogout}>Sair</MenuItem>
 							</Menu>
 						</div>
 					)}

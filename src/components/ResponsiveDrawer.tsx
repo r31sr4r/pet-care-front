@@ -22,7 +22,7 @@ type Props = {
 export default function ResponsiveDrawer({ open, onClose }: Props) {
 	const routes = [
 		{
-			path: '/',
+			path: '/pets',
 			name: 'Home',
 		},
 		{
