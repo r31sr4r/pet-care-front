@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import {
-	DataGrid,
+import {	
 	GridColDef,
 	GridFilterModel,
 	GridRowsProp,
@@ -10,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { Results } from '../../../types/FleasAndTicksControll';
 import { SelectBoosterUnit } from '../../../utils/SelectBoosterUnit';
 import Formatters from '../../../utils/ui/Formatters';
+import { DataGrid } from '../../../components/DataGrid';
 
 type Props = {
 	data: Results | undefined;

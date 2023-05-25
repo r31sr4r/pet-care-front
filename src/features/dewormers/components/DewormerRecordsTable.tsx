@@ -1,15 +1,16 @@
 import { Box, Typography } from '@mui/material';
-import {
-	DataGrid,
+import {	
 	GridColDef,
 	GridFilterModel,
 	GridRowsProp,
-	GridToolbar
+	GridToolbar,
+	ptBR,
 } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import { Results } from '../../../types/DewormerRecord';
 import { SelectBoosterUnit } from '../../../utils/SelectBoosterUnit';
 import Formatters from '../../../utils/ui/Formatters';
+import { DataGrid } from '../../../components/DataGrid';
 
 type Props = {
 	data: Results | undefined;
@@ -119,7 +120,7 @@ export function DewormerRecordsTable({
 
 	return (
 		<Box sx={{ display: 'flex', height: 400 }}>
-			<DataGrid
+			<DataGrid				
 				checkboxSelection={false}
 				columns={columns}
 				components={{ Toolbar: GridToolbar }}
