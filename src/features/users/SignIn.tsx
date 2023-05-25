@@ -16,6 +16,7 @@ import { useSignInUserMutation } from './usersSlice';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import config from '../../config/config';
+import useAutofillStyles from '../../hooks/useAutofillStyles';
 
 export default function SignIn() {
 	let navigate = useNavigate();
@@ -34,6 +35,8 @@ export default function SignIn() {
 		await signInUser(payload);
 
 	};
+
+	useAutofillStyles();
 
 	useEffect(() => {
 		if (status.isSuccess) {
